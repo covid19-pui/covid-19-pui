@@ -1,3 +1,5 @@
+![](https://github.com/mcode/covid-19-pui/workflows/Build%20and%20Test/badge.svg)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
