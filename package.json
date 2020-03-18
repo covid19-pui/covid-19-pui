@@ -15,9 +15,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-no-watch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.js'",
-    "lint-fix": "eslint './src/**/*.js' --fix"
+    "lint": "eslint './src/**/*.{js,jsx}'",
+    "lint-fix": "eslint './src/**/*.{js,jsx}' --fix",
+    "prettier": "prettier --check '**/*.{js,jsx}'",
+    "prettier-fix": "prettier --write '**/*.{js,jsx}'",
+    "check": "npm run build && npm run test-no-watch && npm run lint && npm run prettier"
   },
   "eslintConfig": {
     "extends": "react-app"
