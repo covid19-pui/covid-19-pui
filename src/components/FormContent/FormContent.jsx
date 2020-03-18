@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { updateTOC, cleanUpTOC } from '../Navigation/Navigation';
 import FormSectionHeader from '../FormSectionHeader';
 
 const sections = [
@@ -10,6 +11,11 @@ const sections = [
 ];
 
 function FormContent() {
+  useEffect(() => {
+    updateTOC();
+    return cleanUpTOC;
+  });
+
   return sections.map(s => <FormSectionHeader key={s.id} title={s.title} />);
 }
 
