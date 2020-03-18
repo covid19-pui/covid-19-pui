@@ -17,10 +17,10 @@
     "test": "react-scripts test",
     "test-no-watch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.js'",
-    "lint-fix": "eslint './src/**/*.js' --fix",
-    "prettier": "prettier --check \"**/*.{js,jsx}\"",
-    "prettier-fix": "prettier --write \"**/*.{js,jsx}\"",
+    "lint": "eslint './src/**/*.{js,jsx}'",
+    "lint-fix": "eslint './src/**/*.{js,jsx}' --fix",
+    "prettier": "prettier --check '**/*.{js,jsx}'",
+    "prettier-fix": "prettier --write '**/*.{js,jsx}'",
     "check": "npm run build && npm run test-no-watch && npm run lint && npm run prettier"
   },
   "eslintConfig": {
