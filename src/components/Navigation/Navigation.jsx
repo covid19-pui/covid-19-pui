@@ -1,8 +1,33 @@
 import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
 import tocbot from 'tocbot';
 
+const useStyles = makeStyles({
+  toc: {
+    background: '#d8d8d8',
+    height: '100vh',
+    position: 'fixed',
+    '@global': {
+      ol: {
+        listStyle: 'none',
+        fontFamily: 'Avenir Next',
+        fontWeight: 500,
+        '@global li': {
+          marginBottom: '0.25em'
+        },
+        '@global a': {
+          color: '#404040',
+          textDecoration: 'none'
+        }
+      }
+    }
+  }
+});
+
 function Navigation() {
-  return <div className="toc"></div>;
+  const styles = useStyles();
+  return <div className={clsx('toc', styles.toc)}></div>;
 }
 
 function updateTOC() {
