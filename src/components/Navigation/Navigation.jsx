@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     '@global': {
       ol: {
         listStyle: 'none',
-        fontFamily: 'Avenir Next',
+        fontFamily: '"Avenir Next", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif',
         fontWeight: 500,
         paddingLeft: '1.5em',
         textTransform: 'capitalize',
