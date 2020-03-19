@@ -50,7 +50,7 @@ function Navigation() {
   const [classNames, setClassNames] = useState(clsx('toc', styles.toc));
   const scrollListener = useCallback(
     element => {
-      const distanceToTop = element.getBoundingClientRect().top;
+      const distanceToTop = element?.getBoundingClientRect().top;
       const elementListener = () => {
         distanceToTop - document.documentElement.scrollTop <= 0
           ? setClassNames(clsx('toc', styles.toc, styles.makeSticky))
