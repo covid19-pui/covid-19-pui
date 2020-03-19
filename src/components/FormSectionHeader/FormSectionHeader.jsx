@@ -1,15 +1,17 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 
 const borderColor = '#404040';
 const useStyles = makeStyles({
   titleBox: {
     fontFamily: 'Avenir Next',
+    fontWeight: 500,
     backgroundColor: borderColor,
     color: 'white',
     border: `3px solid ${borderColor}`,
     letterSpacing: 1,
-    display: 'inline-block'
+    display: 'inline-block',
+    padding: '0 5px'
   },
   line: {
     display: 'inline-block',
@@ -19,17 +21,15 @@ const useStyles = makeStyles({
 });
 
 function FormSectionHeader({ title }) {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
-    <Grid container direction="row">
-      <Grid item>
-        <div className={classes.titleBox}>{title}</div>
-      </Grid>
-      <Grid item xs={9}>
-        <div className={classes.line}></div>
-      </Grid>
-    </Grid>
+    <Box display="flex" flexDirection="row">
+      <Box className={styles.titleBox}>{title}</Box>
+      <Box flexGrow={1}>
+        <div className={styles.line}></div>
+      </Box>
+    </Box>
   );
 }
 
