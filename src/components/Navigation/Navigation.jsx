@@ -7,7 +7,9 @@ const useStyles = makeStyles({
   toc: {
     background: '#d8d8d8',
     height: '100vh',
-    position: 'fixed',
+    position: 'sticky',
+    top: '0',
+    paddingTop: '0.5em',
     '@global': {
       ol: {
         listStyle: 'none',
