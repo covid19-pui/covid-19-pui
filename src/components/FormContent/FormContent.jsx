@@ -32,7 +32,7 @@ function FormContent() {
   });
 
   return sections.map(s => (
-    <div className={styles.root}>
+    <div className={styles.root} key={s.id}>
       <FormSectionHeader id={s.id} key={s.id} title={s.title} />
     </div>
   ));

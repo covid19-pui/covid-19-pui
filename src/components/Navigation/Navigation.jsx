@@ -10,6 +10,8 @@ const useStyles = makeStyles({
     position: 'sticky',
     top: '0',
     paddingRight: '1em',
+    width: '265px',
+    float: 'left',
     '@global': {
       ol: {
         listStyle: 'none',
