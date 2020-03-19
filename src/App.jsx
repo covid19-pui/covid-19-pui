@@ -13,10 +13,10 @@ function App() {
         </Grid>
       </Grid>
       <Grid container direction="row">
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Navigation />
         </Grid>
-        <Grid className="tocSection" item xs={9}>
+        <Grid className="tocSection" item xs={10}>
           <FormContent />
         </Grid>
       </Grid>

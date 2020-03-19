@@ -11,7 +11,6 @@ const useStyles = makeStyles({
     top: '0',
     paddingTop: '0.5em',
     paddingRight: '1em',
-    width: 'fit-content',
     '@global': {
       ol: {
         listStyle: 'none',
