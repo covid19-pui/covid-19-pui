@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import tocbot from 'tocbot';
@@ -38,7 +38,25 @@ const useStyles = makeStyles({
 
 function Navigation() {
   const styles = useStyles();
-  return <div className={clsx('toc', styles.toc)}></div>;
+  const [classNames, setClassNames] = useState(clsx('toc', styles.toc));
+  const scrollListener = useCallback(
+    element => {
+      const elementListener = () => {
+        const top = element.getBoundingClientRect().top;
+        top <= 0
+          ? setClassNames(clsx('toc', styles.toc, 'makeSticky'))
+          : setClassNames(clsx('toc', styles.toc));
+      };
+      console.log('asdf');
+      console.log(element.getBoundingClientRect().top);
+      window.addEventListener('scroll', elementListener);
+      return () => {
+        window.removeEventListener('scroll', elementListener);
+      };
+    },
+    [styles.toc]
+  );
+  return <div ref={scrollListener} className={classNames}></div>;
 }
 
 function updateTOC() {
