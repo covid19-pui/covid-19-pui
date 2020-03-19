@@ -18,13 +18,19 @@ const useStyles = makeStyles({
         fontWeight: 500,
         paddingLeft: '1.5em',
         textTransform: 'capitalize',
-        '@global li': {
-          marginBottom: '0.25em'
-        },
-        '@global a': {
-          color: '#404040',
-          textDecoration: 'none'
+        '@global': {
+          li: {
+            marginBottom: '0.25em'
+          },
+          a: {
+            color: '#404040',
+            textDecoration: 'none'
+          }
         }
+      },
+      '.activeHeading': {
+        borderLeft: '0.1em solid',
+        paddingLeft: '0.5em'
       }
     }
   }
@@ -40,7 +46,8 @@ function updateTOC() {
   tocbot.init({
     tocSelector: '.toc',
     contentSelector: '.tocSection',
-    headingSelector: '.tocHeading'
+    headingSelector: '.tocHeading',
+    activeLinkClass: 'activeHeading'
   });
 }
 
