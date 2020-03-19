@@ -47,8 +47,6 @@ function Navigation() {
           ? setClassNames(clsx('toc', styles.toc, 'makeSticky'))
           : setClassNames(clsx('toc', styles.toc));
       };
-      console.log('asdf');
-      console.log(element.getBoundingClientRect().top);
       window.addEventListener('scroll', elementListener);
       return () => {
         window.removeEventListener('scroll', elementListener);
