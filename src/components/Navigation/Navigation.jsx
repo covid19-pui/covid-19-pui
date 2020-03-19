@@ -38,8 +38,8 @@ const useStyles = makeStyles({
     }
   },
   makeSticky: {
-    // position: 'fixed',
-    // top: '0'
+    position: 'fixed',
+    top: '0'
   }
 });
 
@@ -48,9 +48,9 @@ function Navigation() {
   const [classNames, setClassNames] = useState(clsx('toc', styles.toc));
   const scrollListener = useCallback(
     element => {
+      const distanceToTop = element.getBoundingClientRect().top;
       const elementListener = () => {
-        const top = element.getBoundingClientRect().top;
-        top <= 0
+        distanceToTop - document.documentElement.scrollTop <= 0
           ? setClassNames(clsx('toc', styles.toc, styles.makeSticky))
           : setClassNames(clsx('toc', styles.toc));
       };
