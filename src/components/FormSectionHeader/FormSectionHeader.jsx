@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, makeStyles } from '@material-ui/core';
+import clsx from 'clsx';
 
 const borderColor = '#404040';
 const useStyles = makeStyles({
@@ -25,7 +26,7 @@ function FormSectionHeader({ title }) {
 
   return (
     <Box display="flex" flexDirection="row">
-      <Box className={styles.titleBox}>{title}</Box>
+      <Box className={clsx(styles.titleBox, 'tocHeading')}>{title}</Box>
       <Box flexGrow={1}>
         <div className={styles.line}></div>
       </Box>
