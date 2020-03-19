@@ -4,7 +4,7 @@ import { Box, makeStyles } from '@material-ui/core';
 const borderColor = '#404040';
 const useStyles = makeStyles({
   titleBox: {
-    fontFamily: 'Avenir Next',
+    fontFamily: 'Avenir Next, Segoe UI, Roboto, Helvetica Neue, sans-serif',
     fontWeight: 500,
     backgroundColor: borderColor,
     color: 'white',

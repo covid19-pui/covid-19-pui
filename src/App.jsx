@@ -6,11 +6,13 @@ import FormContent from './components/FormContent';
 
 function App() {
   return (
-    <Grid container direction="column">
-      <Grid item xs={12}>
-        <PageHeader />
+    <>
+      <Grid container>
+        <Grid item xs={12}>
+          <PageHeader />
+        </Grid>
       </Grid>
-      <Grid item container direction="row">
+      <Grid container direction="row">
         <Grid item xs={3}>
           <Navigation />
         </Grid>
@@ -18,7 +20,7 @@ function App() {
           <FormContent />
         </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }
 
