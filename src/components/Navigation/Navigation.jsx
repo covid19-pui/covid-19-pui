@@ -9,28 +9,31 @@ const useStyles = makeStyles({
     height: '100vh',
     position: 'sticky',
     top: '0',
-    paddingTop: '0.5em',
     paddingRight: '1em',
     '@global': {
       ol: {
         listStyle: 'none',
         fontFamily: '"Avenir Next", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif',
-        fontWeight: 500,
-        paddingLeft: '1.5em',
+        fontWeight: 600,
+        padding: '1.5em',
+        margin: '0',
         textTransform: 'capitalize',
         '@global': {
           li: {
-            marginBottom: '0.25em'
+            padding: '0.25em 0',
+            borderLeft: '2px solid #eee',
+            paddingLeft: '1em',
+
+            '&.is-active-li': {
+              borderColor: '#A6354C',
+              fontWeight: 700
+            }
           },
           a: {
             color: '#404040',
             textDecoration: 'none'
           }
         }
-      },
-      '.activeHeading': {
-        borderLeft: '0.1em solid',
-        paddingLeft: '0.5em'
       }
     }
   }
