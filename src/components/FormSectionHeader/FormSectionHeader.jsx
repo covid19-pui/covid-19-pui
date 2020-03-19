@@ -12,7 +12,8 @@ const useStyles = makeStyles({
     border: `3px solid ${borderColor}`,
     letterSpacing: 1,
     display: 'inline-block',
-    padding: '0 5px'
+    padding: '0 5px',
+    textTransform: 'uppercase'
   },
   line: {
     display: 'inline-block',

@@ -3,11 +3,11 @@ import { updateTOC, cleanUpTOC } from '../Navigation/Navigation';
 import FormSectionHeader from '../FormSectionHeader';
 
 const sections = [
-  { id: 'identifiers', title: 'IDENTIFIERS' },
-  { id: 'interviewer', title: 'INTERVIEWER' },
-  { id: 'basicInformation', title: 'BASIC INFORMATION' },
-  { id: 'demographics', title: 'DEMOGRAPHICS' },
-  { id: 'diseaseInformation', title: 'DISEASE INFORMATION' }
+  { id: 'identifiers', title: 'identifiers' },
+  { id: 'interviewer', title: 'interviewer' },
+  { id: 'basicInformation', title: 'basic information' },
+  { id: 'demographics', title: 'demographics' },
+  { id: 'diseaseInformation', title: 'disease information' }
 ];
 
 function FormContent() {

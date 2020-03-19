@@ -18,6 +18,7 @@ const useStyles = makeStyles({
         fontFamily: 'Avenir Next',
         fontWeight: 500,
         paddingLeft: '1.5em',
+        textTransform: 'capitalize',
         '@global li': {
           marginBottom: '0.25em'
         },
