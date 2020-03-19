@@ -36,6 +36,10 @@ const useStyles = makeStyles({
         }
       }
     }
+  },
+  makeSticky: {
+    // position: 'fixed',
+    // top: '0'
   }
 });
 
@@ -47,7 +51,7 @@ function Navigation() {
       const elementListener = () => {
         const top = element.getBoundingClientRect().top;
         top <= 0
-          ? setClassNames(clsx('toc', styles.toc, 'makeSticky'))
+          ? setClassNames(clsx('toc', styles.toc, styles.makeSticky))
           : setClassNames(clsx('toc', styles.toc));
       };
       window.addEventListener('scroll', elementListener);
@@ -55,7 +59,7 @@ function Navigation() {
         window.removeEventListener('scroll', elementListener);
       };
     },
-    [styles.toc]
+    [styles]
   );
   return <div ref={scrollListener} className={classNames}></div>;
 }
