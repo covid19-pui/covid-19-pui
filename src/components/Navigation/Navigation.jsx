@@ -9,8 +9,8 @@ function updateTOC() {
   // Initialize Tocbot
   tocbot.init({
     tocSelector: '.toc',
-    contentSelector: '.tocHeading',
-    headingSelector: 'h1'
+    contentSelector: '.tocSection',
+    headingSelector: '.tocHeading'
   });
 }
 

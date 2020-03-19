@@ -16,7 +16,7 @@ function App() {
         <Grid item xs={3}>
           <Navigation />
         </Grid>
-        <Grid item xs={9}>
+        <Grid className="tocSection" item xs={9}>
           <FormContent />
         </Grid>
       </Grid>
