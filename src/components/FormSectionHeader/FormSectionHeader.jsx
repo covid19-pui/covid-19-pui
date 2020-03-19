@@ -13,7 +13,8 @@ const useStyles = makeStyles({
     letterSpacing: 1,
     display: 'inline-block',
     padding: '0 5px',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    marginBottom: '30em'
   },
   line: {
     display: 'inline-block',
