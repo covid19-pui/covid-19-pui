@@ -10,11 +10,14 @@ const useStyles = makeStyles({
     position: 'sticky',
     top: '0',
     paddingTop: '0.5em',
+    paddingRight: '1em',
+    width: 'fit-content',
     '@global': {
       ol: {
         listStyle: 'none',
         fontFamily: 'Avenir Next',
         fontWeight: 500,
+        paddingLeft: '1.5em',
         '@global li': {
           marginBottom: '0.25em'
         },
