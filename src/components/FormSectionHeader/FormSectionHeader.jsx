@@ -26,7 +26,9 @@ function FormSectionHeader({ title, id }) {
 
   return (
     <Box display="flex" flexDirection="row">
-      <Box id={id} className={clsx(styles.titleBox, 'tocHeading')}>{title}</Box>
+      <Box id={id} className={clsx(styles.titleBox, 'tocHeading')}>
+        {title}
+      </Box>
       <Box flexGrow={1}>
         <div className={styles.line}></div>
       </Box>
