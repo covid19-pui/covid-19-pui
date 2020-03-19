@@ -16,7 +16,7 @@ function FormContent() {
     return cleanUpTOC;
   });
 
-  return sections.map(s => <FormSectionHeader key={s.id} title={s.title} />);
+  return sections.map(s => <FormSectionHeader id={s.id} key={s.id} title={s.title} />);
 }
 
 export default FormContent;
