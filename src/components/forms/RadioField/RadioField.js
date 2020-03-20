@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { useForm } from '../../FormProvider/FormProvider';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   formControl: {
     display: 'flex',
     flexDirection: 'row',
@@ -19,16 +19,15 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  '@global': {
-    label: {
-      fontFamily: '"Avenir Next", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif'
-    }
+  formLabel: {
+    fontFamily: theme.typography.fontFamily,
+    color: theme.palette.text.primary
   }
-});
+}));
 
 function RadioField({ label }) {
   const styles = useStyles();
-  const [form, setForm] = useForm();
+  const { 1: setForm } = useForm();
   const [selection, setSelection] = useState('');
   const handleChange = event => {
     setForm(prevState => {
@@ -43,13 +42,12 @@ function RadioField({ label }) {
   return (
     <div>
       <FormControl className={styles.formControl}>
-        <FormLabel>{label}</FormLabel>
+        <FormLabel className={styles.formLabel}>{label}</FormLabel>
         <RadioGroup className={styles.radioGroup} value={selection} onChange={handleChange}>
           <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
           <FormControlLabel value={'false'} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
-      <div>{form.knownContact}</div>
     </div>
   );
 }
