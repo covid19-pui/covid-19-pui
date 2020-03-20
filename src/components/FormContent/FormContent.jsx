@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import useStyles from './styles';
 import { updateTOC, cleanUpTOC } from '../Navigation/Navigation';
 import FormSectionHeader from '../FormSectionHeader';
-import IdentifiersSection from 'sections/IdentifiersSection/IdentifiersSection';
+import IdentifiersSection from 'sections/IdentifiersSection';
 
 const sections = [
   { id: 'identifiers', title: 'identifiers', section: <IdentifiersSection /> },

@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function RadioField({ label }) {
+function RadioField({ label, formKey, options }) {
   const styles = useStyles();
   const { 1: setForm } = useForm();
   const [selection, setSelection] = useState('');
@@ -33,7 +33,7 @@ function RadioField({ label }) {
     setForm(prevState => {
       return {
         ...prevState,
-        knownContact: event.target.value
+        [formKey]: event.target.value
       };
     });
     setSelection(event.target.value);
@@ -44,8 +44,14 @@ function RadioField({ label }) {
       <FormControl className={styles.formControl}>
         <FormLabel className={styles.formLabel}>{label}</FormLabel>
         <RadioGroup className={styles.radioGroup} value={selection} onChange={handleChange}>
-          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
-          <FormControlLabel value={'false'} control={<Radio />} label="No" />
+          {options.map(option => (
+            <FormControlLabel
+              key={option.value}
+              value={option.value}
+              control={<Radio />}
+              label={option.label}
+            />
+          ))}
         </RadioGroup>
       </FormControl>
     </div>

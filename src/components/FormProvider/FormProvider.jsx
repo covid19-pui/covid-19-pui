@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 const FormContext = createContext([]);
 
 const FormProvider = ({ children, value }) => {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState(value ?? {});
   return <FormContext.Provider value={[form, setForm]}>{children}</FormContext.Provider>;
 };
 
