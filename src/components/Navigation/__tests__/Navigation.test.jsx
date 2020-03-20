@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { render } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/core/styles';
+
+import theme from '../../../styles/theme';
 import Navigation, { cleanUpTOC, updateTOC } from '../Navigation';
 
 const headingClassName = 'tocHeading';
@@ -10,6 +13,7 @@ const MockFormSections = () => {
     updateTOC();
     return cleanUpTOC;
   });
+
   return (
     <div className="tocSection">
       {headings.map(heading => (
@@ -23,15 +27,19 @@ const MockFormSections = () => {
 
 describe('<Navigation/>', () => {
   test('renders side navigation', () => {
-    render(<Navigation />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Navigation />
+      </ThemeProvider>
+    );
   });
 
   test('renders side navigation with table of contents', () => {
     const { getAllByText } = render(
-      <div>
+      <ThemeProvider theme={theme}>
         <MockFormSections />
         <Navigation />
-      </div>
+      </ThemeProvider>
     );
 
     headings.forEach(heading => {
