@@ -8,6 +8,7 @@ import theme from '../../styles/theme';
 import PageHeader from '../PageHeader';
 import Navigation from '../Navigation';
 import FormContent from '../FormContent';
+import FormProvider from '../FormProvider';
 
 function App() {
   const styles = useStyles();
@@ -23,7 +24,9 @@ function App() {
       <Navigation />
 
       <div className={clsx(styles.content, 'tocSection')}>
-        <FormContent />
+        <FormProvider>
+          <FormContent />
+        </FormProvider>
       </div>
     </>
   );
