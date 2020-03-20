@@ -1,9 +1,10 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-const FormContext = createContext({});
+const FormContext = createContext([]);
 
 const FormProvider = ({ children, value }) => {
-  return <FormContext.Provider value={value ?? {}}>{children}</FormContext.Provider>;
+  const [form, setForm] = useState({});
+  return <FormContext.Provider value={[form, setForm]}>{children}</FormContext.Provider>;
 };
 
 const useForm = () => useContext(FormContext);

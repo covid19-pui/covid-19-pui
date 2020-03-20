@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import { useForm } from '../../FormProvider/FormProvider';
 
 const useStyles = makeStyles({
   formControl: {
@@ -27,17 +28,36 @@ const useStyles = makeStyles({
 
 function RadioField({ label }) {
   const styles = useStyles();
+  const [form, setForm] = useForm();
   const handleChange = event => {
-    //do nothing
+    setForm(prevState => {
+      return {
+        ...prevState,
+        knownContact: event.target.value
+      };
+    });
   };
+  useEffect(() => {
+    if (form.knownContact === undefined)
+      setForm(prevState => {
+        return {
+          ...prevState,
+          knownContact: ''
+        };
+      });
+  }, [form.knownContact, setForm]);
+
   return (
-    <FormControl className={styles.formControl}>
-      <FormLabel>{label}</FormLabel>
-      <RadioGroup className={styles.radioGroup} onChange={handleChange}>
-        <FormControlLabel value={true} control={<Radio />} label="Yes" />
-        <FormControlLabel value={false} control={<Radio />} label="No" />
-      </RadioGroup>
-    </FormControl>
+    <div>
+      <FormControl className={styles.formControl}>
+        <FormLabel>{label}</FormLabel>
+        <RadioGroup className={styles.radioGroup} value={''} onChange={handleChange}>
+          <FormControlLabel value={true} control={<Radio />} label="Yes" />
+          <FormControlLabel value={false} control={<Radio />} label="No" />
+        </RadioGroup>
+      </FormControl>
+      <div>{form.knownContact}</div>
+    </div>
   );
 }
 
