@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function PageHeader() {
-  const classes = useStyles();
+  const styles = useStyles();
   return (
-    <Grid container xs={12} className={classes.bg}>
-      <Grid item xs={6} className={classes.text}>
-        Human Infection with 2019 Novel Coronovirus Person Under Investigation (PUI) and Case Report
+    <Grid container xs={12} className={styles.bg}>
+      <Grid item xs={6} className={styles.text}>
+        Human Infection with 2019 Novel Coronavirus Person Under Investigation (PUI) and Case Report
         Form
       </Grid>
     </Grid>
