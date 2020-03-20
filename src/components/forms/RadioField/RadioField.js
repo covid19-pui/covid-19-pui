@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 function RadioField({ label }) {
   const styles = useStyles();
   const [form, setForm] = useForm();
+  const [selection, setSelection] = useState('');
   const handleChange = event => {
     setForm(prevState => {
       return {
@@ -36,24 +37,16 @@ function RadioField({ label }) {
         knownContact: event.target.value
       };
     });
+    setSelection(event.target.value);
   };
-  useEffect(() => {
-    if (form.knownContact === undefined)
-      setForm(prevState => {
-        return {
-          ...prevState,
-          knownContact: ''
-        };
-      });
-  }, [form.knownContact, setForm]);
 
   return (
     <div>
       <FormControl className={styles.formControl}>
         <FormLabel>{label}</FormLabel>
-        <RadioGroup className={styles.radioGroup} value={''} onChange={handleChange}>
-          <FormControlLabel value={true} control={<Radio />} label="Yes" />
-          <FormControlLabel value={false} control={<Radio />} label="No" />
+        <RadioGroup className={styles.radioGroup} value={selection} onChange={handleChange}>
+          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
+          <FormControlLabel value={'false'} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
       <div>{form.knownContact}</div>
