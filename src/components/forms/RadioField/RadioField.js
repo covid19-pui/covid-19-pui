@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   formLabel: {
-    fontFamily: theme.typography.fontFamily,
+    fontFamily: theme.typography.primary.fontFamily,
     color: theme.palette.text.primary
   }
 }));
