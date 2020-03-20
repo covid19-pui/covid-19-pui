@@ -4,7 +4,8 @@ const colors = {
   black: '#404040',
   white: '#FFFFFF',
   gray: '#D8D8D8',
-  red: '#A6354C'
+  red: '#A6354C',
+  darkGray: '#666'
 };
 
 const typography = {
@@ -30,7 +31,7 @@ const theme = createMuiTheme({
       main: colors.black
     },
     secondary: {
-      main: colors.gray
+      main: colors.red
     },
     common: colors,
     background: {
@@ -41,7 +42,14 @@ const theme = createMuiTheme({
       secondary: colors.white
     }
   },
-  variables: { ...variables }
+  variables: { ...variables },
+  overrides: {
+    MuiRadio: {
+      root: {
+        color: colors.darkGray
+      }
+    }
+  }
 });
 
 export default theme;
