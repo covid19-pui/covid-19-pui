@@ -4,10 +4,11 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 import useStyles from './styles';
-import theme from '../../styles/theme';
-import PageHeader from '../PageHeader';
-import Navigation from '../Navigation';
-import FormContent from '../FormContent';
+import theme from 'styles/theme';
+import PageHeader from 'components/PageHeader';
+import Navigation from 'components/Navigation';
+import FormContent from 'components/FormContent';
+import FormProvider from 'components/FormProvider';
 
 function App() {
   const styles = useStyles();
@@ -23,7 +24,9 @@ function App() {
       <Navigation />
 
       <div className={clsx(styles.content, 'tocSection')}>
-        <FormContent />
+        <FormProvider>
+          <FormContent />
+        </FormProvider>
       </div>
     </>
   );
