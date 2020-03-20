@@ -1,29 +1,8 @@
 import React from 'react';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(
-  theme => ({
-    titleBox: {
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: 500,
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.text.secondary,
-      border: `3px solid ${theme.palette.common.black}`,
-      letterSpacing: 1,
-      display: 'inline-block',
-      padding: '0 5px',
-      textTransform: 'uppercase',
-      marginBottom: '30em'
-    },
-    line: {
-      display: 'inline-block',
-      border: `1px solid ${theme.palette.common.black}`,
-      width: '100%'
-    }
-  }),
-  { name: 'FormSectionHeader' }
-);
+import useStyles from './styles';
 
 function FormSectionHeader({ title, id }) {
   const styles = useStyles();

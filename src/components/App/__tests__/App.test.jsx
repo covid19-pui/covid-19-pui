@@ -3,12 +3,12 @@ import { render } from '@testing-library/react';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import theme from '../../../styles/theme';
-import PageHeader from '../PageHeader';
+import App from '../App';
 
-test('renders page header', () => {
+test('renders app', () => {
   render(
     <ThemeProvider theme={theme}>
-      <PageHeader />
+      <App />
     </ThemeProvider>
   );
 });

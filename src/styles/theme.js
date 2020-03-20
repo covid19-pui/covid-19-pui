@@ -8,7 +8,19 @@ const colors = {
 };
 
 const typography = {
-  fontFamily: '"Avenir Next", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif'
+  primary: {
+    fontFamily: '"Avenir Next", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif'
+  },
+  secondary: {
+    fontFamily: 'Roboto, sans-serif'
+  }
+};
+
+const variables = {
+  spacing: {
+    navWidth: '265px',
+    globalPadding: '2em'
+  }
 };
 
 const theme = createMuiTheme({
@@ -28,7 +40,8 @@ const theme = createMuiTheme({
       primary: colors.black,
       secondary: colors.white
     }
-  }
+  },
+  variables: { ...variables }
 });
 
 export default theme;

@@ -1,17 +1,8 @@
 import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core';
 
+import useStyles from './styles';
 import { updateTOC, cleanUpTOC } from '../Navigation/Navigation';
 import FormSectionHeader from '../FormSectionHeader';
-
-const useStyles = makeStyles(
-  {
-    root: {
-      margin: '2em'
-    }
-  },
-  { name: 'FormContent' }
-);
 
 const sections = [
   { id: 'identifiers', title: 'identifiers' },

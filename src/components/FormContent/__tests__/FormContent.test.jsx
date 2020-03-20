@@ -1,5 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/core/styles';
+
+import theme from '../../../styles/theme';
 import FormContent from '../FormContent';
 
 const MockTOC = () => {
@@ -8,11 +11,11 @@ const MockTOC = () => {
 
 test('renders form content', () => {
   render(
-    <div>
+    <ThemeProvider theme={theme}>
       <MockTOC />
       <div className="tocSection">
         <FormContent />
       </div>
-    </div>
+    </ThemeProvider>
   );
 });
