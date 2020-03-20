@@ -44,6 +44,11 @@ const theme = createMuiTheme({
   },
   variables: { ...variables },
   overrides: {
+    MuiFormLabel: {
+      root: {
+        color: colors.darkGray
+      }
+    },
     MuiRadio: {
       root: {
         color: colors.darkGray

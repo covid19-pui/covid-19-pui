@@ -6,7 +6,7 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 import useStyles from './styles';
 import { useForm } from '../../FormProvider/FormProvider';
 
-function DateField({ id, label }) {
+function DateField({ formKey, label }) {
   const styles = useStyles();
   const { 1: setForm } = useForm();
   const [selectedDate, setDate] = useState(moment());
@@ -14,7 +14,7 @@ function DateField({ id, label }) {
     setForm(prevState => {
       return {
         ...prevState,
-        [id]: date.format('MM/DD/YYYY')
+        [formKey]: date.format('MM/DD/YYYY')
       };
     });
     setDate(date);
@@ -23,6 +23,7 @@ function DateField({ id, label }) {
     <FormControl className={styles.formControl}>
       <KeyboardDatePicker
         autoOk
+        fullWidth
         variant="inline"
         inputVariant="outlined"
         label={label}
