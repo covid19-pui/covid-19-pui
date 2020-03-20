@@ -1,33 +1,36 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+
 import Image from './covid.png';
+
 const useStyles = makeStyles(theme => ({
   bg: {
-    height: '170px',
     backgroundImage: `url(${Image})`,
-    backgroundSize: 'cover'
+    backgroundSize: '100%',
+    backgroundRepeat: 'no-repeat',
+    alignItems: 'center'
   },
   text: {
-    textAlign: 'left',
-    alignItems: 'center',
     color: 'white',
     fontFamily: 'Roboto, sans-serif',
-    fontWeight: 500,
-    fontSize: '32px',
-    padding: '20px 40px'
+    fontWeight: 300,
+    fontSize: 'calc(12px + 0.9vw)',
+    padding: 'calc(2px + 1vw) 40px',
+    width: '50%',
+    minWidth: '500px'
   }
 }));
 
 function PageHeader() {
   const styles = useStyles();
+
   return (
-    <Grid container xs={12} className={styles.bg}>
-      <Grid item xs={6} className={styles.text}>
+    <div className={styles.bg}>
+      <div className={styles.text}>
         Human Infection with 2019 Novel Coronavirus Person Under Investigation (PUI) and Case Report
         Form
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 }
 
