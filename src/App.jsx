@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PageHeader from './components/PageHeader';
 import Navigation from './components/Navigation';
 import FormContent from './components/FormContent';
+import ThemeProvider from './components/ThemeProvider';
 
 const useStyles = makeStyles({
   content: {
@@ -15,7 +16,7 @@ function App() {
   const styles = useStyles();
 
   return (
-    <>
+    <ThemeProvider>
       <Grid container>
         <Grid item xs={12}>
           <PageHeader />
@@ -25,7 +26,7 @@ function App() {
       <div className={clsx(styles.content, 'tocSection')}>
         <FormContent />
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 

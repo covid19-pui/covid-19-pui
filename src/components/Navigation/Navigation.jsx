@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import tocbot from 'tocbot';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   toc: {
-    background: '#d8d8d8',
+    background: theme.palette.common.gray,
     height: '100vh',
     position: 'sticky',
     top: '0',
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     '@global': {
       ol: {
         listStyle: 'none',
-        fontFamily: '"Avenir Next", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif',
+        fontFamily: theme.typography.fontFamily,
         fontWeight: 600,
         padding: '1.5em',
         margin: '0',
@@ -27,12 +27,12 @@ const useStyles = makeStyles({
             paddingLeft: '1em',
 
             '&.is-active-li': {
-              borderColor: '#A6354C',
+              borderColor: theme.palette.common.red,
               fontWeight: 700
             }
           },
           a: {
-            color: '#404040',
+            color: theme.palette.text.primary,
             textDecoration: 'none'
           }
         }
@@ -43,7 +43,7 @@ const useStyles = makeStyles({
     position: 'fixed',
     top: '0'
   }
-});
+}));
 
 function Navigation() {
   const styles = useStyles();

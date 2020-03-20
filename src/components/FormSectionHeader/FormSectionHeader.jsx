@@ -2,16 +2,14 @@ import React from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 
-const borderColor = '#404040';
-
 const useStyles = makeStyles(
-  {
+  theme => ({
     titleBox: {
-      fontFamily: 'Avenir Next, Segoe UI, Roboto, Helvetica Neue, sans-serif',
+      fontFamily: theme.typography.fontFamily,
       fontWeight: 500,
-      backgroundColor: borderColor,
-      color: 'white',
-      border: `3px solid ${borderColor}`,
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.text.secondary,
+      border: `3px solid ${theme.palette.common.black}`,
       letterSpacing: 1,
       display: 'inline-block',
       padding: '0 5px',
@@ -20,10 +18,10 @@ const useStyles = makeStyles(
     },
     line: {
       display: 'inline-block',
-      border: `1px solid ${borderColor}`,
+      border: `1px solid ${theme.palette.common.black}`,
       width: '100%'
     }
-  },
+  }),
   { name: 'FormSectionHeader' }
 );
 
@@ -36,7 +34,7 @@ function FormSectionHeader({ title, id }) {
         {title}
       </Box>
       <Box flexGrow={1}>
-        <div className={styles.line}></div>
+        <div className={styles.line} />
       </Box>
     </Box>
   );
