@@ -10,7 +10,8 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
-    "tocbot": "^4.10.1"
+    "tocbot": "^4.10.1",
+    "typeface-roboto": "^0.0.75"
   },
   "scripts": {
     "start": "react-scripts start",

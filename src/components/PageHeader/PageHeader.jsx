@@ -9,12 +9,13 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: 'cover'
   },
   text: {
-    textAlign: 'center left',
+    textAlign: 'left',
+    alignItems: 'center',
     color: 'white',
-    fontFamily: "'Code-Pro-LC', sans-serif",
-    fontWeight: 600,
-    fontSize: '30px',
-    padding: '20px '
+    fontFamily: 'Roboto, sans-serif',
+    fontWeight: 500,
+    fontSize: '32px',
+    padding: '20px 40px'
   }
 }));
 
