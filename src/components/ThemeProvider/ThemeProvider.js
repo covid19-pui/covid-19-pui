@@ -1,5 +1,8 @@
 import React from 'react';
-import { ThemeProvider as MuiThemeProvider, useTheme as muiUseTheme } from '@material-ui/core/styles';
+import {
+  ThemeProvider as MuiThemeProvider,
+  useTheme as muiUseTheme
+} from '@material-ui/core/styles';
 import theme from '../../styles/theme';
 
 const ThemeProvider = ({ children }) => {
