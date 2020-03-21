@@ -3,12 +3,10 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 
-import useStyles from './styles';
 import { useForm } from '../../FormProvider/FormProvider';
 
 function SelectBox({ id, formKey, label, options }) {
   if (formKey == null) formKey = id;
-  const styles = useStyles();
 
   const { setForm } = useForm();
   const [selectedItem, setItem] = useState();
@@ -24,14 +22,13 @@ function SelectBox({ id, formKey, label, options }) {
   };
 
   return (
-    <FormControl className={styles.root} fullWidth>
+    <FormControl fullWidth>
       <TextField
         name={id}
         select
         label={label}
         value={selectedItem || ''}
         onChange={handleChange}
-        //helperText={help}
         variant="outlined"
       >
         {options.map(option => (
@@ -43,4 +40,5 @@ function SelectBox({ id, formKey, label, options }) {
     </FormControl>
   );
 }
+
 export default SelectBox;

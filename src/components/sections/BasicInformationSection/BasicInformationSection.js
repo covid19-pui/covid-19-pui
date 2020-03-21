@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 
+import { useForm } from '../../FormProvider/FormProvider';
 import DateField from 'components/forms/DateField';
 import SelectBox from 'components/forms/SelectBox';
 
@@ -10,49 +11,105 @@ const currentStatusOptions = [
   { value: 'laboratory-confirmed', label: 'Laboratory-confirmed case' }
 ];
 
-// TODO: Dynamically adjust based on current status selected
-const testingStatusOptions = [
-  { value: 'pui-pending', label: 'Testing pending' },
-  { value: 'pui-negative', label: 'Testing negative' },
-  { value: 'confirmatory-pending', label: 'Confirmatory testing pending' },
-  { value: 'confirmatory-negative', label: 'Confirmatory tested negative' }
-];
+const testingStatusOptions = {
+  pui: [
+    { value: 'pui-pending', label: 'Testing pending' },
+    { value: 'pui-negative', label: 'Testing negative' }
+  ],
+  presumptive: [
+    { value: 'confirmatory-pending', label: 'Confirmatory testing pending' },
+    { value: 'confirmatory-negative', label: 'Confirmatory tested negative' }
+  ]
+};
 
-// TODO: Get states and territories database / api
-const stateOptions = [
-  { value: 'MA', label: 'Massachusetts' },
-  { value: 'NH', label: 'New Hampshire' },
-  { value: 'RI', label: 'Rhode Island' }
-];
+async function fetchStates() {
+  const res = await fetch('https://api.census.gov/data/2010/dec/sf1?get=NAME&for=state:*');
+  return res.json().then(res => res.slice(1));
+}
 
-// TODO: Get counties database / api
-const countyOptions = [
-  { value: 'County1', label: 'County 1' },
-  { value: 'County2', label: 'County 2' },
-  { value: 'County3', label: 'County 3' }
-];
+async function fetchCounties(stateId) {
+  const res = await fetch(
+    `https://api.census.gov/data/2010/dec/sf1?get=NAME&for=county:*&in=state:${stateId}`
+  );
+  return res.json().then(res => res.slice(1));
+}
+
+function useStates() {
+  const [data, setData] = useState({ loading: true, error: null, states: [], stateId: {} });
+
+  useEffect(() => {
+    fetchStates()
+      .then(states => {
+        const stateId = states.reduce((map, state) => ({ ...map, [state[0]]: state[1] }), {});
+        setData({ loading: false, errors: null, states, stateId });
+      })
+      .catch(error => setData({ loading: false, error, states: [], stateId: {} }));
+  }, []);
+
+  return data;
+}
+
+function useCounties(stateId) {
+  const [data, setData] = useState({ loading: false, error: null, counties: [] });
+
+  useEffect(() => {
+    if (stateId == null) return;
+
+    setData(data => ({ ...data, loading: true, counties: [] }));
+    fetchCounties(stateId)
+      .then(counties => setData({ loading: false, error: null, counties }))
+      .catch(error => setData({ loading: false, error, counties: [] }));
+  }, [stateId]);
+
+  return data;
+}
 
 function BasicInformationSection() {
+  const { form } = useForm();
+  const { states, error: statesError, stateId } = useStates();
+  const { counties, error: countiesError } = useCounties(stateId[form.state]);
+
+  const testingOptions = testingStatusOptions[form.currentStatus];
+  const stateOptions = states.map(tuple => {
+    const state = tuple[0];
+    return { value: state, label: state };
+  });
+  const countyOptions = counties.map(tuple => {
+    const county = tuple[0].split('County,')[0];
+    return { value: county, label: county };
+  });
+
+  if (statesError || countiesError) return <div>There was an error...</div>;
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <SelectBox id="currentStatus" label="Current Status" options={currentStatusOptions} />
       </Grid>
-      <Grid item xs={12}>
-        <SelectBox id="testingStatus" label="Testing Status" options={testingStatusOptions} />
-      </Grid>
+
+      {testingOptions && (
+        <Grid item xs={12}>
+          <SelectBox id="testingStatus" label="Testing Status" options={testingOptions || []} />
+        </Grid>
+      )}
+
       <Grid item xs={6}>
         <DateField id="puiReportDate" label="Report Date of PUI to CDC" />
       </Grid>
+
       <Grid item xs={6}>
         <SelectBox id="state" label="State of Residence" options={stateOptions} />
       </Grid>
+
       <Grid item xs={6}>
         <DateField id="caseReportDate" label="Report Date of case to CDC" />
       </Grid>
-      <Grid item xs={6}>
-        <SelectBox id="county" label="County of Residence" options={countyOptions} />
-      </Grid>
+
+      {countyOptions.length > 0 && (
+        <Grid item xs={6}>
+          <SelectBox id="county" label="County of Residence" options={countyOptions} />
+        </Grid>
+      )}
     </Grid>
   );
 }

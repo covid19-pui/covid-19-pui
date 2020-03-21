@@ -53,7 +53,7 @@ function IdentifiersSection() {
         <TextField
           name="NNDSSCaseId"
           label="NNDSS Loc. Rec. ID / Case ID"
-          helperText="For NNDSS reporters, use GenV2 or NETSS patient identifier."
+          helperText="For NNDSS reporters, use GenV2 or NETSS patient identifier"
         />
       </Grid>
     </Grid>
