@@ -8,7 +8,7 @@ import { useForm } from '../../FormProvider/FormProvider';
 
 function DateField({ formKey, label }) {
   const styles = useStyles();
-  const { 1: setForm } = useForm();
+  const { setForm } = useForm();
   const [selectedDate, setDate] = useState(moment());
   const handleDateChange = date => {
     setForm(prevState => {

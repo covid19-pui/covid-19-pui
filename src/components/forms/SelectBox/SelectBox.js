@@ -7,14 +7,13 @@ import useStyles from './styles';
 import { useForm } from '../../FormProvider/FormProvider';
 
 function SelectBox({ id, formKey, label, options }) {
-  if (formKey == null) {
-    formKey = id;
-  }
+  if (formKey == null) formKey = id;
   const styles = useStyles();
-  const { 1: setForm } = useForm();
+
+  const { setForm } = useForm();
   const [selectedItem, setItem] = useState();
+
   const handleChange = event => {
-    console.log(event);
     setForm(prevState => {
       return {
         ...prevState,
@@ -23,10 +22,10 @@ function SelectBox({ id, formKey, label, options }) {
     });
     setItem(event.target.value);
   };
+
   return (
     <FormControl className={styles.root} fullWidth>
       <TextField
-        id={id}
         name={id}
         select
         label={label}

@@ -9,7 +9,7 @@ const expectedText = value => `${formText} ${value}`;
 const newFormValue = { name: 'James' };
 
 const MockConsumer = () => {
-  const [form, setForm] = useForm();
+  const { form, setForm } = useForm();
   const onClick = () => {
     setForm(newFormValue);
   };

@@ -6,11 +6,12 @@ import useStyles from './styles';
 import { updateTOC, cleanUpTOC } from 'components/Navigation';
 import FormSectionHeader from 'components/FormSectionHeader';
 import IdentifiersSection from 'components/sections/IdentifiersSection';
+import InterviewerSection from 'components/sections/InterviewerSection';
 import BasicInformationSection from 'sections/BasicInformationSection';
 
 const sections = [
   { id: 'identifiers', title: 'identifiers', section: <IdentifiersSection /> },
-  { id: 'interviewer', title: 'interviewer' },
+  { id: 'interviewer', title: 'interviewer', section: <InterviewerSection /> },
   { id: 'basicInformation', title: 'basic information', section: <BasicInformationSection /> },
   { id: 'demographics', title: 'demographics' },
   { id: 'patientCare', title: 'patient care' },

@@ -10,8 +10,9 @@ import useStyles from './styles';
 
 function RadioField({ label, formKey, options }) {
   const styles = useStyles();
-  const { 1: setForm } = useForm();
+  const { setForm } = useForm();
   const [selection, setSelection] = useState('');
+
   const handleChange = event => {
     setForm(prevState => {
       return {
