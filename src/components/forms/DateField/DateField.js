@@ -3,18 +3,18 @@ import FormControl from '@material-ui/core/FormControl';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
 import useStyles from './styles';
-import { useForm } from '../../FormProvider/FormProvider';
+import { useForm } from 'components/FormProvider';
 
-function DateField({ formKey, label, defaultDate }) {
+function DateField({ name, label, defaultValue }) {
   const styles = useStyles();
   const { setForm } = useForm();
-  const [selectedDate, setDate] = useState(defaultDate);
+  const [selectedDate, setDate] = useState(defaultValue);
 
   const handleDateChange = date => {
     setForm(prevState => {
       return {
         ...prevState,
-        [formKey]: date.format('MM/DD/YYYY')
+        [name]: date.format('MM/DD/YYYY')
       };
     });
     setDate(date);

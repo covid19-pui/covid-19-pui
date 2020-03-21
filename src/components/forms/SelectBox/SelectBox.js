@@ -3,28 +3,28 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 
-import { useForm } from '../../FormProvider/FormProvider';
+import { useForm } from 'components/FormProvider';
 
-function SelectBox({ id, formKey, label, options }) {
-  if (formKey == null) formKey = id;
-
+function SelectBox({ name, label, defaultValue, options }) {
   const { setForm } = useForm();
-  const [selectedItem, setItem] = useState();
+  const [selectedItem, setItem] = useState(defaultValue);
 
   const handleChange = event => {
+    const { value } = event.target;
+
     setForm(prevState => {
       return {
         ...prevState,
-        [formKey]: event.target.value
+        [name]: value
       };
     });
-    setItem(event.target.value);
+    setItem(value);
   };
 
   return (
     <FormControl fullWidth>
       <TextField
-        name={id}
+        name={name}
         select
         label={label}
         value={selectedItem || ''}

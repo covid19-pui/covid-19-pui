@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import FormProvider, { useForm } from '../FormProvider';
+import FormProvider, { useForm } from 'components/FormProvider';
 
 const formText = 'The name is';
 const formTextRegExp = new RegExp(formText);

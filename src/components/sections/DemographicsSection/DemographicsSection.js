@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
-import { useForm } from '../../FormProvider/FormProvider';
+import { useForm } from 'components/FormProvider';
 import SelectBox from 'components/forms/SelectBox';
 import DateField from 'components/forms/DateField';
 import TextField from 'components/forms/TextField';
@@ -26,9 +26,9 @@ const raceOptions = [
 ];
 
 const ageUnitsOptions = [
-  { value: 'years', label: 'Years' },
-  { value: 'months', label: 'Months' },
-  { value: 'days', label: 'Days' }
+  { value: 'years', label: 'Year(s)' },
+  { value: 'months', label: 'Month(s)' },
+  { value: 'days', label: 'Day(s)' }
 ];
 
 const sexOptions = [
@@ -44,11 +44,11 @@ function DemographicsSection() {
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
-        <DateField id="dateOfBirth" label="Date of Birth" />
+        <DateField name="dateOfBirth" label="Date of Birth" />
       </Grid>
 
       <Grid item xs={6}>
-        <SelectBox id="ethnicity" label="Ethnicity" options={ethnicityOptions} />
+        <SelectBox name="ethnicity" label="Ethnicity" options={ethnicityOptions} />
       </Grid>
 
       <Grid item xs={3}>
@@ -56,15 +56,15 @@ function DemographicsSection() {
       </Grid>
 
       <Grid item xs={3}>
-        <SelectBox id="ageUnits" label="Age Units" options={ageUnitsOptions} />
+        <SelectBox name="ageUnits" label="Age Units" options={ageUnitsOptions} />
       </Grid>
 
       <Grid item xs={6}>
-        <SelectBox id="race" label="Race" options={raceOptions} />
+        <SelectBox name="race" label="Race" options={raceOptions} />
       </Grid>
 
       <Grid item xs={6}>
-        <SelectBox id="sex" label="Sex" options={sexOptions} />
+        <SelectBox name="sex" label="Sex" options={sexOptions} />
       </Grid>
 
       {form.race === 'other' && (

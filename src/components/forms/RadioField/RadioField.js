@@ -8,7 +8,7 @@ import { useForm } from 'components/FormProvider';
 
 import useStyles from './styles';
 
-function RadioField({ label, formKey, options }) {
+function RadioField({ name, label, options }) {
   const styles = useStyles();
   const { setForm } = useForm();
   const [selection, setSelection] = useState('');
@@ -17,7 +17,7 @@ function RadioField({ label, formKey, options }) {
     setForm(prevState => {
       return {
         ...prevState,
-        [formKey]: event.target.value
+        [name]: event.target.value
       };
     });
     setSelection(event.target.value);
