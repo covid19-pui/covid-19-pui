@@ -12,6 +12,7 @@
     "moment": "^2.24.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-input-mask": "^2.0.4",
     "react-scripts": "3.4.0",
     "tocbot": "^4.10.1",
     "typeface-roboto": "^0.0.75"
@@ -26,7 +27,7 @@
     "lint-fix": "eslint './src/**/*.{js,jsx}' --fix",
     "prettier": "prettier --check '**/*.{js,jsx}'",
     "prettier-fix": "prettier --write '**/*.{js,jsx}'",
-    "check": "npm run build && npm run test-no-watch && npm run lint && npm run prettier"
+    "check": "npm run build && npm run test-no-watch && npm run lint"
   },
   "eslintConfig": {
     "extends": "react-app"

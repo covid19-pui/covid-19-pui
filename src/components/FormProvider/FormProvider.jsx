@@ -4,7 +4,7 @@ const FormContext = createContext([]);
 
 const FormProvider = ({ children, value }) => {
   const [form, setForm] = useState(value ?? {});
-  return <FormContext.Provider value={[form, setForm]}>{children}</FormContext.Provider>;
+  return <FormContext.Provider value={{ form, setForm }}>{children}</FormContext.Provider>;
 };
 
 const useForm = () => useContext(FormContext);
