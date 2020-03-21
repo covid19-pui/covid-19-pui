@@ -4,7 +4,7 @@ export default makeStyles(
   theme => {
     return {
       toc: {
-        background: theme.palette.common.gray,
+        background: theme.palette.common.lightGray,
         height: '100vh',
         position: 'sticky',
         top: '0',

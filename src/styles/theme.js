@@ -3,9 +3,10 @@ import { createMuiTheme } from '@material-ui/core';
 const colors = {
   black: '#404040',
   white: '#FFFFFF',
-  gray: '#D8D8D8',
-  red: '#A6354C',
-  darkGray: '#666'
+  lightGray: '#D8D8D8',
+  gray: '#7D8892',
+  darkGray: '#666',
+  red: '#A6354C'
 };
 
 const typography = {
@@ -19,8 +20,8 @@ const typography = {
 
 const variables = {
   spacing: {
-    navWidth: '265px',
-    globalPadding: '2em'
+    navWidth: '210px',
+    globalPadding: '1em 3em'
   }
 };
 
@@ -47,6 +48,11 @@ const theme = createMuiTheme({
     MuiFormLabel: {
       root: {
         color: colors.darkGray
+      }
+    },
+    MuiFormHelperText: {
+      root: {
+        color: colors.gray
       }
     },
     MuiRadio: {

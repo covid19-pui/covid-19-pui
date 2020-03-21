@@ -10,6 +10,7 @@ function DateField({ formKey, label }) {
   const styles = useStyles();
   const { setForm } = useForm();
   const [selectedDate, setDate] = useState(moment());
+
   const handleDateChange = date => {
     setForm(prevState => {
       return {
@@ -19,6 +20,7 @@ function DateField({ formKey, label }) {
     });
     setDate(date);
   };
+
   return (
     <FormControl className={styles.formControl}>
       <KeyboardDatePicker

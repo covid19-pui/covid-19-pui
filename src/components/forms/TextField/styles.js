@@ -11,8 +11,7 @@ export default makeStyles(
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
-      margin: theme.spacing(1)
+      justifyContent: 'space-between'
     }
   }),
   { name: 'TextField' }
