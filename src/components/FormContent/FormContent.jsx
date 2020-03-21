@@ -7,7 +7,7 @@ import { updateTOC, cleanUpTOC } from 'components/Navigation';
 import FormSectionHeader from 'components/FormSectionHeader';
 import IdentifiersSection from 'components/sections/IdentifiersSection';
 import InterviewerSection from 'components/sections/InterviewerSection';
-import BasicInformationSection from 'sections/BasicInformationSection';
+import BasicInformationSection from 'components/sections/BasicInformationSection';
 
 const sections = [
   { id: 'identifiers', title: 'identifiers', section: <IdentifiersSection /> },
@@ -15,8 +15,12 @@ const sections = [
   { id: 'basicInformation', title: 'basic information', section: <BasicInformationSection /> },
   { id: 'demographics', title: 'demographics' },
   { id: 'patientCare', title: 'patient care' },
+  { id: 'exposure', title: 'exposure' },
+  { id: 'discovery', title: 'discovery' },
   { id: 'symptoms', title: 'symptoms' },
-  { id: 'exposure', title: 'exposure' }
+  { id: 'history', title: 'history' },
+  { id: 'testing', title: 'testing' },
+  { id: 'specimens', title: 'specimens' }
 ];
 
 function FormContent() {

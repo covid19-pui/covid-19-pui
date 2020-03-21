@@ -8,7 +8,7 @@ function FormSectionHeader({ title, id }) {
   const styles = useStyles();
 
   return (
-    <Box display="flex" flexDirection="row">
+    <Box display="flex" flexDirection="row" className={styles.root}>
       <Box id={id} className={clsx(styles.titleBox, 'tocHeading')}>
         {title}
       </Box>
