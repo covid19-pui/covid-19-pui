@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Formik, Form } from 'formik';
+import { Button, Grid } from '@material-ui/core';
 import download from 'downloadjs';
 
 import useStyles from './styles';
@@ -77,7 +78,12 @@ function FormContent() {
     >
       <Form>
         {sectionContent}
-        <button type="submit">Submit</button>
+
+        <Grid container justify="flex-end" className={styles['submit-button']}>
+          <Button type="submit" variant="contained" color="secondary" size="large">
+            Submit
+          </Button>
+        </Grid>
       </Form>
     </Formik>
   );
