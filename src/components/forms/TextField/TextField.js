@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField as MUITextField, FormControl } from '@material-ui/core';
 import InputMask from 'react-input-mask';
 
+import { useForm } from 'components/FormProvider';
+
 import useStyles from './styles';
-import { useForm } from '../../FormProvider/FormProvider';
 
 function Field({ type, onChange, ...props }) {
   switch (type) {
@@ -21,9 +22,10 @@ function Field({ type, onChange, ...props }) {
   }
 }
 
-function TextField({ name, ...props }) {
+function TextField({ name, defaultValue, ...props }) {
   const styles = useStyles();
   const { setForm } = useForm();
+  const [textValue, setTextValue] = useState(defaultValue);
 
   const handleChange = event => {
     const { value } = event.target;
@@ -34,11 +36,12 @@ function TextField({ name, ...props }) {
         [name]: value
       };
     });
+    setTextValue(value);
   };
 
   return (
     <FormControl className={styles.formControl}>
-      <Field {...props} onChange={handleChange} />
+      <Field {...props} value={textValue} onChange={handleChange} />
     </FormControl>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
-import { useForm } from '../../FormProvider/FormProvider';
+import { useForm } from 'components/FormProvider';
 import TextField from 'components/forms/TextField';
 import RadioField from 'components/forms/RadioField';
 
@@ -17,8 +17,8 @@ function IdentifiersSection() {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <RadioField
+          name="knownContact"
           label="Is the case-patient a known contact of a prior source case-patient?"
-          formKey="knownContact"
           options={options}
         />
       </Grid>

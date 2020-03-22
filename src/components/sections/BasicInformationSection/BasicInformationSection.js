@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 
-import { useForm } from '../../FormProvider/FormProvider';
+import { useForm } from 'components/FormProvider';
 import DateField from 'components/forms/DateField';
 import SelectBox from 'components/forms/SelectBox';
 
@@ -84,30 +84,30 @@ function BasicInformationSection() {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <SelectBox id="currentStatus" label="Current Status" options={currentStatusOptions} />
+        <SelectBox name="currentStatus" label="Current Status" options={currentStatusOptions} />
       </Grid>
 
       {testingOptions && (
         <Grid item xs={12}>
-          <SelectBox id="testingStatus" label="Testing Status" options={testingOptions || []} />
+          <SelectBox name="testingStatus" label="Testing Status" options={testingOptions || []} />
         </Grid>
       )}
 
       <Grid item xs={6}>
-        <DateField id="puiReportDate" label="Report Date of PUI to CDC" />
+        <DateField name="puiReportDate" label="Report Date of PUI to CDC" />
       </Grid>
 
       <Grid item xs={6}>
-        <SelectBox id="state" label="State of Residence" options={stateOptions} />
+        <SelectBox name="state" label="State of Residence" options={stateOptions} />
       </Grid>
 
       <Grid item xs={6}>
-        <DateField id="caseReportDate" label="Report Date of case to CDC" />
+        <DateField name="caseReportDate" label="Report Date of case to CDC" />
       </Grid>
 
       {countyOptions.length > 0 && (
         <Grid item xs={6}>
-          <SelectBox id="county" label="County of Residence" options={countyOptions} />
+          <SelectBox name="county" label="County of Residence" options={countyOptions} />
         </Grid>
       )}
     </Grid>
