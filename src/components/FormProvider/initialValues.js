@@ -24,7 +24,27 @@ const initialValues = {
   ageUnits: '',
   race: '',
   sex: '',
-  otherRace: ''
+  otherRace: '',
+  positiveSpecimenCollected: '',
+  firstPositiveSpecimenDate: null,
+  firstPositiveSpecimenDateUnknown: '',
+  pneumonia: '',
+  acuteRespiratoryDistressSyndrome: '',
+  anotherDiagnosisEtiology: '',
+  abnormalChestXray: '',
+  hospitalized: '',
+  admissionDate: null,
+  admissionDateUnknown: '',
+  dischargeDate: null,
+  dischargeDateUnknown: '',
+  dischargeDateNotApplicable: '',
+  intensiveCareUnit: '',
+  mechanicalVentilationIntubation: '',
+  totalDaysWithMV: '',
+  ecmo: '',
+  death: '',
+  deathDate: null,
+  deathDateUnknown: ''
 };
 
 export default initialValues;
