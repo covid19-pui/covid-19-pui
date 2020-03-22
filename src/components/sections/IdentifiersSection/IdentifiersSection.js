@@ -1,17 +1,17 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { useFormikContext } from 'formik';
 
-import { useForm } from 'components/FormProvider';
 import TextField from 'components/forms/TextField';
 import RadioField from 'components/forms/RadioField';
 
 const options = [
-  { value: 'true', label: 'Yes' },
-  { value: 'false', label: 'No' }
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' }
 ];
 
 function IdentifiersSection() {
-  const { form } = useForm();
+  const { values } = useFormikContext();
 
   return (
     <Grid container spacing={3}>
@@ -23,30 +23,35 @@ function IdentifiersSection() {
         />
       </Grid>
 
-      {form.knownContact === 'true' && (
+      {values.knownContact === 'yes' && (
         <Grid item xs={12}>
           <TextField
             name="contactId"
             label="Contact ID"
             helperText="Assign Contact ID using CDC 2019-nCoV ID and sequential contact ID, e.g., Confirmed case CA102034567 has contacts CA102034567 -01 and CA102034567 -02"
+            autoComplete="off"
           />
         </Grid>
       )}
 
       <Grid item xs={12}>
-        <TextField name="reportingJurisdiction" label="Reporting Jurisdiction" />
+        <TextField name="reportingJurisdiction" label="Reporting Jurisdiction" autoComplete="off" />
       </Grid>
 
       <Grid item xs={12}>
-        <TextField name="reportingHealthDept" label="Reporting Health Department" />
+        <TextField
+          name="reportingHealthDept"
+          label="Reporting Health Department"
+          autoComplete="off"
+        />
       </Grid>
 
       <Grid item xs={4}>
-        <TextField name="caseStateLocalId" label="Case State / Local ID" />
+        <TextField name="caseStateLocalId" label="Case State / Local ID" autoComplete="off" />
       </Grid>
 
       <Grid item xs={4}>
-        <TextField name="CDC2019nCoVID" label="CDC 2019-nCoV ID" />
+        <TextField name="CDC2019nCoVID" label="CDC 2019-nCoV ID" autoComplete="off" />
       </Grid>
 
       <Grid item xs={4}>
@@ -54,6 +59,7 @@ function IdentifiersSection() {
           name="NNDSSCaseId"
           label="NNDSS Loc. Rec. ID / Case ID"
           helperText="For NNDSS reporters, use GenV2 or NETSS patient identifier"
+          autoComplete="off"
         />
       </Grid>
     </Grid>

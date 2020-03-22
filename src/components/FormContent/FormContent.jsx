@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import React, { useMemo } from 'react';
+import { Formik, Form } from 'formik';
+import download from 'downloadjs';
 
 import useStyles from './styles';
-import { updateTOC, cleanUpTOC } from 'components/Navigation';
 import FormSectionHeader from 'components/FormSectionHeader';
 import IdentifiersSection from 'components/sections/IdentifiersSection';
 import InterviewerSection from 'components/sections/InterviewerSection';
 import BasicInformationSection from 'components/sections/BasicInformationSection';
 import DemographicsSection from 'components/sections/DemographicsSection';
+import useTOC from 'hooks/useTOC';
 
 const sections = [
   { id: 'identifiers', title: 'identifiers', section: <IdentifiersSection /> },
@@ -24,22 +24,63 @@ const sections = [
   { id: 'specimens', title: 'specimens' }
 ];
 
+export const initialValues = {
+  knownContact: null,
+  contactId: '',
+  reportingJurisdiction: '',
+  reportingHealthDept: '',
+  caseStateLocalId: '',
+  CDC2019nCoVID: '',
+  NNDSSCaseId: '',
+  interviewerFirstName: '',
+  interviewerLastName: '',
+  interviewerAffiliationOrganization: '',
+  interviewerTelephone: '',
+  interviewerEmail: '',
+  currentStatus: '',
+  testingStatus: '',
+  puiReportDate: null,
+  state: null,
+  caseReportDate: null,
+  county: null,
+  dateOfBirth: null,
+  ethnicity: '',
+  age: '',
+  ageUnits: '',
+  race: '',
+  sex: '',
+  otherRace: ''
+};
+
 function FormContent() {
   const styles = useStyles();
 
-  useEffect(() => {
-    updateTOC();
-    return cleanUpTOC;
-  });
+  useTOC();
 
-  const sectionContent = sections.map(s => (
-    <div className={styles.root} key={s.id}>
-      <FormSectionHeader id={s.id} key={s.id} title={s.title} />
-      {s.section}
-    </div>
-  ));
+  const sectionContent = useMemo(
+    () =>
+      sections.map(({ id, title, section }) => (
+        <div className={styles.root} key={id}>
+          <FormSectionHeader id={id} title={title} />
+          {section}
+        </div>
+      )),
+    [styles.root]
+  );
 
-  return <MuiPickersUtilsProvider utils={MomentUtils}>{sectionContent}</MuiPickersUtilsProvider>;
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(values, actions) => {
+        download(JSON.stringify(values, 2, null), 'covid-19-pui-form.json', 'application/json');
+      }}
+    >
+      <Form>
+        {sectionContent}
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
+  );
 }
 
 export default FormContent;

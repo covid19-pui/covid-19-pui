@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
+import { useFormikContext } from 'formik';
+import { differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 
-import { useForm } from 'components/FormProvider';
 import SelectBox from 'components/forms/SelectBox';
 import DateField from 'components/forms/DateField';
 import TextField from 'components/forms/TextField';
@@ -39,12 +41,38 @@ const sexOptions = [
 ];
 
 function DemographicsSection() {
-  const { form } = useForm();
+  const { values, setFieldValue } = useFormikContext();
+
+  const handleBirthdayChange = useCallback(
+    date => {
+      batch(() => {
+        setFieldValue('dateOfBirth', date);
+        if (!isNaN(date)) {
+          const now = new Date();
+          const dayDiff = differenceInDays(now, date);
+          const monthDiff = differenceInMonths(now, date);
+
+          if (dayDiff <= 0) return;
+          else if (monthDiff === 0) {
+            setFieldValue('age', dayDiff);
+            setFieldValue('ageUnits', 'days');
+          } else if (monthDiff <= 12) {
+            setFieldValue('age', monthDiff);
+            setFieldValue('ageUnits', 'months');
+          } else {
+            setFieldValue('age', differenceInYears(now, date));
+            setFieldValue('ageUnits', 'years');
+          }
+        }
+      });
+    },
+    [setFieldValue]
+  );
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
-        <DateField name="dateOfBirth" label="Date of Birth" />
+        <DateField name="dateOfBirth" label="Date of Birth" onChange={handleBirthdayChange} />
       </Grid>
 
       <Grid item xs={6}>
@@ -52,7 +80,7 @@ function DemographicsSection() {
       </Grid>
 
       <Grid item xs={3}>
-        <TextField name="age" label="Age" type="number" />
+        <TextField name="age" label="Age" type="number" autoComplete="off" />
       </Grid>
 
       <Grid item xs={3}>
@@ -67,9 +95,9 @@ function DemographicsSection() {
         <SelectBox name="sex" label="Sex" options={sexOptions} />
       </Grid>
 
-      {form.race === 'other' && (
+      {values.race === 'other' && (
         <Grid item xs={6}>
-          <TextField name="otherRace" label="Other Race" />
+          <TextField name="otherRace" label="Other Race" autoComplete="off" />
         </Grid>
       )}
     </Grid>

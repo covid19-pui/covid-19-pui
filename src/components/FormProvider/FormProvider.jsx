@@ -1,13 +1,9 @@
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
-const FormContext = createContext([]);
-
-const FormProvider = ({ children, value }) => {
-  const [form, setForm] = useState(value ?? {});
-  return <FormContext.Provider value={{ form, setForm }}>{children}</FormContext.Provider>;
-};
-
-const useForm = () => useContext(FormContext);
+function FormProvider({ children }) {
+  return <MuiPickersUtilsProvider utils={DateFnsUtils}>{children}</MuiPickersUtilsProvider>;
+}
 
 export default FormProvider;
-export { useForm };

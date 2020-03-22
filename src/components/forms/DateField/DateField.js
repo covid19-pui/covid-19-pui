@@ -1,38 +1,33 @@
-import React, { useState } from 'react';
-import FormControl from '@material-ui/core/FormControl';
+import React from 'react';
+import { Field } from 'formik';
 import { KeyboardDatePicker } from '@material-ui/pickers';
+import { fieldToKeyboardDatePicker } from 'formik-material-ui-pickers';
+import FormControl from 'components/forms/FormControl';
 
-import useStyles from './styles';
-import { useForm } from 'components/FormProvider';
-
-function DateField({ name, label, defaultValue }) {
-  const styles = useStyles();
-  const { setForm } = useForm();
-  const [selectedDate, setDate] = useState(defaultValue);
-
-  const handleDateChange = date => {
-    setForm(prevState => {
-      return {
-        ...prevState,
-        [name]: date.format('MM/DD/YYYY')
-      };
-    });
-    setDate(date);
-  };
+function FormikKeyboardDatePicker({ children, onChange, ...props }) {
+  const datePickerProps = fieldToKeyboardDatePicker(props);
+  if (onChange) datePickerProps.onChange = onChange;
 
   return (
-    <FormControl className={styles.formControl}>
-      <KeyboardDatePicker
-        autoOk
-        fullWidth
-        variant="inline"
-        inputVariant="outlined"
-        label={label}
-        format="MM/DD/YYYY"
-        value={selectedDate || null}
-        InputAdornmentProps={{ position: 'end' }}
-        onChange={date => handleDateChange(date)}
-      />
+    <KeyboardDatePicker
+      {...datePickerProps}
+      autoOk
+      fullWidth
+      variant="inline"
+      inputVariant="outlined"
+      format="MM/dd/yyyy"
+      placeholder="MM/DD/YYYY"
+      InputAdornmentProps={{ position: 'end' }}
+    >
+      {children}
+    </KeyboardDatePicker>
+  );
+}
+
+function DateField(props) {
+  return (
+    <FormControl>
+      <Field component={FormikKeyboardDatePicker} {...props} />
     </FormControl>
   );
 }
