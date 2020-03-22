@@ -23,34 +23,6 @@ const sections = [
   { id: 'specimens', title: 'specimens' }
 ];
 
-export const initialValues = {
-  knownContact: null,
-  contactId: '',
-  reportingJurisdiction: '',
-  reportingHealthDept: '',
-  caseStateLocalId: '',
-  CDC2019nCoVID: '',
-  NNDSSCaseId: '',
-  interviewerFirstName: '',
-  interviewerLastName: '',
-  interviewerAffiliationOrganization: '',
-  interviewerTelephone: '',
-  interviewerEmail: '',
-  currentStatus: '',
-  testingStatus: '',
-  puiReportDate: null,
-  state: null,
-  caseReportDate: null,
-  county: null,
-  dateOfBirth: null,
-  ethnicity: '',
-  age: '',
-  ageUnits: '',
-  race: '',
-  sex: '',
-  otherRace: ''
-};
-
 function FormContent() {
   const styles = useStyles();
 
