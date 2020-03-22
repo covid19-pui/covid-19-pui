@@ -9,7 +9,6 @@ import DemographicsSection from 'components/sections/DemographicsSection';
 import PatientCareSection from 'components/sections/PatientCareSection';
 
 import useTOC from 'hooks/useTOC';
-import initialValues from './initialValues';
 import useStyles from './styles';
 
 const sections = [
