@@ -1,20 +1,23 @@
 import React, { useMemo } from 'react';
 import { Button, Grid } from '@material-ui/core';
 
-import useStyles from './styles';
 import FormSectionHeader from 'components/FormSectionHeader';
 import IdentifiersSection from 'components/sections/IdentifiersSection';
 import InterviewerSection from 'components/sections/InterviewerSection';
 import BasicInformationSection from 'components/sections/BasicInformationSection';
 import DemographicsSection from 'components/sections/DemographicsSection';
+import PatientCareSection from 'components/sections/PatientCareSection';
+
 import useTOC from 'hooks/useTOC';
+import initialValues from './initialValues';
+import useStyles from './styles';
 
 const sections = [
   { id: 'identifiers', title: 'identifiers', section: <IdentifiersSection /> },
   { id: 'interviewer', title: 'interviewer', section: <InterviewerSection /> },
   { id: 'basicInformation', title: 'basic information', section: <BasicInformationSection /> },
   { id: 'demographics', title: 'demographics', section: <DemographicsSection /> },
-  { id: 'patientCare', title: 'patient care' },
+  { id: 'patientCare', title: 'patient care', section: <PatientCareSection /> },
   { id: 'exposure', title: 'exposure' },
   { id: 'discovery', title: 'discovery' },
   { id: 'symptoms', title: 'symptoms' },

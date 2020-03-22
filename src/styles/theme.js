@@ -3,6 +3,7 @@ import { createMuiTheme } from '@material-ui/core';
 const colors = {
   black: '#404040',
   white: '#FFFFFF',
+  lighterGray: '#C6D0D7',
   lightGray: '#D8D8D8',
   gray: '#7D8892',
   darkGray: '#666',
@@ -56,6 +57,11 @@ const theme = createMuiTheme({
       }
     },
     MuiRadio: {
+      root: {
+        color: colors.darkGray
+      }
+    },
+    MuiCheckbox: {
       root: {
         color: colors.darkGray
       }
