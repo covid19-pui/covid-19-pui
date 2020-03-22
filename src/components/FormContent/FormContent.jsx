@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import React, { useMemo } from 'react';
+import { Button, Grid } from '@material-ui/core';
 
 import useStyles from './styles';
-import { updateTOC, cleanUpTOC } from 'components/Navigation';
 import FormSectionHeader from 'components/FormSectionHeader';
 import IdentifiersSection from 'components/sections/IdentifiersSection';
 import InterviewerSection from 'components/sections/InterviewerSection';
 import BasicInformationSection from 'components/sections/BasicInformationSection';
 import DemographicsSection from 'components/sections/DemographicsSection';
+import useTOC from 'hooks/useTOC';
 
 const sections = [
   { id: 'identifiers', title: 'identifiers', section: <IdentifiersSection /> },
@@ -27,19 +26,30 @@ const sections = [
 function FormContent() {
   const styles = useStyles();
 
-  useEffect(() => {
-    updateTOC();
-    return cleanUpTOC;
-  });
+  useTOC();
 
-  const sectionContent = sections.map(s => (
-    <div className={styles.root} key={s.id}>
-      <FormSectionHeader id={s.id} key={s.id} title={s.title} />
-      {s.section}
-    </div>
-  ));
+  const sectionContent = useMemo(
+    () =>
+      sections.map(({ id, title, section }) => (
+        <div className={styles.root} key={id}>
+          <FormSectionHeader id={id} title={title} />
+          {section}
+        </div>
+      )),
+    [styles.root]
+  );
 
-  return <MuiPickersUtilsProvider utils={MomentUtils}>{sectionContent}</MuiPickersUtilsProvider>;
+  return (
+    <>
+      {sectionContent}
+
+      <Grid container justify="flex-end" className={styles['submit-button']}>
+        <Button type="submit" variant="contained" color="secondary" size="large">
+          Submit
+        </Button>
+      </Grid>
+    </>
+  );
 }
 
 export default FormContent;

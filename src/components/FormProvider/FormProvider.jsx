@@ -1,13 +1,24 @@
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { Formik, Form } from 'formik';
+import DateFnsUtils from '@date-io/date-fns';
+import download from 'downloadjs';
 
-const FormContext = createContext([]);
+import initialValues from './initialValues';
 
-const FormProvider = ({ children, value }) => {
-  const [form, setForm] = useState(value ?? {});
-  return <FormContext.Provider value={{ form, setForm }}>{children}</FormContext.Provider>;
-};
-
-const useForm = () => useContext(FormContext);
+function FormProvider({ children }) {
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values, actions) => {
+          download(JSON.stringify(values, null, 2), 'covid-19-pui-form.json', 'application/json');
+        }}
+      >
+        <Form>{children}</Form>
+      </Formik>
+    </MuiPickersUtilsProvider>
+  );
+}
 
 export default FormProvider;
-export { useForm };

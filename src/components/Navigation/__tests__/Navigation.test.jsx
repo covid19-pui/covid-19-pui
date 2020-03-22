@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import theme from '../../../styles/theme';
-import Navigation, { cleanUpTOC, updateTOC } from '../Navigation';
+import theme from 'styles/theme';
+import useTOC from 'hooks/useTOC';
+import Navigation from 'components/Navigation';
 
 const headingClassName = 'tocHeading';
 const headings = ['foo', 'bar'];
 
 const MockFormSections = () => {
-  useEffect(() => {
-    updateTOC();
-    return cleanUpTOC;
-  });
+  useTOC();
 
   return (
     <div className="tocSection">

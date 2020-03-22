@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
+import { useFormikContext } from 'formik';
 
-import { useForm } from 'components/FormProvider';
+import AutocompleteField from 'components/forms/AutocompleteField';
 import DateField from 'components/forms/DateField';
 import SelectBox from 'components/forms/SelectBox';
 
@@ -65,31 +67,46 @@ function useCounties(stateId) {
 }
 
 function BasicInformationSection() {
-  const { form } = useForm();
+  const { values, setFieldValue, handleChange } = useFormikContext();
   const { states, error: statesError, stateId } = useStates();
-  const { counties, error: countiesError } = useCounties(stateId[form.state]);
+  const { counties, error: countiesError } = useCounties(stateId[values.state?.value]);
 
-  const testingOptions = testingStatusOptions[form.currentStatus];
-  const stateOptions = states.map(tuple => {
-    const state = tuple[0];
-    return { value: state, label: state };
-  });
-  const countyOptions = counties.map(tuple => {
-    const county = tuple[0].split('County,')[0];
-    return { value: county, label: county };
-  });
+  const testingOptions = testingStatusOptions[values.currentStatus];
+  const stateOptions = useMemo(() => states.map(([state]) => ({ value: state, label: state })), [
+    states
+  ]);
+  const countyOptions = useMemo(
+    () =>
+      counties.map(tuple => {
+        let [county] = tuple[0].split('County', 1);
+        county = county.trim();
+
+        return { value: county, label: county };
+      }),
+    [counties]
+  );
 
   if (statesError || countiesError) return <div>There was an error...</div>;
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <SelectBox name="currentStatus" label="Current Status" options={currentStatusOptions} />
+        <SelectBox
+          name="currentStatus"
+          label="Current Status"
+          options={currentStatusOptions}
+          onChange={e => {
+            batch(() => {
+              handleChange(e);
+              setFieldValue('testingStatus', ''); // reset testing status
+            });
+          }}
+        />
       </Grid>
 
       {testingOptions && (
         <Grid item xs={12}>
-          <SelectBox name="testingStatus" label="Testing Status" options={testingOptions || []} />
+          <SelectBox name="testingStatus" label="Testing Status" options={testingOptions} />
         </Grid>
       )}
 
@@ -98,7 +115,7 @@ function BasicInformationSection() {
       </Grid>
 
       <Grid item xs={6}>
-        <SelectBox name="state" label="State of Residence" options={stateOptions} />
+        <AutocompleteField name="state" label="State of Residence" options={stateOptions} />
       </Grid>
 
       <Grid item xs={6}>
@@ -107,7 +124,7 @@ function BasicInformationSection() {
 
       {countyOptions.length > 0 && (
         <Grid item xs={6}>
-          <SelectBox name="county" label="County of Residence" options={countyOptions} />
+          <AutocompleteField name="county" label="County of Residence" options={countyOptions} />
         </Grid>
       )}
     </Grid>

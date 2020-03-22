@@ -40,7 +40,8 @@ export default makeStyles(
       },
       makeSticky: {
         position: 'fixed',
-        top: '0'
+        top: '0',
+        float: 'none'
       }
     };
   },

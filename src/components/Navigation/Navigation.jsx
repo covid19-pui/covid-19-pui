@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import clsx from 'clsx';
-import tocbot from 'tocbot';
 
 import useStyles from './styles';
 
@@ -27,19 +26,4 @@ function Navigation() {
   return <div ref={scrollListener} className={classNames}></div>;
 }
 
-function updateTOC() {
-  // Initialize Tocbot
-  tocbot.init({
-    tocSelector: '.toc',
-    contentSelector: '.tocSection',
-    headingSelector: '.tocHeading',
-    activeLinkClass: 'activeHeading'
-  });
-}
-
-function cleanUpTOC() {
-  tocbot.destroy();
-}
-
 export default Navigation;
-export { updateTOC, cleanUpTOC };
