@@ -80,7 +80,7 @@ function DemographicsSection() {
       </Grid>
 
       <Grid item xs={3}>
-        <TextField name="age" label="Age" type="number" autoComplete="off" />
+        <TextField name="age" label="Age" type="text" autoComplete="off" />
       </Grid>
 
       <Grid item xs={3}>
