@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
-import { Formik, Form } from 'formik';
 import { Button, Grid } from '@material-ui/core';
-import download from 'downloadjs';
 
 import useStyles from './styles';
 import FormSectionHeader from 'components/FormSectionHeader';
@@ -25,34 +23,6 @@ const sections = [
   { id: 'specimens', title: 'specimens' }
 ];
 
-export const initialValues = {
-  knownContact: null,
-  contactId: '',
-  reportingJurisdiction: '',
-  reportingHealthDept: '',
-  caseStateLocalId: '',
-  CDC2019nCoVID: '',
-  NNDSSCaseId: '',
-  interviewerFirstName: '',
-  interviewerLastName: '',
-  interviewerAffiliationOrganization: '',
-  interviewerTelephone: '',
-  interviewerEmail: '',
-  currentStatus: '',
-  testingStatus: '',
-  puiReportDate: null,
-  state: null,
-  caseReportDate: null,
-  county: null,
-  dateOfBirth: null,
-  ethnicity: '',
-  age: '',
-  ageUnits: '',
-  race: '',
-  sex: '',
-  otherRace: ''
-};
-
 function FormContent() {
   const styles = useStyles();
 
@@ -70,22 +40,15 @@ function FormContent() {
   );
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={(values, actions) => {
-        download(JSON.stringify(values, 2, null), 'covid-19-pui-form.json', 'application/json');
-      }}
-    >
-      <Form>
-        {sectionContent}
+    <>
+      {sectionContent}
 
-        <Grid container justify="flex-end" className={styles['submit-button']}>
-          <Button type="submit" variant="contained" color="secondary" size="large">
-            Submit
-          </Button>
-        </Grid>
-      </Form>
-    </Formik>
+      <Grid container justify="flex-end" className={styles['submit-button']}>
+        <Button type="submit" variant="contained" color="secondary" size="large">
+          Submit
+        </Button>
+      </Grid>
+    </>
   );
 }
 

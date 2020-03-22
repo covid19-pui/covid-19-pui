@@ -51,6 +51,7 @@ function DemographicsSection() {
           const now = new Date();
           const dayDiff = differenceInDays(now, date);
           const monthDiff = differenceInMonths(now, date);
+          const yearDiff = differenceInYears(now, date);
 
           if (dayDiff <= 0) return;
           else if (monthDiff === 0) {
@@ -60,7 +61,7 @@ function DemographicsSection() {
             setFieldValue('age', monthDiff);
             setFieldValue('ageUnits', 'months');
           } else {
-            setFieldValue('age', differenceInYears(now, date));
+            setFieldValue('age', yearDiff);
             setFieldValue('ageUnits', 'years');
           }
         }

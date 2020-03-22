@@ -14,7 +14,7 @@ export function FormikAutocompleteTextField({ children, options, ...props }) {
       autoHighlight
       openOnFocus
       options={options}
-      getOptionLabel={option => option.label}
+      getOptionLabel={option => (typeof option === 'string' ? option : option.label)}
       renderInput={params => (
         <MUITextField
           {...params}
