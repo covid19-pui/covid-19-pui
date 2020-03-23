@@ -10,6 +10,7 @@ import PatientCareSection from 'components/sections/PatientCareSection';
 import DiscoverySection from 'components/sections/DiscoverySection';
 import SymptomsSection from 'components/sections/SymptomsSection';
 import HistorySection from 'components/sections/HistorySection';
+import ExposureSection from 'components/sections/ExposureSection';
 
 import useTOC from 'hooks/useTOC';
 import useStyles from './styles';
