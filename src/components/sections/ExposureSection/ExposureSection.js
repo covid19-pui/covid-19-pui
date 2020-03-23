@@ -70,19 +70,26 @@ function ExposureSection() {
           />
         </Grid>
         {values.travelOutsideUS === 'yes' && (
-          <Grid container alignItems="center">
-            <Grid item xs={6}>
-              <SelectBox
-                name="locationTraveledTo"
-                label="Location Traveled To"
-                options={locationOptions}
-              />
-            </Grid>
-            <FontAwesomeIcon icon={faPlusSquare} className={styles.plusIcon} />
-          </Grid>
+          <LocationsTraveled />
         )}
       </FormGroup>
     </>
+  );
+}
+
+function LocationsTraveled() {
+  const styles = useStyles();
+  return (
+    <Grid container alignItems="center">
+      <Grid item xs={6}>
+        <SelectBox
+          name="locationTraveledTo"
+          label="Location Traveled To"
+          options={locationOptions}
+        />
+      </Grid>
+      <FontAwesomeIcon icon={faPlusSquare} className={styles.plusIcon} />
+    </Grid>
   );
 }
 
