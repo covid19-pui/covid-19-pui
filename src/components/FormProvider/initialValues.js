@@ -19,6 +19,7 @@ const exposureInitialValues = {
 
 // DateField names need to be null, all other can be ''
 const initialValues = {
+  // identifiers
   knownContact: '',
   contactId: '',
   reportingJurisdiction: '',
