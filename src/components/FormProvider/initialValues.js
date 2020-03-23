@@ -50,6 +50,10 @@ const initialValues = {
   death: '',
   deathDate: null,
   deathDateUnknown: '',
+  // discovery
+  discoveryProcess: '',
+  dgmqid: '',
+  otherDiscoveryProcess: '',
   // history
   pregnant: '',
   currentSmoker: '',
