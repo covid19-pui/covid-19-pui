@@ -137,7 +137,7 @@ function LocationsTraveled() {
             name={`${name}.0`}
             withIcon={
               values[name].length > 1
-                ? minusIcon(arrayHelpers, 0)
+                ? values[name][1] && minusIcon(arrayHelpers, 0)
                 : values[name][0] && plusIcon(arrayHelpers, 0)
             }
             onChange={onChange(arrayHelpers, 0)}
