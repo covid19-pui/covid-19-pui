@@ -41,7 +41,7 @@ function SymptomsSection() {
             <DateField
               name="dateOfSymptomResolution"
               label="Date of Symptom Resolution"
-              disabled={!values.isSymptomatic}
+              disabled={values.isSymptomatic === 'yes' || values.isSymptomatic == null}
             />
           </Grid>
 
@@ -78,7 +78,7 @@ function SymptomsSection() {
             <DateField
               name="symptomOnsetDate"
               label="Onset Date"
-              disabled={values.presentedSymptoms}
+              disabled={values.presentedSymptoms !== 'yes'}
             />
           </Grid>
 
