@@ -1,8 +1,6 @@
 import React, { memo, useMemo } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { FieldArray, useFormikContext } from 'formik';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { useFormikContext } from 'formik';
 
 import { FormGroup, FormGroupDivider, RadioField, SelectBox, TextField } from 'components/forms';
 import useStyles from './styles';
