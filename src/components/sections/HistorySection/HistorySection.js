@@ -17,17 +17,42 @@ function HistorySection() {
   const { values } = useFormikContext();
 
   return (
-    <FormGroup options={options}>
-      <Grid item xs={12}>
-        <RadioField
-          name="preExistingConditions"
-          label="Pre-existing medical conditions?"
-          options={options}
-        />
-      </Grid>
-      <FormGroupDivider />
-      {values.preExistingConditions !== 'no' && (
-        <>
+    <>
+      <FormGroup options={options}>
+        {values.sex !== 'male' && (
+          <Grid item xs={12}>
+            <RadioField name="pregnant" label="Is the case-patient pregnant?" options={options} />
+          </Grid>
+        )}
+        <FormGroupDivider />
+        <Grid item xs={12}>
+          <RadioField
+            name="currentSmoker"
+            label="Is the case-patient a current smoker?"
+            options={options}
+          />
+        </Grid>
+        <FormGroupDivider />
+        <Grid item xs={12}>
+          <RadioField
+            name="formerSmoker"
+            label="Is the case-patient a former smoker?"
+            options={options}
+          />
+        </Grid>
+
+        <FormGroupDivider />
+        <Grid item xs={12}>
+          <RadioField
+            name="preExistingConditions"
+            label="Pre-existing medical conditions?"
+            options={options}
+          />
+        </Grid>
+      </FormGroup>
+
+      {values.preExistingConditions === 'yes' && (
+        <FormGroup headerText="During this illness, did the patient have" options={options}>
           <Grid item xs={12}>
             <RadioField
               name="chronicLungDisease"
@@ -103,33 +128,9 @@ function HistorySection() {
             </Grid>
           )}
           <FormGroupDivider />
-        </>
+        </FormGroup>
       )}
-
-      <Grid container spacing={3}>
-        {values.sex !== 'male' && (
-          <Grid item xs={12}>
-            <RadioField name="pregnant" label="Is the case-patient pregnant?" options={options} />
-          </Grid>
-        )}
-        <FormGroupDivider />
-        <Grid item xs={12}>
-          <RadioField
-            name="currentSmoker"
-            label="Is the case-patient a current smoker?"
-            options={options}
-          />
-        </Grid>
-        <FormGroupDivider />
-        <Grid item xs={12}>
-          <RadioField
-            name="formerSmoker"
-            label="Is the case-patient a former smoker?"
-            options={options}
-          />
-        </Grid>
-      </Grid>
-    </FormGroup>
+    </>
   );
 }
 
