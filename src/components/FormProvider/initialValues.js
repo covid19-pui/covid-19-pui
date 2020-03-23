@@ -111,7 +111,8 @@ const initialValues = {
   symptomOther: '',
   symptomOtherSpecify: '',
   // specimens
-  specimenCollected: ''
+  specimenCollected: '',
+  specimens: []
 };
 
 export default initialValues;
