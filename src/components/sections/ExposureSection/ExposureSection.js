@@ -105,31 +105,14 @@ function LocationsTraveled() {
       helpers.replace(index, event.target.value);
     };
   }, []);
-  const onPlus = useCallback((helpers, index) => {
-    return () => {
-      helpers.insert(index + 1, '');
-    };
+
+  const plusIcon = useCallback((helpers, index) => {
+    return { icon: faPlusSquare, onClick: () => helpers.insert(index + 1, '') };
   }, []);
 
-  const onMinus = useCallback((helpers, index) => {
-    return () => {
-      helpers.remove(index);
-    };
+  const minusIcon = useCallback((helpers, index) => {
+    return { icon: faMinusSquare, onClick: () => helpers.remove(index) };
   }, []);
-
-  const plusIcon = useCallback(
-    (helpers, index) => {
-      return { icon: faPlusSquare, onClick: onPlus(helpers, index) };
-    },
-    [onPlus]
-  );
-
-  const minusIcon = useCallback(
-    (helpers, index) => {
-      return { icon: faMinusSquare, onClick: onMinus(helpers, index) };
-    },
-    [onMinus]
-  );
 
   return (
     <FieldArray
