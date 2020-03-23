@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { FieldArray, useFormikContext } from 'formik';
 import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Grid from '@material-ui/core/Grid';
 
 import useStyles from './styles';
 
@@ -26,21 +25,32 @@ function withMultipleSelections(SelectionComponent, WrapperComponent) {
     }, []);
 
     const indexOptions = useCallback(
-      index => {
-        return options.filter(location => {
-          return values[name][index] === location.value || values[name].indexOf(location.value) < 0;
-        });
-      },
+      options
+        ? index => {
+            return options.filter(location => {
+              return (
+                values[name][index] === location.value || values[name].indexOf(location.value) < 0
+              );
+            });
+          }
+        : index => options,
       [name, options, values]
     );
 
     const lastIcon = useCallback(
-      helpers => {
-        const icon = [minusIcon(helpers, values[name].length - 1)];
-        if (values[name].slice(-1)[0] && indexOptions(values[name].length - 1).length > 1)
-          return icon.concat(plusIcon(helpers, values[name].length - 1));
-        return icon;
-      },
+      options
+        ? helpers => {
+            const icon = [minusIcon(helpers, values[name].length - 1)];
+            if (values[name].slice(-1)[0] && indexOptions(values[name].length - 1).length > 1)
+              return icon.concat(plusIcon(helpers, values[name].length - 1));
+            return icon;
+          }
+        : helpers => {
+            return [
+              minusIcon(helpers, values[name].length - 1),
+              plusIcon(helpers, values[name].length - 1)
+            ];
+          },
       [indexOptions, minusIcon, name, plusIcon, values]
     );
 
@@ -91,9 +101,6 @@ function withMultipleSelections(SelectionComponent, WrapperComponent) {
 function withIcons(WrappedComponent, wrapperComponent) {
   return ({ withIcon, ...wrappedProps }) => {
     const styles = useStyles();
-    const wrappedComponent = useMemo(() => {
-      return <WrappedComponent {...wrappedProps} />;
-    }, [wrappedProps]);
 
     const icons = useMemo(() => {
       return (
@@ -112,6 +119,10 @@ function withIcons(WrappedComponent, wrapperComponent) {
         </>
       );
     }, [styles.icon, withIcon]);
+
+    const wrappedComponent = useMemo(() => {
+      return <WrappedComponent icons={icons} {...wrappedProps} />;
+    }, [wrappedProps]);
 
     return wrapperComponent
       ? React.cloneElement(wrapperComponent, { icons }, wrappedComponent)

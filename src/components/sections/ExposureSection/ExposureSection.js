@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useMemo } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { FieldArray, useFormikContext } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
-import { FormGroup, FormGroupDivider, RadioField, SelectBox } from 'components/forms';
+import { FormGroup, FormGroupDivider, RadioField, SelectBox, TextField } from 'components/forms';
 import useStyles from './styles';
 import withMultipleSelections from 'components/forms/MultipleSelections/MultipleSelections';
 
@@ -25,15 +25,44 @@ function GridWrapper({ children, icons }) {
   const styles = useStyles();
   return (
     <Grid container alignItems="center" className={styles.locationSelection}>
-      <Grid item xs={6}>
-        {children}
-      </Grid>
-      {icons}
+      {children}
     </Grid>
   );
 }
 
-const LocationsTraveled = withMultipleSelections(SelectBox, <GridWrapper />);
+function TextSelectBox({ name, label, icons }) {
+  return (
+    <>
+      <Grid item xs={6}>
+        <TextField name={name} label={label} type="text" autoComplete="off" />
+      </Grid>
+      {icons}
+    </>
+  );
+}
+
+const MultipleTextBox = withMultipleSelections(TextSelectBox, <GridWrapper />);
+
+function LocationSelectBox({ name, label, options, icons }) {
+  const { values } = useFormikContext();
+  const locationName = useMemo(() => {
+    return <MultipleTextBox name="nonUSCountryNames" label="Non-US Country Name" />;
+  }, []);
+  return (
+    <>
+      <Grid item xs={6}>
+        <SelectBox name={name} label={label} options={options} />
+      </Grid>
+      {icons}
+
+      {name.split('.').reduce((acc, index) => {
+        return acc[index];
+      }, values) === 'nonUSCountry' && locationName}
+    </>
+  );
+}
+
+const MultipleLocationSelection = withMultipleSelections(LocationSelectBox, <GridWrapper />);
 
 function ExposureSection() {
   const styles = useStyles();
@@ -85,7 +114,7 @@ function ExposureSection() {
           />
         </Grid>
         {values.travelOutsideUS === 'yes' && (
-          <LocationsTraveled
+          <MultipleLocationSelection
             name="locationsTraveledTo"
             options={locationOptions}
             label="Location Traveled To"

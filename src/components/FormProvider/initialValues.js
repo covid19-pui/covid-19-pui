@@ -2,7 +2,8 @@ const exposureInitialValues = {
   locationsTraveledTo: [''],
   heathCareWorker: '',
   historyInChinaHealthcareFacility: '',
-  travelOutsideUS: ''
+  travelOutsideUS: '',
+  nonUSCountryNames: ['']
 };
 
 // DateField names need to be null, all other can be ''
