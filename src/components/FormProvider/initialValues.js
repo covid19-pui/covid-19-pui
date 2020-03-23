@@ -5,7 +5,16 @@ const exposureInitialValues = {
   travelOutsideUS: '',
   travelToChina: '',
   chinaLocationsTraveledTo: [''],
-  travelToNonUS: ['']
+  travelToNonUS: [''],
+  contactWithCOVIDpatient: '',
+  sourceOfContact: [''],
+  healthcareContact: '',
+  sourceContactUSCase: '',
+  sourceContactCaseID: '',
+  animalExposure: '',
+  exposureToCluster: '',
+  sourceNotListed: '',
+  sourceNotListedSource: ''
 };
 
 // DateField names need to be null, all other can be ''
