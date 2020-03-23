@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { unstable_batchedUpdates as batch } from 'react-dom';
 import { useFormikContext } from 'formik';
 import Grid from '@material-ui/core/Grid';
+import useObjectSlice from 'hooks/useObjectSlice';
 
 import {
   RadioField,
@@ -19,9 +20,37 @@ const options = [
   { value: 'unknown', label: 'Unknown' }
 ];
 
+const REQUIRED_VALUES = [
+  'positiveSpecimenCollected',
+  'firstPositiveSpecimenDateUnknown',
+  'hospitalized',
+  'admissionDateUnknown',
+  'dischargeDateUnknown',
+  'dischargeDateNotApplicable',
+  'mechanicalVentilationIntubation',
+  'death',
+  'deathDateUnknown'
+];
+
 function PatientCareSection() {
-  const styles = useStyles();
   const { values, setFieldValue, handleChange } = useFormikContext();
+  const formValues = useObjectSlice(values, REQUIRED_VALUES);
+
+  return (
+    <PatientCareSectionForm
+      setFieldValue={setFieldValue}
+      handleChange={handleChange}
+      values={formValues}
+    />
+  );
+}
+
+const PatientCareSectionForm = memo(function PatientCareSectionForm({
+  setFieldValue,
+  handleChange,
+  values
+}) {
+  const styles = useStyles();
 
   return (
     <FormGroup options={options}>
@@ -327,6 +356,6 @@ function PatientCareSection() {
       )}
     </FormGroup>
   );
-}
+});
 
 export default PatientCareSection;

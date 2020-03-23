@@ -18,7 +18,7 @@ const exposureInitialValues = {
 };
 
 // DateField names need to be null, all other can be ''
-const initialValues = {
+export const initialFormValues = {
   // identifiers
   knownContact: '',
   contactId: '',
@@ -115,4 +115,10 @@ const initialValues = {
   specimens: []
 };
 
-export default initialValues;
+let id = 0;
+export function createForm() {
+  return {
+    ...initialFormValues,
+    _id: ++id
+  };
+}

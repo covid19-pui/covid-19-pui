@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
@@ -10,8 +10,14 @@ const options = [
 ];
 
 function IdentifiersSection() {
-  const { values } = useFormikContext();
+  const {
+    values: { knownContact }
+  } = useFormikContext();
 
+  return <IdentifiersSectionForm knownContact={knownContact} />;
+}
+
+const IdentifiersSectionForm = memo(function IdentifiersSectionForm({ knownContact }) {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -22,7 +28,7 @@ function IdentifiersSection() {
         />
       </Grid>
 
-      {values.knownContact === 'yes' && (
+      {knownContact === 'yes' && (
         <Grid item xs={12}>
           <TextField
             name="contactId"
@@ -63,6 +69,6 @@ function IdentifiersSection() {
       </Grid>
     </Grid>
   );
-}
+});
 
 export default IdentifiersSection;

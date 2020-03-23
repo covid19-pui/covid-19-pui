@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
 import { RadioField, TextField, FormGroup, FormGroupDivider } from 'components/forms';
+import useObjectSlice from 'hooks/useObjectSlice';
 import useStyles from './styles';
 
 const options = [
@@ -11,9 +12,22 @@ const options = [
   { value: 'unknown', label: 'Unknown' }
 ];
 
+const REQUIRED_VALUES = [
+  'sex',
+  'preExistingConditions',
+  'neurologicDisease',
+  'otherChronicDisease'
+];
+
 function HistorySection() {
-  const styles = useStyles();
   const { values } = useFormikContext();
+  const formValues = useObjectSlice(values, REQUIRED_VALUES);
+
+  return <HistorySectionForm values={formValues} />;
+}
+
+const HistorySectionForm = memo(function HistorySectionForm({ values }) {
+  const styles = useStyles();
 
   return (
     <>
@@ -181,6 +195,6 @@ function HistorySection() {
       )}
     </>
   );
-}
+});
 
 export default HistorySection;

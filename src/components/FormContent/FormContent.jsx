@@ -59,4 +59,6 @@ function FormContent() {
   );
 }
 
+FormContent.whyDidYouRender = true;
+
 export default FormContent;

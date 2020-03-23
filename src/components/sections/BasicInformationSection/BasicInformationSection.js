@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
 import { AutocompleteField, DateField, SelectBox } from 'components/forms';
+import { useStates, useCounties } from './hooks';
 
 const currentStatusOptions = [
   { value: 'pui', label: 'PUI, tested (performed by state, local, or CDC lab)' },
@@ -22,65 +23,38 @@ const testingStatusOptions = {
   ]
 };
 
-async function fetchStates() {
-  const res = await fetch('https://api.census.gov/data/2010/dec/sf1?get=NAME&for=state:*');
-  return res.json().then(res => res.slice(1));
-}
-
-async function fetchCounties(stateId) {
-  const res = await fetch(
-    `https://api.census.gov/data/2010/dec/sf1?get=NAME&for=county:*&in=state:${stateId}`
-  );
-  return res.json().then(res => res.slice(1));
-}
-
-function useStates() {
-  const [data, setData] = useState({ loading: true, error: null, states: [], stateId: {} });
-
-  useEffect(() => {
-    fetchStates()
-      .then(states => {
-        const stateId = states.reduce((map, state) => ({ ...map, [state[0]]: state[1] }), {});
-        setData({ loading: false, errors: null, states, stateId });
-      })
-      .catch(error => setData({ loading: false, error, states: [], stateId: {} }));
-  }, []);
-
-  return data;
-}
-
-function useCounties(stateId) {
-  const [data, setData] = useState({ loading: false, error: null, counties: [] });
-
-  useEffect(() => {
-    if (stateId == null) return;
-
-    setData(data => ({ ...data, loading: true, counties: [] }));
-    fetchCounties(stateId)
-      .then(counties => setData({ loading: false, error: null, counties }))
-      .catch(error => setData({ loading: false, error, counties: [] }));
-  }, [stateId]);
-
-  return data;
-}
-
 function BasicInformationSection() {
-  const { values, setFieldValue, handleChange } = useFormikContext();
-  const { states, error: statesError, stateId } = useStates();
-  const { counties, error: countiesError } = useCounties(stateId[values.state?.value]);
+  const {
+    values: { state, currentStatus },
+    setFieldValue,
+    handleChange
+  } = useFormikContext();
 
-  const testingOptions = testingStatusOptions[values.currentStatus];
+  return (
+    <BasicInformationSectionForm
+      setFieldValue={setFieldValue}
+      handleChange={handleChange}
+      state={state}
+      currentStatus={currentStatus}
+    />
+  );
+}
+
+const BasicInformationSectionForm = memo(function BasicInformationSection({
+  setFieldValue,
+  handleChange,
+  state,
+  currentStatus
+}) {
+  const { states, error: statesError, stateId } = useStates();
+  const { counties, error: countiesError } = useCounties(stateId[state?.value]);
+
+  const testingOptions = testingStatusOptions[currentStatus];
   const stateOptions = useMemo(() => states.map(([state]) => ({ value: state, label: state })), [
     states
   ]);
   const countyOptions = useMemo(
-    () =>
-      counties.map(tuple => {
-        let [county] = tuple[0].split('County', 1);
-        county = county.trim();
-
-        return { value: county, label: county };
-      }),
+    () => counties.map(([county]) => ({ value: county, label: county })),
     [counties]
   );
 
@@ -127,6 +101,6 @@ function BasicInformationSection() {
       )}
     </Grid>
   );
-}
+});
 
 export default BasicInformationSection;
