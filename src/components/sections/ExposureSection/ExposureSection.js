@@ -75,42 +75,10 @@ function ExposureSection() {
   );
 }
 
-function LocationsTraveled() {
-  const { values } = useFormikContext();
-  const name = 'locationsTraveledTo';
-  const onChange = useCallback((helpers, index) => {
-    return event => {
-      helpers.replace(index, event.target.value);
-    };
-  }, []);
-  return (
-    <FieldArray
-      name={name}
-      render={arrayHelpers => (
-        <>
-          <div>asdf</div>
-          <LocationSelection
-            name={`${name}.0`}
-            withIcon={faPlusSquare}
-            onChange={onChange(arrayHelpers, 0)}
-          />
-          {/*{values.locationsTraveledTo &&*/}
-          {/*  values.locationsTraveledTo.map((location, index) => (*/}
-          {/*    <LocationsTraveled*/}
-          {/*      name={`${name}.${index}`}*/}
-          {/*      onChange={onChange(arrayHelpers, index)}*/}
-          {/*    />*/}
-          {/*  ))}*/}
-        </>
-      )}
-    />
-  );
-}
-
-function LocationSelection({ name, withIcon, onChange }) {
+function LocationSelection({ name, withIcon, onChange, onClick }) {
   const styles = useStyles();
   return (
-    <Grid container alignItems="center">
+    <Grid container alignItems="center" className={styles.locationSelection}>
       <Grid item xs={6}>
         <SelectBox
           name={name}
@@ -119,8 +87,84 @@ function LocationSelection({ name, withIcon, onChange }) {
           onChange={onChange}
         />
       </Grid>
-      {withIcon && <FontAwesomeIcon icon={withIcon} className={styles.plusIcon} />}
+      {withIcon &&
+        [withIcon]
+          .flat()
+          .map(({ icon, onClick }) => (
+            <FontAwesomeIcon icon={icon} className={styles.icon} onClick={onClick} />
+          ))}
     </Grid>
+  );
+}
+
+function LocationsTraveled() {
+  const { values } = useFormikContext();
+  const name = 'locationsTraveledTo';
+  const onChange = useCallback((helpers, index) => {
+    return event => {
+      helpers.replace(index, event.target.value);
+    };
+  }, []);
+  const onPlus = useCallback((helpers, index) => {
+    return () => {
+      helpers.insert(index + 1, '');
+    };
+  }, []);
+
+  const onMinus = useCallback((helpers, index) => {
+    return () => {
+      helpers.remove(index);
+    };
+  }, []);
+
+  const plusIcon = useCallback(
+    (helpers, index) => {
+      return { icon: faPlusSquare, onClick: onPlus(helpers, index) };
+    },
+    [onPlus]
+  );
+
+  const minusIcon = useCallback(
+    (helpers, index) => {
+      return { icon: faMinusSquare, onClick: onMinus(helpers, index) };
+    },
+    [onMinus]
+  );
+
+  return (
+    <FieldArray
+      name={name}
+      render={arrayHelpers => (
+        <>
+          <LocationSelection
+            name={`${name}.0`}
+            withIcon={
+              values[name].length > 1 ? minusIcon(arrayHelpers, 0) : plusIcon(arrayHelpers, 0)
+            }
+            onChange={onChange(arrayHelpers, 0)}
+          />
+          {values.locationsTraveledTo &&
+            values.locationsTraveledTo
+              .slice(1, values.locationsTraveledTo.length - 1)
+              .map((location, index) => (
+                <LocationSelection
+                  name={`${name}.${index + 1}`}
+                  withIcon={minusIcon(arrayHelpers, index + 1)}
+                  onChange={onChange(arrayHelpers, index + 1)}
+                />
+              ))}
+          {values[name].length > 1 && (
+            <LocationSelection
+              name={`${name}.${values[name].length - 1}`}
+              withIcon={[
+                minusIcon(arrayHelpers, values[name].length - 1),
+                plusIcon(arrayHelpers, values[name].length - 1)
+              ]}
+            />
+          )}
+        </>
+      )}
+    />
   );
 }
 
