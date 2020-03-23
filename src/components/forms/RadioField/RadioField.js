@@ -1,24 +1,38 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Field } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
-import { Radio, FormControlLabel, FormLabel } from '@material-ui/core';
-import FormControl from 'components/forms/FormControl';
+import { fieldToRadioGroup } from 'formik-material-ui';
+import { Radio, FormControlLabel, FormLabel, RadioGroup } from '@material-ui/core';
 
+import FormControl from 'components/forms/FormControl';
 import useStyles from './styles';
 
-function RadioField({ name, label, options, ...props }) {
+function FormikRadioGroup({ onChange, ...props }) {
+  const radioProps = fieldToRadioGroup(props);
+  if (onChange) radioProps.onChange = onChange;
+
+  return <RadioGroup {...radioProps} />;
+}
+
+function RadioField({ name, label, options, inFormGroup = false, ...props }) {
   const styles = useStyles();
 
   return (
     <FormControl>
-      <FormLabel className={styles.formLabel}>{label}</FormLabel>
-      <Field component={RadioGroup} name={name} className={styles.radioGroup}>
+      <FormLabel className={styles['form-label']}>{label}</FormLabel>
+      <Field
+        component={FormikRadioGroup}
+        name={name}
+        className={clsx(styles['radio-group'], inFormGroup && styles['in-form-group'])}
+        {...props}
+      >
         {options.map(option => (
           <FormControlLabel
             key={option.value}
             value={option.value}
             control={<Radio />}
-            label={option.label}
+            label={inFormGroup ? '' : option.label}
+            className={clsx(inFormGroup && styles.grouped)}
           />
         ))}
       </Field>
