@@ -1,9 +1,11 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { useFormikContext } from 'formik';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { RadioField, FormGroup, FormGroupDivider, SelectBox } from 'components/forms';
 import useStyles from './styles';
-import { useFormikContext } from 'formik';
 
 const options = [
   { value: 'yes', label: 'Yes' },
@@ -20,7 +22,7 @@ const locationOptions = [
 
 function ExposureSection() {
   const styles = useStyles();
-  const { values, setFieldValue } = useFormikContext();
+  const { values } = useFormikContext();
   return (
     <>
       <FormGroup options={options}>
@@ -68,13 +70,15 @@ function ExposureSection() {
           />
         </Grid>
         {values.travelOutsideUS === 'yes' && (
-          <Grid item xs={6}>
-            <SelectBox
-              name="locationTraveledTo"
-              label="Location Traveled To"
-              options={locationOptions}
-            />
-
+          <Grid container alignItems="center">
+            <Grid item xs={6}>
+              <SelectBox
+                name="locationTraveledTo"
+                label="Location Traveled To"
+                options={locationOptions}
+              />
+            </Grid>
+            <FontAwesomeIcon icon={faPlusSquare} className={styles.plusIcon} />
           </Grid>
         )}
       </FormGroup>
