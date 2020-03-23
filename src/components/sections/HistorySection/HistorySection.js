@@ -21,7 +21,12 @@ function HistorySection() {
       <FormGroup options={options}>
         {values.sex !== 'male' && (
           <Grid item xs={12}>
-            <RadioField name="pregnant" label="Is the case-patient pregnant?" options={options} />
+            <RadioField
+              name="pregnant"
+              label="Is the case-patient pregnant?"
+              options={options}
+              inFormGroup
+            />
           </Grid>
         )}
         <FormGroupDivider />
@@ -30,6 +35,7 @@ function HistorySection() {
             name="currentSmoker"
             label="Is the case-patient a current smoker?"
             options={options}
+            inFormGroup
           />
         </Grid>
         <FormGroupDivider />
@@ -38,6 +44,7 @@ function HistorySection() {
             name="formerSmoker"
             label="Is the case-patient a former smoker?"
             options={options}
+            inFormGroup
           />
         </Grid>
 
@@ -47,6 +54,7 @@ function HistorySection() {
             name="preExistingConditions"
             label="Pre-existing medical conditions?"
             options={options}
+            inFormGroup
           />
         </Grid>
       </FormGroup>
@@ -58,11 +66,12 @@ function HistorySection() {
               name="chronicLungDisease"
               label="Chronic Lung Disease (asthma/emphysema/COPD)"
               options={options}
+              inFormGroup
             />
           </Grid>
           <FormGroupDivider />
           <Grid item xs={12}>
-            <RadioField name="diabetes" label="Diabetes Mellitus" options={options} />
+            <RadioField name="diabetes" label="Diabetes Mellitus" options={options} inFormGroup />
           </Grid>
           <FormGroupDivider />
           <Grid item xs={12}>
@@ -70,6 +79,7 @@ function HistorySection() {
               name="cardiovascularDisease"
               label="Cardiovascular disease"
               options={options}
+              inFormGroup
             />
           </Grid>
           <FormGroupDivider />
@@ -78,6 +88,7 @@ function HistorySection() {
               name="chronicRenalDisease"
               label="Chronic Renal disease)"
               options={options}
+              inFormGroup
             />
           </Grid>
           <FormGroupDivider />
@@ -86,6 +97,7 @@ function HistorySection() {
               name="chroniucLiverDisease"
               label="Chronic Liver disease"
               options={options}
+              inFormGroup
             />
           </Grid>
           <FormGroupDivider />
@@ -94,6 +106,7 @@ function HistorySection() {
               name="immunocomprimised"
               label="Immunocompromised Condition"
               options={options}
+              inFormGroup
             />
           </Grid>
           <FormGroupDivider />
@@ -102,6 +115,7 @@ function HistorySection() {
               name="neurologicDisease"
               label="Neurologic/neurodevelopmental/intellectual disability"
               options={options}
+              inFormGroup
             />
           </Grid>
 
@@ -118,6 +132,7 @@ function HistorySection() {
               name="otherChronicDisease"
               label="Other chronic disease"
               options={options}
+              inFormGroup
             />
           </Grid>
           {values.otherChronicDisease === 'yes' && (
