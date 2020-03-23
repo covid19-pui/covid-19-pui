@@ -118,6 +118,16 @@ function LocationsTraveled() {
     [values]
   );
 
+  const lastIcon = useCallback(
+    helpers => {
+      const icon = [minusIcon(helpers, values[name].length - 1)];
+      if (values[name].slice(-1)[0] && indexOptions(values[name].length - 1).length > 1)
+        return icon.concat(plusIcon(helpers, values[name].length - 1));
+      return icon;
+    },
+    [indexOptions, minusIcon, plusIcon, values]
+  );
+
   return (
     <FieldArray
       name={name}
@@ -126,7 +136,9 @@ function LocationsTraveled() {
           <LocationSelection
             name={`${name}.0`}
             withIcon={
-              values[name].length > 1 ? minusIcon(arrayHelpers, 0) : plusIcon(arrayHelpers, 0)
+              values[name].length > 1
+                ? minusIcon(arrayHelpers, 0)
+                : values[name][0] && plusIcon(arrayHelpers, 0)
             }
             onChange={onChange(arrayHelpers, 0)}
             options={indexOptions(0)}
@@ -146,10 +158,7 @@ function LocationsTraveled() {
           {values[name].length > 1 && (
             <LocationSelection
               name={`${name}.${values[name].length - 1}`}
-              withIcon={[
-                minusIcon(arrayHelpers, values[name].length - 1),
-                plusIcon(arrayHelpers, values[name].length - 1)
-              ]}
+              withIcon={lastIcon(arrayHelpers)}
               options={indexOptions(values[name].length - 1)}
             />
           )}
