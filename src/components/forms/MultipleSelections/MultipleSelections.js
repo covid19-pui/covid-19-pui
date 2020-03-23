@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { FieldArray, useFormikContext } from 'formik';
 import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,14 +7,10 @@ import useStyles from './styles';
 
 function withMultipleSelections(SelectionComponent, WrapperComponent) {
   return ({ name, label, options }) => {
-    const SelectionComponentWithIcons = withIcons(SelectionComponent, WrapperComponent);
-    const { values } = useFormikContext();
-
-    const onChange = useCallback((helpers, index) => {
-      return event => {
-        helpers.replace(index, event.target.value);
-      };
+    const SelectionComponentWithIcons = useMemo(() => {
+      return withIcons(SelectionComponent, WrapperComponent);
     }, []);
+    const { values } = useFormikContext();
 
     const plusIcon = useCallback((helpers, index) => {
       return { icon: faPlusSquare, onClick: () => helpers.insert(index + 1, '') };
@@ -51,7 +47,7 @@ function withMultipleSelections(SelectionComponent, WrapperComponent) {
               plusIcon(helpers, values[name].length - 1)
             ];
           },
-      [indexOptions, minusIcon, name, plusIcon, values]
+      [indexOptions, minusIcon, name, plusIcon]
     );
 
     return (
@@ -67,7 +63,6 @@ function withMultipleSelections(SelectionComponent, WrapperComponent) {
                   ? values[name][1] && minusIcon(arrayHelpers, 0)
                   : values[name][0] && plusIcon(arrayHelpers, 0)
               }
-              onChange={onChange(arrayHelpers, 0)}
               options={indexOptions(0)}
             />
             {values[name] &&
@@ -79,7 +74,6 @@ function withMultipleSelections(SelectionComponent, WrapperComponent) {
                     name={`${name}.${index + 1}`}
                     label={label}
                     withIcon={minusIcon(arrayHelpers, index + 1)}
-                    onChange={onChange(arrayHelpers, index + 1)}
                     options={indexOptions(index + 1)}
                   />
                 ))}
@@ -122,10 +116,12 @@ function withIcons(WrappedComponent, wrapperComponent) {
 
     const wrappedComponent = useMemo(() => {
       return <WrappedComponent icons={icons} {...wrappedProps} />;
-    }, [wrappedProps]);
+    }, [icons, wrappedProps]);
 
     return wrapperComponent
-      ? React.cloneElement(wrapperComponent, { icons }, wrappedComponent)
+      ? useMemo(() => {
+          return React.cloneElement(wrapperComponent, { icons }, wrappedComponent);
+        }, [icons, wrappedComponent])
       : wrappedComponent;
   };
 }

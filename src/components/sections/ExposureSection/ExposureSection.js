@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { FieldArray, useFormikContext } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,7 +41,7 @@ function TextSelectBox({ name, label, icons }) {
   );
 }
 
-const MultipleTextBox = withMultipleSelections(TextSelectBox, <GridWrapper />);
+const MultipleTextBox = memo(withMultipleSelections(TextSelectBox, <GridWrapper />));
 
 function LocationSelectBox({ name, label, options, icons }) {
   const { values } = useFormikContext();
