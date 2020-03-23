@@ -6,6 +6,7 @@ import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { FormGroup, FormGroupDivider, RadioField, SelectBox } from 'components/forms';
 import useStyles from './styles';
+import withMultipleSelections from 'components/forms/MultipleSelections/MultipleSelections';
 
 const options = [
   { value: 'yes', label: 'Yes' },
@@ -19,6 +20,20 @@ const locationOptions = [
   { value: 'mainlandChina', label: 'Mainland China' },
   { value: 'nonUSCountry', label: 'Non-US Country' }
 ];
+
+function GridWrapper({ children, icons }) {
+  const styles = useStyles();
+  return (
+    <Grid container alignItems="center" className={styles.locationSelection}>
+      <Grid item xs={6}>
+        {children}
+      </Grid>
+      {icons}
+    </Grid>
+  );
+}
+
+const LocationsTraveled = withMultipleSelections(SelectBox, <GridWrapper />);
 
 function ExposureSection() {
   const styles = useStyles();
@@ -69,102 +84,15 @@ function ExposureSection() {
             inFormGroup
           />
         </Grid>
-        {values.travelOutsideUS === 'yes' && <LocationsTraveled />}
+        {values.travelOutsideUS === 'yes' && (
+          <LocationsTraveled
+            name="locationsTraveledTo"
+            options={locationOptions}
+            label="Location Traveled To"
+          />
+        )}
       </FormGroup>
     </>
-  );
-}
-
-function LocationSelection({ name, withIcon, onChange, options }) {
-  const styles = useStyles();
-  return (
-    <Grid container alignItems="center" className={styles.locationSelection}>
-      <Grid item xs={6}>
-        <SelectBox name={name} label="Location Traveled To" options={options} onChange={onChange} />
-      </Grid>
-      {withIcon &&
-        [withIcon]
-          .flat()
-          .map(({ icon, onClick }, index) => (
-            <FontAwesomeIcon icon={icon} className={styles.icon} onClick={onClick} key={index} />
-          ))}
-    </Grid>
-  );
-}
-
-function LocationsTraveled() {
-  const { values } = useFormikContext();
-  const name = 'locationsTraveledTo';
-  const onChange = useCallback((helpers, index) => {
-    return event => {
-      helpers.replace(index, event.target.value);
-    };
-  }, []);
-
-  const plusIcon = useCallback((helpers, index) => {
-    return { icon: faPlusSquare, onClick: () => helpers.insert(index + 1, '') };
-  }, []);
-
-  const minusIcon = useCallback((helpers, index) => {
-    return { icon: faMinusSquare, onClick: () => helpers.remove(index) };
-  }, []);
-
-  const indexOptions = useCallback(
-    index => {
-      return locationOptions.filter(location => {
-        return values[name][index] === location.value || values[name].indexOf(location.value) < 0;
-      });
-    },
-    [values]
-  );
-
-  const lastIcon = useCallback(
-    helpers => {
-      const icon = [minusIcon(helpers, values[name].length - 1)];
-      if (values[name].slice(-1)[0] && indexOptions(values[name].length - 1).length > 1)
-        return icon.concat(plusIcon(helpers, values[name].length - 1));
-      return icon;
-    },
-    [indexOptions, minusIcon, plusIcon, values]
-  );
-
-  return (
-    <FieldArray
-      name={name}
-      render={arrayHelpers => (
-        <>
-          <LocationSelection
-            name={`${name}.0`}
-            withIcon={
-              values[name].length > 1
-                ? values[name][1] && minusIcon(arrayHelpers, 0)
-                : values[name][0] && plusIcon(arrayHelpers, 0)
-            }
-            onChange={onChange(arrayHelpers, 0)}
-            options={indexOptions(0)}
-          />
-          {values.locationsTraveledTo &&
-            values.locationsTraveledTo
-              .slice(1, values.locationsTraveledTo.length - 1)
-              .map((location, index) => (
-                <LocationSelection
-                  key={index.toString()}
-                  name={`${name}.${index + 1}`}
-                  withIcon={minusIcon(arrayHelpers, index + 1)}
-                  onChange={onChange(arrayHelpers, index + 1)}
-                  options={indexOptions(index + 1)}
-                />
-              ))}
-          {values[name].length > 1 && (
-            <LocationSelection
-              name={`${name}.${values[name].length - 1}`}
-              withIcon={lastIcon(arrayHelpers)}
-              options={indexOptions(values[name].length - 1)}
-            />
-          )}
-        </>
-      )}
-    />
   );
 }
 
