@@ -175,7 +175,7 @@ function SymptomsSection() {
         <Grid item xs={12}>
           <RadioField
             name="symptomDiarrhea"
-            label="Diarrhea (\u2265 loose/looser than normal stools/24hr period"
+            label="Diarrhea (\u2265 loose/looser than normal stools/24hr period)"
             options={options}
             inFormGroup
           />

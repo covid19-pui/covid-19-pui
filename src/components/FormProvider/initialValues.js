@@ -64,7 +64,28 @@ const initialValues = {
   neurologicDisease: '',
   neurologicDiseaseSpecify: '',
   otherChronicDisease: '',
-  otherDiseaseSpecify: ''
+  otherDiseaseSpecify: '',
+  // symptoms
+  "isSymptomatic": '',
+  "dateOfSymptomResolution": '',
+  "dateOfSymptomResolutionUnknown" : '',
+  "presentedSymptoms": '',
+  "symptomOnsetDate": '',
+  "onsetDateUnknown": '',
+  "symptom104Fever": '',
+  "symptomSubectiveFever" : '',
+  "symptomChills": '',
+  "symptomMuscleAches": '',
+  "symptomRhinorrhea":'',
+  "symptomSoreThroat": '',
+  "symptomCough": '',
+  "symptomDyspnea" :'',
+  "symptomNausea": '',
+  "symptomAbdominalPain":'',
+  "symptomDiarrhea": '',
+  "symptomOther": '',
+  "symptomOtherSpecify": ''
+ 
 };
 
 export default initialValues;
