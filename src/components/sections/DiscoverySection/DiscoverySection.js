@@ -1,10 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
-import SelectBox from 'components/forms/SelectBox';
-import TextField from 'components/forms/TextField';
+import { SelectBox, TextField } from 'components/forms';
 import useStyles from './styles';
 
 const discoveryProcessOptions = [
@@ -18,35 +17,26 @@ const discoveryProcessOptions = [
 
 function DiscoverySection() {
   const styles = useStyles();
-  const { values, setFieldValue } = useFormikContext();
-
-  const handleDiscoveryProcessChange = useCallback(
-    e => {
-      const option = e.target.value;
-      batch(() => {
-        setFieldValue('discoveryProcess', option);
-        if (option !== 'epiXNotification') {
-          setFieldValue('dgmqid', '');
-        }
-        if (option !== 'other') {
-          setFieldValue('otherDiscoveryProcess', '');
-        }
-      });
-    },
-    [setFieldValue]
-  );
+  const { values, setFieldValue, handleChange } = useFormikContext();
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} className={styles['simple-text']}>
         Under what process was the PUI or case first <strong>identified</strong>?
       </Grid>
+
       <Grid item xs={9}>
         <SelectBox
           name="discoveryProcess"
           label="Discovery Process"
           options={discoveryProcessOptions}
-          onChange={handleDiscoveryProcessChange}
+          onChange={e => {
+            batch(() => {
+              handleChange(e);
+              setFieldValue('dgmqid', '');
+              setFieldValue('otherDiscoveryProcess', '');
+            });
+          }}
         />
       </Grid>
 

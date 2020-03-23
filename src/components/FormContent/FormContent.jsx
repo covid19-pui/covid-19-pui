@@ -8,8 +8,8 @@ import BasicInformationSection from 'components/sections/BasicInformationSection
 import DemographicsSection from 'components/sections/DemographicsSection';
 import PatientCareSection from 'components/sections/PatientCareSection';
 import DiscoverySection from 'components/sections/DiscoverySection';
-import HistorySection from 'components/sections/HistorySection';
 import SymptomsSection from 'components/sections/SymptomsSection';
+import HistorySection from 'components/sections/HistorySection';
 
 import useTOC from 'hooks/useTOC';
 import useStyles from './styles';
