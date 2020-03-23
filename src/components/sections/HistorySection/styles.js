@@ -6,5 +6,5 @@ export default makeStyles(
       marginBottom: '1em'
     }
   },
-  { name: 'PatientCareSection' }
+  { name: 'HistorySection' }
 );

@@ -1,11 +1,10 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { FormGroup, FormGroupDivider } from 'components/forms/FormGroup';
 import { useFormikContext } from 'formik';
 
-import RadioField from 'components/forms/RadioField';
-import TextField from 'components/forms/TextField';
+import { RadioField, TextField, FormGroup, FormGroupDivider } from 'components/forms';
 import useStyles from './styles';
+
 const options = [
   { value: 'yes', label: 'Yes' },
   { value: 'no', label: 'No' },
@@ -23,36 +22,57 @@ function HistorySection() {
           <Grid item xs={12}>
             <RadioField
               name="pregnant"
-              label="Is the case-patient pregnant?"
+              label={
+                <>
+                  Is the patient currently <strong>pregnant</strong>?
+                </>
+              }
               options={options}
               inFormGroup
             />
           </Grid>
         )}
+
         <FormGroupDivider />
+
         <Grid item xs={12}>
           <RadioField
             name="currentSmoker"
-            label="Is the case-patient a current smoker?"
-            options={options}
-            inFormGroup
-          />
-        </Grid>
-        <FormGroupDivider />
-        <Grid item xs={12}>
-          <RadioField
-            name="formerSmoker"
-            label="Is the case-patient a former smoker?"
+            label={
+              <>
+                Is the patient a <strong>current smoker</strong>?
+              </>
+            }
             options={options}
             inFormGroup
           />
         </Grid>
 
         <FormGroupDivider />
+
         <Grid item xs={12}>
           <RadioField
+            name="formerSmoker"
+            label={
+              <>
+                Is the case-patient a <strong>former smoker</strong>?
+              </>
+            }
+            options={options}
+            inFormGroup
+          />
+        </Grid>
+
+        <FormGroupDivider />
+
+        <Grid item xs={12} className={styles['margin-bottom']}>
+          <RadioField
             name="preExistingConditions"
-            label="Pre-existing medical conditions?"
+            label={
+              <>
+                Does the patient have <strong>pre-existing medical conditions</strong>?
+              </>
+            }
             options={options}
             inFormGroup
           />
@@ -60,7 +80,7 @@ function HistorySection() {
       </FormGroup>
 
       {values.preExistingConditions === 'yes' && (
-        <FormGroup headerText="During this illness, did the patient have" options={options}>
+        <FormGroup headerText="During this illness, did the patient have..." options={options}>
           <Grid item xs={12}>
             <RadioField
               name="chronicLungDisease"
@@ -69,11 +89,15 @@ function HistorySection() {
               inFormGroup
             />
           </Grid>
+
           <FormGroupDivider />
+
           <Grid item xs={12}>
             <RadioField name="diabetes" label="Diabetes Mellitus" options={options} inFormGroup />
           </Grid>
+
           <FormGroupDivider />
+
           <Grid item xs={12}>
             <RadioField
               name="cardiovascularDisease"
@@ -82,25 +106,31 @@ function HistorySection() {
               inFormGroup
             />
           </Grid>
+
           <FormGroupDivider />
+
           <Grid item xs={12}>
             <RadioField
               name="chronicRenalDisease"
-              label="Chronic Renal disease)"
+              label="Chronic Renal disease"
               options={options}
               inFormGroup
             />
           </Grid>
+
           <FormGroupDivider />
+
           <Grid item xs={12}>
             <RadioField
-              name="chroniucLiverDisease"
+              name="chronicLiverDisease"
               label="Chronic Liver disease"
               options={options}
               inFormGroup
             />
           </Grid>
+
           <FormGroupDivider />
+
           <Grid item xs={12}>
             <RadioField
               name="immunocomprimised"
@@ -109,7 +139,9 @@ function HistorySection() {
               inFormGroup
             />
           </Grid>
+
           <FormGroupDivider />
+
           <Grid item xs={12}>
             <RadioField
               name="neurologicDisease"
@@ -122,11 +154,13 @@ function HistorySection() {
           {values.neurologicDisease === 'yes' && (
             <Grid container alignItems="center" className={styles['margin-bottom']}>
               <Grid item xs={4}>
-                <TextField name="neurologicDiseaseSpecify" label="Specify" />
+                <TextField name="neurologicDiseaseSpecify" label="Specify Disability" />
               </Grid>
             </Grid>
           )}
+
           <FormGroupDivider />
+
           <Grid item xs={12}>
             <RadioField
               name="otherChronicDisease"
@@ -135,14 +169,14 @@ function HistorySection() {
               inFormGroup
             />
           </Grid>
+
           {values.otherChronicDisease === 'yes' && (
             <Grid container alignItems="center" className={styles['margin-bottom']}>
               <Grid item xs={4}>
-                <TextField name="otherDiseaseSpecify" label="Specify" />
+                <TextField name="otherDiseaseSpecify" label="Specify Chronic Disease" />
               </Grid>
             </Grid>
           )}
-          <FormGroupDivider />
         </FormGroup>
       )}
     </>
