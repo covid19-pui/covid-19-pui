@@ -10,7 +10,7 @@ const options = [
   { value: 'unknown', label: 'Unknown' }
 ];
 
-function SocialHistorySection() {
+function HistorySection() {
   const { values } = useFormikContext();
 
   return (
@@ -40,4 +40,4 @@ function SocialHistorySection() {
   );
 }
 
-export default SocialHistorySection;
+export default HistorySection;

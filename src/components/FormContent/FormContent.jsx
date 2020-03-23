@@ -7,7 +7,7 @@ import InterviewerSection from 'components/sections/InterviewerSection';
 import BasicInformationSection from 'components/sections/BasicInformationSection';
 import DemographicsSection from 'components/sections/DemographicsSection';
 import PatientCareSection from 'components/sections/PatientCareSection';
-import SocialHistorySection from 'components/sections/SocialHistorySection';
+import HistorySection from 'components/sections/HistorySection';
 
 import useTOC from 'hooks/useTOC';
 import useStyles from './styles';
@@ -21,7 +21,7 @@ const sections = [
   { id: 'exposure', title: 'exposure' },
   { id: 'discovery', title: 'discovery' },
   { id: 'symptoms', title: 'symptoms' },
-  { id: 'history', title: 'history', section: <SocialHistorySection /> },
+  { id: 'history', title: 'history', section: <HistorySection /> },
   { id: 'testing', title: 'testing' },
   { id: 'specimens', title: 'specimens' }
 ];
