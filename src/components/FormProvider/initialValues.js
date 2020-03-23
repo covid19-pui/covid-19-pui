@@ -1,5 +1,6 @@
 // DateField names need to be null, all other can be ''
 const initialValues = {
+  // identifiers
   knownContact: '',
   contactId: '',
   reportingJurisdiction: '',
@@ -7,17 +8,20 @@ const initialValues = {
   caseStateLocalId: '',
   CDC2019nCoVID: '',
   NNDSSCaseId: '',
+  // interviewer
   interviewerFirstName: '',
   interviewerLastName: '',
   interviewerAffiliationOrganization: '',
   interviewerTelephone: '',
   interviewerEmail: '',
+  // basic information
   currentStatus: '',
   testingStatus: '',
   puiReportDate: null,
   state: '',
   caseReportDate: null,
   county: '',
+  // demographics
   dateOfBirth: null,
   ethnicity: '',
   age: '',
@@ -25,6 +29,7 @@ const initialValues = {
   race: '',
   sex: '',
   otherRace: '',
+  // patient care
   positiveSpecimenCollected: '',
   firstPositiveSpecimenDate: null,
   firstPositiveSpecimenDateUnknown: '',
@@ -44,7 +49,22 @@ const initialValues = {
   ecmo: '',
   death: '',
   deathDate: null,
-  deathDateUnknown: ''
+  deathDateUnknown: '',
+  // history
+  pregnant: '',
+  currentSmoker: '',
+  formerSmoker: '',
+  preExistingConditions: '',
+  chronicLungDisease: '',
+  diabetes: '',
+  cardiovascularDisease: '',
+  chronicRenalDisease: '',
+  chronicLiverDisease: '',
+  immunocomprimised: '',
+  neurologicDisease: '',
+  neurologicDiseaseSpecify: '',
+  otherChronicDisease: '',
+  otherDiseaseSpecify: ''
 };
 
 export default initialValues;
