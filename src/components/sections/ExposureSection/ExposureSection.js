@@ -1,10 +1,9 @@
-import React, { memo, useMemo } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
 import { FormGroup, FormGroupDivider, RadioField, SelectBox, TextField } from 'components/forms';
 import useStyles from './styles';
-import withMultipleSelections from 'components/forms/MultipleSelections/MultipleSelections';
 
 const options = [
   { value: 'yes', label: 'Yes' },
@@ -15,52 +14,8 @@ const options = [
 const locationOptions = [
   { value: 'wuhan', label: 'Wuhan' },
   { value: 'hubei', label: 'Hubei' },
-  { value: 'mainlandChina', label: 'Mainland China' },
-  { value: 'nonUSCountry', label: 'Non-US Country' }
+  { value: 'mainlandChina', label: 'Mainland China' }
 ];
-
-function GridWrapper({ children, icons }) {
-  const styles = useStyles();
-  return (
-    <Grid container alignItems="center" className={styles.locationSelection}>
-      {children}
-    </Grid>
-  );
-}
-
-function TextSelectBox({ name, label, icons }) {
-  return (
-    <>
-      <Grid item xs={6}>
-        <TextField name={name} label={label} type="text" autoComplete="off" />
-      </Grid>
-      {icons}
-    </>
-  );
-}
-
-const MultipleTextBox = memo(withMultipleSelections(TextSelectBox, <GridWrapper />));
-
-function LocationSelectBox({ name, label, options, icons }) {
-  const { values } = useFormikContext();
-  const locationName = useMemo(() => {
-    return <MultipleTextBox name="nonUSCountryNames" label="Non-US Country Name" />;
-  }, []);
-  return (
-    <>
-      <Grid item xs={6}>
-        <SelectBox name={name} label={label} options={options} />
-      </Grid>
-      {icons}
-
-      {name.split('.').reduce((acc, index) => {
-        return acc[index];
-      }, values) === 'nonUSCountry' && locationName}
-    </>
-  );
-}
-
-const MultipleLocationSelection = withMultipleSelections(LocationSelectBox, <GridWrapper />);
 
 function ExposureSection() {
   const styles = useStyles();
@@ -101,10 +56,35 @@ function ExposureSection() {
       <FormGroup options={options} headerText="In the 14 days prior to illness onset...">
         <Grid item xs={12}>
           <RadioField
+            name="travelToChina"
+            label={
+              <>
+                Did the patient <strong>travel to China</strong>?
+              </>
+            }
+            options={options}
+            inFormGroup
+          />
+        </Grid>
+        {values.travelToChina === 'yes' && (
+          <Grid container direction="column">
+            <Grid item xs={6}>
+              <SelectBox
+                name="chinaLocationsTraveledTo"
+                label="Location Traveled To"
+                options={locationOptions}
+                allowMultiple
+              />
+            </Grid>
+          </Grid>
+        )}
+
+        <Grid item xs={12}>
+          <RadioField
             name="travelOutsideUS"
             label={
               <>
-                Did the patient <strong>travel outside of the US</strong>
+                Did the patient <strong>travel to another Non-US Country?</strong>?
               </>
             }
             options={options}
@@ -112,11 +92,17 @@ function ExposureSection() {
           />
         </Grid>
         {values.travelOutsideUS === 'yes' && (
-          <MultipleLocationSelection
-            name="locationsTraveledTo"
-            options={locationOptions}
-            label="Location Traveled To"
-          />
+          <Grid container direction="column">
+            <Grid item xs={6}>
+              <TextField
+                name="travelToNonUS"
+                label="Location Traveled To"
+                allowMultiple
+                type="text"
+                autoComplete="off"
+              />
+            </Grid>
+          </Grid>
         )}
       </FormGroup>
     </>

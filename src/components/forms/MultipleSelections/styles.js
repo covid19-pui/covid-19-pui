@@ -7,7 +7,7 @@ export default makeStyles(
       cursor: 'pointer',
       marginLeft: '0.5em'
     },
-    container: {
+    multSelectWrapper: {
       marginBottom: '0.5em'
     }
   },

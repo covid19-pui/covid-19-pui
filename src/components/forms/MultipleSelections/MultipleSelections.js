@@ -1,11 +1,12 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FieldArray, useFormikContext } from 'formik';
 import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useStyles from './styles';
+import Grid from '@material-ui/core/Grid';
 
-function withMultipleSelections(SelectionComponent, WrapperComponent) {
+function withMultipleSelections(SelectionComponent, WrapperComponent = <MultiSelectWrapper />) {
   return ({ name, label, options }) => {
     const SelectionComponentWithIcons = useMemo(() => {
       return withIcons(SelectionComponent, WrapperComponent);
@@ -124,6 +125,20 @@ function withIcons(WrappedComponent, wrapperComponent) {
         }, [icons, wrappedComponent])
       : wrappedComponent;
   };
+}
+
+function MultiSelectWrapper({ children, icons }) {
+  const styles = useStyles();
+  return (
+    <Grid container alignItems="center" className={styles.multSelectWrapper} wrap="nowrap">
+      <Grid item className={styles.marginBottom} xs={11}>
+        {children}
+      </Grid>
+      <Grid item container wrap="nowrap" xs={1}>
+        {icons}
+      </Grid>
+    </Grid>
+  );
 }
 
 export default withMultipleSelections;
