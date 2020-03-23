@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { useFormikContext } from 'formik';
+import { FieldArray, useFormikContext } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { RadioField, FormGroup, FormGroupDivider, SelectBox } from 'components/forms';
 import useStyles from './styles';
@@ -69,26 +69,57 @@ function ExposureSection() {
             inFormGroup
           />
         </Grid>
-        {values.travelOutsideUS === 'yes' && (
-          <LocationsTraveled />
-        )}
+        {values.travelOutsideUS === 'yes' && <LocationsTraveled />}
       </FormGroup>
     </>
   );
 }
 
 function LocationsTraveled() {
+  const { values } = useFormikContext();
+  const name = 'locationsTraveledTo';
+  const onChange = useCallback((helpers, index) => {
+    return event => {
+      helpers.replace(index, event.target.value);
+    };
+  }, []);
+  return (
+    <FieldArray
+      name={name}
+      render={arrayHelpers => (
+        <>
+          <div>asdf</div>
+          <LocationSelection
+            name={`${name}.0`}
+            withIcon={faPlusSquare}
+            onChange={onChange(arrayHelpers, 0)}
+          />
+          {/*{values.locationsTraveledTo &&*/}
+          {/*  values.locationsTraveledTo.map((location, index) => (*/}
+          {/*    <LocationsTraveled*/}
+          {/*      name={`${name}.${index}`}*/}
+          {/*      onChange={onChange(arrayHelpers, index)}*/}
+          {/*    />*/}
+          {/*  ))}*/}
+        </>
+      )}
+    />
+  );
+}
+
+function LocationSelection({ name, withIcon, onChange }) {
   const styles = useStyles();
   return (
     <Grid container alignItems="center">
       <Grid item xs={6}>
         <SelectBox
-          name="locationTraveledTo"
+          name={name}
           label="Location Traveled To"
           options={locationOptions}
+          onChange={onChange}
         />
       </Grid>
-      <FontAwesomeIcon icon={faPlusSquare} className={styles.plusIcon} />
+      {withIcon && <FontAwesomeIcon icon={withIcon} className={styles.plusIcon} />}
     </Grid>
   );
 }

@@ -1,6 +1,12 @@
+const exposureInitialValues = {
+  locationsTraveledTo: [''],
+  heathCareWorker: '',
+  historyInChinaHealthcareFacility: '',
+  travelOutsideUS: ''
+};
+
 // DateField names need to be null, all other can be ''
 const initialValues = {
-  // identifiers
   knownContact: '',
   contactId: '',
   reportingJurisdiction: '',
@@ -88,7 +94,8 @@ const initialValues = {
   symptomAbdominalPain: '',
   symptomDiarrhea: '',
   symptomOther: '',
-  symptomOtherSpecify: ''
+  symptomOtherSpecify: '',
+  ...exposureInitialValues
 };
 
 export default initialValues;
