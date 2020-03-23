@@ -106,6 +106,12 @@ function ExposureSection() {
                 Did the patient <strong>travel to another Non-US Country</strong>?
               </>
             }
+            onChange={e => {
+              batch(() => {
+                handleChange(e);
+                setFieldValue('travelToNonUS', ['']);
+              });
+            }}
             options={options}
             inFormGroup
           />
@@ -135,23 +141,34 @@ function ExposureSection() {
               </>
             }
             options={options}
+            onChange={e => {
+              batch(() => {
+                handleChange(e);
+                setFieldValue('sourceOfContact', ['']);
+                setFieldValue('healthcareContact', '');
+                setFieldValue('sourceContactUSCase', '');
+                setFieldValue('sourceContactCaseID', '');
+              });
+            }}
             inFormGroup
           />
         </Grid>
         {values.contactWithCOVIDpatient === 'yes' && (
-          <Grid container direction="column">
-            <Grid item xs={6}>
-              <SelectBox
-                name="sourceOfContact"
-                label="Source of Contact"
-                allowMultiple
-                options={sourceOfContactOptions}
-              />
+          <>
+            <Grid container direction="column">
+              <Grid item xs={6}>
+                <SelectBox
+                  name="sourceOfContact"
+                  label="Source of Contact"
+                  allowMultiple
+                  options={sourceOfContactOptions}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          </>
         )}
         {values.sourceOfContact.indexOf('healthcare') >= 0 && (
-          <Grid item xs={6}>
+          <Grid item xs={6} className={styles['margin-bottom']}>
             <SelectBox
               name="healthcareContact"
               label="Source of Healthcare Contact"
@@ -159,26 +176,30 @@ function ExposureSection() {
             />
           </Grid>
         )}
-
-        <FormGroupDivider />
-
         {values.contactWithCOVIDpatient === 'yes' && (
           <>
+            <FormGroupDivider />
+
             <Grid item xs={12}>
               <RadioField
                 name="sourceContactUSCase"
                 label={<>Was this COVID-19 source case-patient a U.S. case?</>}
                 options={options}
+                onChange={e => {
+                  batch(() => {
+                    handleChange(e);
+                    setFieldValue('sourceContactCaseID', '');
+                  });
+                }}
                 inFormGroup
               />
             </Grid>
             {values.sourceContactUSCase === 'yes' && (
-              <Grid container direction="column">
+              <Grid container direction="column" className={styles['margin-bottom']}>
                 <Grid item xs={6}>
                   <TextField
                     name="sourceContactCaseID"
                     label="nCoV ID of Source Case"
-                    allowMultiple
                     options={sourceOfContactOptions}
                   />
                 </Grid>
@@ -231,6 +252,12 @@ function ExposureSection() {
                 Was the patient <strong>exposed from a source not listed here</strong>?
               </>
             }
+            onChange={e => {
+              batch(() => {
+                handleChange(e);
+                setFieldValue('sourceNotListedSource', '');
+              });
+            }}
             options={options}
             inFormGroup
           />
