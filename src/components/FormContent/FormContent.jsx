@@ -21,7 +21,7 @@ const sections = [
   { id: 'basicInformation', title: 'basic information', section: <BasicInformationSection /> },
   { id: 'demographics', title: 'demographics', section: <DemographicsSection /> },
   { id: 'patientCare', title: 'patient care', section: <PatientCareSection /> },
-  { id: 'exposure', title: 'exposure' },
+  { id: 'exposure', title: 'exposure', section: <ExposureSection /> },
   { id: 'discovery', title: 'discovery', section: <DiscoverySection /> },
   { id: 'symptoms', title: 'symptoms', section: <SymptomsSection /> },
   { id: 'history', title: 'history', section: <HistorySection /> },
