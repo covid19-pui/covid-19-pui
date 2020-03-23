@@ -2,9 +2,9 @@ import React, { useCallback } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { FieldArray, useFormikContext } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
-import { RadioField, FormGroup, FormGroupDivider, SelectBox } from 'components/forms';
+import { FormGroup, FormGroupDivider, RadioField, SelectBox } from 'components/forms';
 import useStyles from './styles';
 
 const options = [
@@ -75,23 +75,18 @@ function ExposureSection() {
   );
 }
 
-function LocationSelection({ name, withIcon, onChange, onClick }) {
+function LocationSelection({ name, withIcon, onChange, options }) {
   const styles = useStyles();
   return (
     <Grid container alignItems="center" className={styles.locationSelection}>
       <Grid item xs={6}>
-        <SelectBox
-          name={name}
-          label="Location Traveled To"
-          options={locationOptions}
-          onChange={onChange}
-        />
+        <SelectBox name={name} label="Location Traveled To" options={options} onChange={onChange} />
       </Grid>
       {withIcon &&
         [withIcon]
           .flat()
-          .map(({ icon, onClick }) => (
-            <FontAwesomeIcon icon={icon} className={styles.icon} onClick={onClick} />
+          .map(({ icon, onClick }, index) => (
+            <FontAwesomeIcon icon={icon} className={styles.icon} onClick={onClick} key={index} />
           ))}
     </Grid>
   );
@@ -114,6 +109,15 @@ function LocationsTraveled() {
     return { icon: faMinusSquare, onClick: () => helpers.remove(index) };
   }, []);
 
+  const indexOptions = useCallback(
+    index => {
+      return locationOptions.filter(location => {
+        return values[name][index] === location.value || values[name].indexOf(location.value) < 0;
+      });
+    },
+    [values]
+  );
+
   return (
     <FieldArray
       name={name}
@@ -125,15 +129,18 @@ function LocationsTraveled() {
               values[name].length > 1 ? minusIcon(arrayHelpers, 0) : plusIcon(arrayHelpers, 0)
             }
             onChange={onChange(arrayHelpers, 0)}
+            options={indexOptions(0)}
           />
           {values.locationsTraveledTo &&
             values.locationsTraveledTo
               .slice(1, values.locationsTraveledTo.length - 1)
               .map((location, index) => (
                 <LocationSelection
+                  key={index.toString()}
                   name={`${name}.${index + 1}`}
                   withIcon={minusIcon(arrayHelpers, index + 1)}
                   onChange={onChange(arrayHelpers, index + 1)}
+                  options={indexOptions(index + 1)}
                 />
               ))}
           {values[name].length > 1 && (
@@ -143,6 +150,7 @@ function LocationsTraveled() {
                 minusIcon(arrayHelpers, values[name].length - 1),
                 plusIcon(arrayHelpers, values[name].length - 1)
               ]}
+              options={indexOptions(values[name].length - 1)}
             />
           )}
         </>
