@@ -2,8 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
-import TextField from 'components/forms/TextField';
-import RadioField from 'components/forms/RadioField';
+import { TextField, RadioField } from 'components/forms';
 
 const options = [
   { value: 'yes', label: 'Yes' },

@@ -26,7 +26,7 @@ const sections = [
   { id: 'symptoms', title: 'symptoms', section: <SymptomsSection /> },
   { id: 'history', title: 'history', section: <HistorySection /> },
   { id: 'testing', title: 'testing' },
-  { id: 'specimens', title: 'specimens' }
+  { id: 'specimens', title: 'specimens', section: <SpecimensSection /> }
 ];
 
 function FormContent() {
@@ -51,7 +51,7 @@ function FormContent() {
 
       <Grid container justify="flex-end" className={styles['submit-button']}>
         <Button type="submit" variant="contained" color="secondary" size="large">
-          Submit
+          Submit Form
         </Button>
       </Grid>
     </>

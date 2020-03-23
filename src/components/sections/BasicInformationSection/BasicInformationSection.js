@@ -3,9 +3,7 @@ import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
-import AutocompleteField from 'components/forms/AutocompleteField';
-import DateField from 'components/forms/DateField';
-import SelectBox from 'components/forms/SelectBox';
+import { AutocompleteField, DateField, SelectBox } from 'components/forms';
 
 const currentStatusOptions = [
   { value: 'pui', label: 'PUI, tested (performed by state, local, or CDC lab)' },

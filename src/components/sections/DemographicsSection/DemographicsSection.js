@@ -4,9 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 import { differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 
-import SelectBox from 'components/forms/SelectBox';
-import DateField from 'components/forms/DateField';
-import TextField from 'components/forms/TextField';
+import { SelectBox, DateField, TextField } from 'components/forms';
 
 const ethnicityOptions = [
   { value: 'hispanicLatino', label: 'Hispanic / Latino' },

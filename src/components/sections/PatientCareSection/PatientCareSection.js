@@ -3,11 +3,14 @@ import { unstable_batchedUpdates as batch } from 'react-dom';
 import { useFormikContext } from 'formik';
 import Grid from '@material-ui/core/Grid';
 
-import { FormGroup, FormGroupDivider } from 'components/forms/FormGroup';
-import RadioField from 'components/forms/RadioField';
-import DateField from 'components/forms/DateField';
-import CheckboxField from 'components/forms/CheckboxField';
-import TextField from 'components/forms/TextField';
+import {
+  RadioField,
+  DateField,
+  CheckboxField,
+  TextField,
+  FormGroup,
+  FormGroupDivider
+} from 'components/forms';
 import useStyles from './styles';
 
 const options = [

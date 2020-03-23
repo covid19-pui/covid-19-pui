@@ -15,13 +15,22 @@ export default makeStyles(
       flexGrow: '1',
       backgroundColor: theme.palette.common.lightGray
     },
-    'has-text': {
+    'text-rows-1': {
       padding: '2px 10px'
+    },
+    'text-rows-2': {
+      padding: '7px 10px'
     },
     'header-button-options': {
       display: 'flex',
       justifyContent: 'space-between',
       backgroundColor: theme.palette.common.lightGray,
+      lineHeight: '1'
+    },
+    'options-count-2': {
+      width: '200px'
+    },
+    'options-count-3': {
       width: '300px'
     },
     'header-button-option': {

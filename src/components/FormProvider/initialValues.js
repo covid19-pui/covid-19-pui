@@ -69,6 +69,8 @@ const initialValues = {
   death: '',
   deathDate: null,
   deathDateUnknown: '',
+  // exposure
+  ...exposureInitialValues,
   // discovery
   discoveryProcess: '',
   dgmqid: '',
@@ -108,7 +110,8 @@ const initialValues = {
   symptomDiarrhea: '',
   symptomOther: '',
   symptomOtherSpecify: '',
-  ...exposureInitialValues
+  // specimens
+  specimenCollected: ''
 };
 
 export default initialValues;
