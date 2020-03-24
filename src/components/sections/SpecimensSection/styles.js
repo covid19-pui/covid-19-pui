@@ -10,6 +10,15 @@ export default makeStyles(
     },
     'button-icon': {
       marginRight: '5px'
+    },
+    checkboxes: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      float: 'right',
+      width: '200px'
+    },
+    'checkboxes-box': {
+      marginLeft: '10px'
     }
   },
   { name: 'SpecimensSection' }

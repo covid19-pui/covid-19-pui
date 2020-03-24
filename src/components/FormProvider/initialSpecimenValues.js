@@ -3,7 +3,9 @@ export const initialSpecimenValues = {
   specimenDateCollected: null,
   specimenID: '',
   specimenStateLabResult: '',
-  specimenCDCLabResult: ''
+  specimenCDCLabResult: '',
+  stateLabTested: '',
+  sentToCDC: ''
 };
 
 let id = 0;
