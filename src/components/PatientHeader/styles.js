@@ -44,6 +44,7 @@ export default makeStyles(
     footnote: {
       display: 'flex',
       alignItems: 'flex-end',
+      textAlign: 'right',
       marginBottom: '1em',
       textTransform: 'uppercase',
       fontWeight: '500',
