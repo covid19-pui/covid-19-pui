@@ -132,6 +132,7 @@ const specimensValues = {
 
 const specimenValues = {
   specimenType: '',
+  specimenTypeOther: '',
   specimenDateCollected: null,
   specimenID: '',
   specimenStateLabResult: '',

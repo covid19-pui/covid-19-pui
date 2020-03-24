@@ -24,7 +24,7 @@ function FieldArrayItems({
       {specimens && specimens.length > 0 ? (
         specimens.map((specimen, index) => (
           <Grid item xs={12} key={specimen._id} className={styles['margin-bottom']}>
-            <Specimen name={`specimens.${index}`} />
+            <Specimen name={`specimens.${index}`} id={specimen._id} />
 
             <IconButton
               type="button"
