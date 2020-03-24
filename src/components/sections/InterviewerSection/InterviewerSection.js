@@ -1,8 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
-import TextField from 'components/forms/TextField';
-import TelField from 'components/forms/TelField';
+import { TextField, TelField } from 'components/forms';
 
 function InterviewerSection() {
   return (

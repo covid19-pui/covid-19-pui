@@ -6,7 +6,7 @@ export default makeStyles(
       padding: theme.variables.spacing.globalPadding
     },
     'submit-button': {
-      paddingRight: '3em'
+      padding: '3em'
     }
   }),
   { name: 'FormContent' }

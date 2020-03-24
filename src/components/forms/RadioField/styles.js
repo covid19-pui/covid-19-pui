@@ -9,6 +9,7 @@ export default makeStyles(
     },
     'in-form-group': {
       width: '300px',
+      minWidth: '300px',
       justifyContent: 'space-around'
     },
     grouped: {

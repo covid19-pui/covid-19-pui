@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Formik, Form } from 'formik';
 import DateFnsUtils from '@date-io/date-fns';
 import download from 'downloadjs';
 
-import initialValues from './initialValues';
+import { createForm } from './initialFormValues';
 
 function FormProvider({ children }) {
+  const initialValues = useMemo(() => createForm(), []);
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Formik

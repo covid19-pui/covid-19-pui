@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
@@ -16,8 +16,27 @@ const discoveryProcessOptions = [
 ];
 
 function DiscoverySection() {
+  const {
+    values: { discoveryProcess },
+    setFieldValue,
+    handleChange
+  } = useFormikContext();
+
+  return (
+    <DiscoverySectionForm
+      discoveryProcess={discoveryProcess}
+      setFieldValue={setFieldValue}
+      handleChange={handleChange}
+    />
+  );
+}
+
+const DiscoverySectionForm = memo(function DiscoverySectionForm({
+  discoveryProcess,
+  setFieldValue,
+  handleChange
+}) {
   const styles = useStyles();
-  const { values, setFieldValue, handleChange } = useFormikContext();
 
   return (
     <Grid container spacing={3}>
@@ -40,13 +59,13 @@ function DiscoverySection() {
         />
       </Grid>
 
-      {values.discoveryProcess === 'epiXNotification' && (
+      {discoveryProcess === 'epiXNotification' && (
         <Grid item xs={6}>
           <TextField name="dgmqid" label="DGMQID" autoComplete="off" />
         </Grid>
       )}
 
-      {values.discoveryProcess === 'other' && (
+      {discoveryProcess === 'other' && (
         <Grid item xs={6}>
           <TextField
             name="otherDiscoveryProcess"
@@ -57,6 +76,6 @@ function DiscoverySection() {
       )}
     </Grid>
   );
-}
+});
 
 export default DiscoverySection;

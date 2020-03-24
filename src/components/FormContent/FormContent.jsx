@@ -7,10 +7,11 @@ import InterviewerSection from 'components/sections/InterviewerSection';
 import BasicInformationSection from 'components/sections/BasicInformationSection';
 import DemographicsSection from 'components/sections/DemographicsSection';
 import PatientCareSection from 'components/sections/PatientCareSection';
+import ExposureSection from 'components/sections/ExposureSection';
 import DiscoverySection from 'components/sections/DiscoverySection';
 import SymptomsSection from 'components/sections/SymptomsSection';
 import HistorySection from 'components/sections/HistorySection';
-import ExposureSection from 'components/sections/ExposureSection';
+import SpecimensSection from 'components/sections/SpecimensSection';
 
 import useTOC from 'hooks/useTOC';
 import useStyles from './styles';
@@ -26,7 +27,7 @@ const sections = [
   { id: 'symptoms', title: 'symptoms', section: <SymptomsSection /> },
   { id: 'history', title: 'history', section: <HistorySection /> },
   { id: 'testing', title: 'testing' },
-  { id: 'specimens', title: 'specimens' }
+  { id: 'specimens', title: 'specimens', section: <SpecimensSection /> }
 ];
 
 function FormContent() {
@@ -51,7 +52,7 @@ function FormContent() {
 
       <Grid container justify="flex-end" className={styles['submit-button']}>
         <Button type="submit" variant="contained" color="secondary" size="large">
-          Submit
+          Submit Form
         </Button>
       </Grid>
     </>

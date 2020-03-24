@@ -1,54 +1,43 @@
-const exposureInitialValues = {
-  locationsTraveledTo: [''],
-  heathCareWorker: '',
-  historyInChinaHealthcareFacility: '',
-  travelOutsideUS: '',
-  travelToChina: '',
-  chinaLocationsTraveledTo: [''],
-  travelToNonUS: [''],
-  contactWithCOVIDpatient: '',
-  sourceOfContact: [''],
-  healthcareContact: '',
-  sourceContactUSCase: '',
-  sourceContactCaseID: '',
-  animalExposure: '',
-  exposureToCluster: '',
-  sourceNotListed: '',
-  sourceNotListedSource: ''
-};
-
 // DateField names need to be null, all other can be ''
-const initialValues = {
-  // identifiers
+
+const identifierValues = {
   knownContact: '',
   contactId: '',
   reportingJurisdiction: '',
   reportingHealthDept: '',
   caseStateLocalId: '',
   CDC2019nCoVID: '',
-  NNDSSCaseId: '',
-  // interviewer
+  NNDSSCaseId: ''
+};
+
+const interviewerValues = {
   interviewerFirstName: '',
   interviewerLastName: '',
   interviewerAffiliationOrganization: '',
   interviewerTelephone: '',
-  interviewerEmail: '',
-  // basic information
+  interviewerEmail: ''
+};
+
+const basicInformationValues = {
   currentStatus: '',
   testingStatus: '',
   puiReportDate: null,
   state: '',
   caseReportDate: null,
-  county: '',
-  // demographics
+  county: ''
+};
+
+const demographicsValues = {
   dateOfBirth: null,
   ethnicity: '',
   age: '',
   ageUnits: '',
   race: '',
   sex: '',
-  otherRace: '',
-  // patient care
+  otherRace: ''
+};
+
+const patientCareValues = {
   positiveSpecimenCollected: '',
   firstPositiveSpecimenDate: null,
   firstPositiveSpecimenDateUnknown: '',
@@ -68,12 +57,35 @@ const initialValues = {
   ecmo: '',
   death: '',
   deathDate: null,
-  deathDateUnknown: '',
-  // discovery
+  deathDateUnknown: ''
+};
+
+const exposureValues = {
+  locationsTraveledTo: [''],
+  heathCareWorker: '',
+  historyInChinaHealthcareFacility: '',
+  travelOutsideUS: '',
+  travelToChina: '',
+  chinaLocationsTraveledTo: [''],
+  travelToNonUS: [''],
+  contactWithCOVIDpatient: '',
+  sourceOfContact: [''],
+  healthcareContact: '',
+  sourceContactUSCase: '',
+  sourceContactCaseID: '',
+  animalExposure: '',
+  exposureToCluster: '',
+  sourceNotListed: '',
+  sourceNotListedSource: ''
+};
+
+const discoveryValues = {
   discoveryProcess: '',
   dgmqid: '',
-  otherDiscoveryProcess: '',
-  // history
+  otherDiscoveryProcess: ''
+};
+
+const historyValues = {
   pregnant: '',
   currentSmoker: '',
   formerSmoker: '',
@@ -87,8 +99,10 @@ const initialValues = {
   neurologicDisease: '',
   neurologicDiseaseSpecify: '',
   otherChronicDisease: '',
-  otherDiseaseSpecify: '',
-  // symptoms
+  otherDiseaseSpecify: ''
+};
+
+const symptomsValues = {
   isSymptomatic: '',
   dateOfSymptomResolution: null,
   dateOfSymptomResolutionUnknown: '',
@@ -104,11 +118,54 @@ const initialValues = {
   symptomCough: '',
   symptomDyspnea: '',
   symptomNausea: '',
+  symptomHeadache: '',
   symptomAbdominalPain: '',
   symptomDiarrhea: '',
   symptomOther: '',
-  symptomOtherSpecify: '',
-  ...exposureInitialValues
+  symptomOtherSpecify: ''
 };
 
-export default initialValues;
+const specimensValues = {
+  specimenCollected: '',
+  specimens: []
+};
+
+const specimenValues = {
+  specimenType: '',
+  specimenTypeOther: '',
+  specimenDateCollected: null,
+  specimenID: '',
+  specimenStateLabResult: '',
+  specimenCDCLabResult: '',
+  stateLabTested: '',
+  sentToCDC: ''
+};
+
+export const initialFormValues = {
+  ...identifierValues,
+  ...interviewerValues,
+  ...basicInformationValues,
+  ...demographicsValues,
+  ...patientCareValues,
+  ...exposureValues,
+  ...discoveryValues,
+  ...historyValues,
+  ...symptomsValues,
+  ...specimensValues
+};
+
+let id = 0;
+export function createForm() {
+  return {
+    ...initialFormValues,
+    _id: ++id
+  };
+}
+
+let specimenId = 0;
+export function createSpecimen() {
+  return {
+    ...specimenValues,
+    _id: ++specimenId
+  };
+}

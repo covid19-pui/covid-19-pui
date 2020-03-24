@@ -1,12 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 import { differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 
-import SelectBox from 'components/forms/SelectBox';
-import DateField from 'components/forms/DateField';
-import TextField from 'components/forms/TextField';
+import { SelectBox, DateField, TextField } from 'components/forms';
 
 const ethnicityOptions = [
   { value: 'hispanicLatino', label: 'Hispanic / Latino' },
@@ -41,8 +39,15 @@ const sexOptions = [
 ];
 
 function DemographicsSection() {
-  const { values, setFieldValue } = useFormikContext();
+  const {
+    values: { race },
+    setFieldValue
+  } = useFormikContext();
 
+  return <DemographicsSectionForm setFieldValue={setFieldValue} race={race} />;
+}
+
+const DemographicsSectionForm = memo(function DemographicsSectionForm({ setFieldValue, race }) {
   const handleBirthdayChange = useCallback(
     date => {
       batch(() => {
@@ -96,13 +101,13 @@ function DemographicsSection() {
         <SelectBox name="sex" label="Sex" options={sexOptions} />
       </Grid>
 
-      {values.race === 'other' && (
+      {race === 'other' && (
         <Grid item xs={6}>
           <TextField name="otherRace" label="Other Race" autoComplete="off" />
         </Grid>
       )}
     </Grid>
   );
-}
+});
 
 export default DemographicsSection;
