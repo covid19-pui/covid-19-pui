@@ -1,5 +1,10 @@
 // DateField names need to be null, all other can be ''
 
+const patientHeaderValues = {
+  patientFirstName: '',
+  patientLastName: ''
+};
+
 const identifierValues = {
   knownContact: '',
   contactId: '',
@@ -142,6 +147,7 @@ const specimenValues = {
 };
 
 export const initialFormValues = {
+  ...patientHeaderValues,
   ...identifierValues,
   ...interviewerValues,
   ...basicInformationValues,
