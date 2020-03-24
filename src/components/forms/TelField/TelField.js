@@ -17,7 +17,7 @@ export function FormikTelField({ children, ...props }) {
       disabled={disabled}
     >
       {() => (
-        <MUITextField {...rest} fullWidth variant="outlined" type="tel">
+        <MUITextField {...rest} fullWidth autoComplete="new-password" variant="outlined" type="tel">
           {children}
         </MUITextField>
       )}

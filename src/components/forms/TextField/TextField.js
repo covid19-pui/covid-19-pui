@@ -10,7 +10,7 @@ export function FormikTextField({ children, onChange, ...props }) {
   if (onChange) textFieldProps.onChange = onChange;
 
   return (
-    <MUITextField {...textFieldProps} fullWidth variant="outlined">
+    <MUITextField {...textFieldProps} fullWidth autoComplete="new-password" variant="outlined">
       {children}
     </MUITextField>
   );

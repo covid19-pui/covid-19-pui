@@ -14,6 +14,7 @@ function FormikKeyboardDatePicker({ children, onChange, ...props }) {
       {...datePickerProps}
       autoOk
       fullWidth
+      autoComplete="new-password"
       variant="inline"
       inputVariant="outlined"
       format="MM/dd/yyyy"
