@@ -13,13 +13,14 @@ export default makeStyles(
     },
     'header-text': {
       flexGrow: '1',
-      backgroundColor: theme.palette.common.lightGray
+      backgroundColor: theme.palette.common.lightGray,
+      lineHeight: '1'
     },
     'text-rows-1': {
       padding: '2px 10px'
     },
     'text-rows-2': {
-      padding: '7px 10px'
+      padding: '10px'
     },
     'header-button-options': {
       display: 'flex',

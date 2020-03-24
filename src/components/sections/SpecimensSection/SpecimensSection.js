@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core';
 
 import { FormGroup, RadioField } from 'components/forms';
 import SpecimenGroups from './SpecimenGroups';
+import useStyles from './styles';
 
 const options = [
   { value: 'stateLabTested', label: 'State Lab Tested' },
@@ -24,6 +25,8 @@ export default function SpecimensSection(props) {
 }
 
 const SpecimensSectionForm = memo(function SpecimensSectionForm({ specimenCollected }) {
+  const styles = useStyles();
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -39,9 +42,11 @@ const SpecimensSectionForm = memo(function SpecimensSectionForm({ specimenCollec
       </Grid>
 
       {specimenCollected === 'yes' && (
-        <FormGroup options={options} headerText="Specimen" textRows={2}>
-          <SpecimenGroups />
-        </FormGroup>
+        <Grid container className={styles.root}>
+          <FormGroup options={options} headerText="Specimen" textRows={2}>
+            <SpecimenGroups />
+          </FormGroup>
+        </Grid>
       )}
     </Grid>
   );

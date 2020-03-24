@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { unstable_batchedUpdates as batch } from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
 
 import { FormGroup, FormGroupDivider, RadioField, SelectBox, TextField } from 'components/forms';
+import useObjectSlice from 'hooks/useObjectSlice';
 import useStyles from './styles';
 
 const options = [
@@ -30,9 +31,35 @@ const healthcareContactOptions = [
   { value: 'healthcare worker', label: 'Healthcare Worker' }
 ];
 
+const REQUIRED_VALUES = [
+  'contactWithCOVIDpatient',
+  'contactWithCOVIDpatient',
+  'sourceContactUSCase',
+  'sourceNotListed',
+  'sourceOfContact',
+  'travelOutsideUS',
+  'travelToChina'
+];
+
 function ExposureSection() {
-  const styles = useStyles();
   const { values, handleChange, setFieldValue } = useFormikContext();
+  const formValues = useObjectSlice(values, REQUIRED_VALUES);
+
+  return (
+    <ExposureSectionForm
+      values={formValues}
+      handleChange={handleChange}
+      setFieldValue={setFieldValue}
+    />
+  );
+}
+
+const ExposureSectionForm = memo(function ExposureSectionForm({
+  values,
+  handleChange,
+  setFieldValue
+}) {
+  const styles = useStyles();
 
   return (
     <>
@@ -291,6 +318,6 @@ function ExposureSection() {
       )}
     </>
   );
-}
+});
 
 export default ExposureSection;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { unstable_batchedUpdates as batch } from 'react-dom';
 import { useFormikContext } from 'formik';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,7 @@ import RadioField from 'components/forms/RadioField';
 import DateField from 'components/forms/DateField';
 import CheckboxField from 'components/forms/CheckboxField';
 import TextField from 'components/forms/TextField';
+import useObjectSlice from 'hooks/useObjectSlice';
 import useStyles from './styles';
 
 const options = [
@@ -16,9 +17,34 @@ const options = [
   { value: 'unknown', label: 'Unknown' }
 ];
 
+const REQUIRED_VALUES = [
+  'isSymptomatic',
+  'dateOfSymptomResolutionUnknown',
+  'presentedSymptoms',
+  'symptomOnsetDateUnknown',
+  'presentedSymptoms',
+  'symptomOther'
+];
+
 function SymptomsSection() {
-  const styles = useStyles();
   const { values, setFieldValue, handleChange } = useFormikContext();
+  const formValues = useObjectSlice(values, REQUIRED_VALUES);
+
+  return (
+    <SymptomsSectionForm
+      values={formValues}
+      setFieldValue={setFieldValue}
+      handleChange={handleChange}
+    />
+  );
+}
+
+const SymptomsSectionForm = memo(function SymptomsSectionForm({
+  values,
+  setFieldValue,
+  handleChange
+}) {
+  const styles = useStyles();
 
   return (
     <>
@@ -259,6 +285,6 @@ function SymptomsSection() {
       )}
     </>
   );
-}
+});
 
 export default SymptomsSection;

@@ -54,7 +54,7 @@ const BasicInformationSectionForm = memo(function BasicInformationSection({
     states
   ]);
   const countyOptions = useMemo(
-    () => counties.map(([county]) => ({ value: county, label: county })),
+    () => counties.map(([county]) => ({ value: county, label: county.split(',', 1)[0] })),
     [counties]
   );
 
