@@ -7,6 +7,11 @@ export default makeStyles(
     },
     'submit-button': {
       padding: '3em'
+    },
+    'fine-print': {
+      fontFamily: theme.typography.primary.fontFamily,
+      color: theme.palette.text.primary,
+      fontSize: '16px'
     }
   }),
   { name: 'FormContent' }

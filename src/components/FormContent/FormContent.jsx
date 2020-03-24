@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Button, Grid } from '@material-ui/core';
+import clsx from 'clsx';
 
 import FormSectionHeader from 'components/FormSectionHeader';
 import IdentifiersSection from 'components/sections/IdentifiersSection';
@@ -54,6 +55,21 @@ function FormContent() {
         <Button type="submit" variant="contained" color="secondary" size="large">
           Submit Form
         </Button>
+      </Grid>
+
+      <Grid container className={clsx(styles.root, styles['fine-print'])}>
+        <p>Form Approved: OMB: 0920-1011 Exp. 4/23/2020</p>
+        <p>
+          Public reporting burden of this collection of information is estimated to average 30
+          minutes per response, including the time for reviewing instructions, searching existing
+          data sources, gathering and maintaining the data needed, and completing and reviewing the
+          collection of information. An agency may not conduct or sponsor, and a person is not
+          required to respond to a collection of information unless it displays a currently valid
+          OMB control number. Send comments regarding this burden estimate or any other aspect of
+          this collection of information including suggestions for reducing this burden to CDC/ATSDR
+          Reports Clearance Officer; 1600 Clifton Road NE, MS D-74 Atlanta, Georgia 30333; ATTN: PRA
+          (0920-1011)
+        </p>
       </Grid>
     </>
   );
