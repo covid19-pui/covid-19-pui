@@ -17,7 +17,7 @@ export function FormikAutocompleteTextField({ children, options, ...props }) {
   useEffect(() => {
     const input = myRef.current && myRef.current.getElementsByTagName('input')[0];
     input.autocomplete = 'new-password';
-  });
+  }, [myRef]);
 
   return (
     <Autocomplete
