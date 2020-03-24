@@ -15,15 +15,12 @@ import useDOBAgeCallback from 'hooks/useDOBAgeCallback';
 import useStyles from './styles';
 
 export default function PatientHeader() {
-  const {
-    values: { age, ageUnit },
-    setFieldValue
-  } = useFormikContext();
+  const { setFieldValue } = useFormikContext();
 
-  return <PatientHeaderForm setFieldValue={setFieldValue} age={age} ageUnit={ageUnit} />;
+  return <PatientHeaderForm setFieldValue={setFieldValue} />;
 }
 
-const PatientHeaderForm = memo(function PatientHeaderForm({ setFieldValue, race }) {
+const PatientHeaderForm = memo(function PatientHeaderForm({ setFieldValue }) {
   const styles = useStyles();
 
   return (
