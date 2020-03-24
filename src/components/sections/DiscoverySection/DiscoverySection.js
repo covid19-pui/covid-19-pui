@@ -61,7 +61,7 @@ const DiscoverySectionForm = memo(function DiscoverySectionForm({
 
       {discoveryProcess === 'epiXNotification' && (
         <Grid item xs={6}>
-          <TextField name="dgmqid" label="DGMQID" autoComplete="off" />
+          <TextField name="dgmqid" label="DGMQID" autoComplete="new-password" />
         </Grid>
       )}
 
@@ -70,7 +70,7 @@ const DiscoverySectionForm = memo(function DiscoverySectionForm({
           <TextField
             name="otherDiscoveryProcess"
             label="Other Discovery Process"
-            autoComplete="off"
+            autoComplete="new-password"
           />
         </Grid>
       )}

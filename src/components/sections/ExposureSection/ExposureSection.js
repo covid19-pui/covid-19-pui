@@ -158,7 +158,7 @@ const ExposureSectionForm = memo(function ExposureSectionForm({
                 name="travelToNonUS"
                 label="Location Traveled To"
                 type="text"
-                autoComplete="off"
+                autoComplete="new-password"
                 allowMultiple
               />
             </Grid>

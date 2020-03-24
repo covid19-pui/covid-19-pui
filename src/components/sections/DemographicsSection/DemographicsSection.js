@@ -60,7 +60,7 @@ const DemographicsSectionForm = memo(function DemographicsSectionForm({ setField
       </Grid>
 
       <Grid item xs={3}>
-        <TextField name="age" label="Age" type="text" autoComplete="off" />
+        <TextField name="age" label="Age" type="text" autoComplete="new-password" />
       </Grid>
 
       <Grid item xs={3}>
@@ -77,7 +77,7 @@ const DemographicsSectionForm = memo(function DemographicsSectionForm({ setField
 
       {race === 'other' && (
         <Grid item xs={6}>
-          <TextField name="otherRace" label="Other Race" autoComplete="off" />
+          <TextField name="otherRace" label="Other Race" autoComplete="new-password" />
         </Grid>
       )}
     </Grid>

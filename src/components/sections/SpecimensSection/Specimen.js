@@ -48,7 +48,7 @@ const SpecimenForm = memo(function SpecimenForm({ name, specimenType }) {
               name={`${name}.specimenTypeOther`}
               label="Other Type"
               type="text"
-              autoComplete="off"
+              autoComplete="new-password"
             />
           </Grid>
         ) : (
@@ -57,7 +57,7 @@ const SpecimenForm = memo(function SpecimenForm({ name, specimenType }) {
               name={`${name}.specimenID`}
               label="Specimen ID"
               type="text"
-              autoComplete="off"
+              autoComplete="new-password"
             />
           </Grid>
         )}
@@ -67,7 +67,7 @@ const SpecimenForm = memo(function SpecimenForm({ name, specimenType }) {
             name={`${name}.specimenStateLabResult`}
             label="State Lab Result"
             type="text"
-            autoComplete="off"
+            autoComplete="new-password"
           />
         </Grid>
 
@@ -81,7 +81,7 @@ const SpecimenForm = memo(function SpecimenForm({ name, specimenType }) {
               name={`${name}.specimenID`}
               label="Specimen ID"
               type="text"
-              autoComplete="off"
+              autoComplete="new-password"
             />
           </Grid>
         ) : (
@@ -93,7 +93,7 @@ const SpecimenForm = memo(function SpecimenForm({ name, specimenType }) {
             name={`${name}.specimenCDCLabResult`}
             label="CDC Lab Result"
             type="text"
-            autoComplete="off"
+            autoComplete="new-password"
           />
         </Grid>
       </Grid>

@@ -57,7 +57,13 @@ function PatientFormTextField({ name, label }) {
       <div className={styles.label}>{label}:</div>
 
       <FormControl className={styles.field}>
-        <Field component={TextField} name={name} autoComplete="off" fullWidth color="secondary" />
+        <Field
+          component={TextField}
+          name={name}
+          autoComplete="new-password"
+          fullWidth
+          color="secondary"
+        />
       </FormControl>
     </div>
   );
@@ -87,7 +93,7 @@ function PatientFormDateField({ name, label, setFieldValue }) {
           format="MM/dd/yyyy"
           placeholder="MM/DD/YYYY"
           color="secondary"
-          autoComplete="off"
+          autoComplete="new-password"
           onChange={calculateDOBAge}
         />
       </FormControl>
