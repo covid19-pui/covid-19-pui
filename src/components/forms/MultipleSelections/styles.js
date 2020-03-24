@@ -8,7 +8,7 @@ export default makeStyles(
       marginLeft: '0.5em'
     },
     multSelectWrapper: {
-      marginBottom: '0.5em'
+      marginBottom: '1em'
     }
   },
   { name: 'MultipleSelections' }

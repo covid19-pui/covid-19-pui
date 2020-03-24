@@ -33,6 +33,7 @@ const healthcareContactOptions = [
 function ExposureSection() {
   const styles = useStyles();
   const { values, handleChange, setFieldValue } = useFormikContext();
+
   return (
     <>
       <FormGroup options={options}>
@@ -48,7 +49,9 @@ function ExposureSection() {
             inFormGroup
           />
         </Grid>
+
         <FormGroupDivider />
+
         <Grid item xs={12} className={styles['margin-bottom']}>
           <RadioField
             name="historyInChinaHealthcareFacility"
@@ -66,6 +69,7 @@ function ExposureSection() {
           />
         </Grid>
       </FormGroup>
+
       <FormGroup options={options} headerText="In the 14 days prior to illness onset...">
         <Grid item xs={12}>
           <RadioField
@@ -85,9 +89,10 @@ function ExposureSection() {
             inFormGroup
           />
         </Grid>
+
         {values.travelToChina === 'yes' && (
           <Grid container direction="column">
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <SelectBox
                 name="chinaLocationsTraveledTo"
                 label="Location Traveled To"
@@ -98,12 +103,14 @@ function ExposureSection() {
           </Grid>
         )}
 
+        <FormGroupDivider />
+
         <Grid item xs={12}>
           <RadioField
             name="travelOutsideUS"
             label={
               <>
-                Did the patient <strong>travel to another Non-US Country</strong>?
+                Did the patient <strong>travel to a Non-US Country besides China</strong>?
               </>
             }
             onChange={e => {
@@ -116,15 +123,16 @@ function ExposureSection() {
             inFormGroup
           />
         </Grid>
+
         {values.travelOutsideUS === 'yes' && (
           <Grid container direction="column">
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 name="travelToNonUS"
                 label="Location Traveled To"
-                allowMultiple
                 type="text"
                 autoComplete="off"
+                allowMultiple
               />
             </Grid>
           </Grid>
@@ -153,29 +161,38 @@ function ExposureSection() {
             inFormGroup
           />
         </Grid>
+
         {values.contactWithCOVIDpatient === 'yes' && (
-          <>
-            <Grid container direction="column">
-              <Grid item xs={6}>
-                <SelectBox
-                  name="sourceOfContact"
-                  label="Source of Contact"
-                  allowMultiple
-                  options={sourceOfContactOptions}
-                />
-              </Grid>
+          <Grid container direction="column">
+            <Grid item xs={4}>
+              <SelectBox
+                name="sourceOfContact"
+                label="Source of Contact"
+                options={sourceOfContactOptions}
+                allowMultiple
+                onChange={e => {
+                  batch(() => {
+                    handleChange(e);
+                    setFieldValue('healthcareContact', '');
+                  });
+                }}
+              />
             </Grid>
-          </>
-        )}
-        {values.sourceOfContact.indexOf('healthcare') >= 0 && (
-          <Grid item xs={6} className={styles['margin-bottom']}>
-            <SelectBox
-              name="healthcareContact"
-              label="Source of Healthcare Contact"
-              options={healthcareContactOptions}
-            />
           </Grid>
         )}
+
+        {values.sourceOfContact.indexOf('healthcare') >= 0 && (
+          <Grid container item xs={4} direction="column">
+            <Grid item xs={11} className={styles['margin-bottom']}>
+              <SelectBox
+                name="healthcareContact"
+                label="Source of Healthcare Contact"
+                options={healthcareContactOptions}
+              />
+            </Grid>
+          </Grid>
+        )}
+
         {values.contactWithCOVIDpatient === 'yes' && (
           <>
             <FormGroupDivider />
@@ -194,9 +211,10 @@ function ExposureSection() {
                 inFormGroup
               />
             </Grid>
+
             {values.sourceContactUSCase === 'yes' && (
               <Grid container direction="column" className={styles['margin-bottom']}>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <TextField
                     name="sourceContactCaseID"
                     label="nCoV ID of Source Case"
@@ -263,9 +281,10 @@ function ExposureSection() {
           />
         </Grid>
       </FormGroup>
+
       {values.sourceNotListed === 'yes' && (
         <Grid container direction="column">
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <TextField name="sourceNotListedSource" label="Source of Exposure" />
           </Grid>
         </Grid>

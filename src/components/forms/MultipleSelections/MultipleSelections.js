@@ -7,7 +7,7 @@ import useStyles from './styles';
 import Grid from '@material-ui/core/Grid';
 
 function withMultipleSelections(SelectionComponent, WrapperComponent = <MultiSelectWrapper />) {
-  return ({ name, label, options }) => {
+  return ({ name, options, ...props }) => {
     const SelectionComponentWithIcons = useMemo(() => {
       return withIcons(SelectionComponent, WrapperComponent);
     }, []);
@@ -57,8 +57,8 @@ function withMultipleSelections(SelectionComponent, WrapperComponent = <MultiSel
         render={arrayHelpers => (
           <>
             <SelectionComponentWithIcons
+              {...props}
               name={`${name}.0`}
-              label={label}
               withIcon={
                 values[name].length > 1
                   ? values[name][1] && minusIcon(arrayHelpers, 0)
@@ -72,16 +72,16 @@ function withMultipleSelections(SelectionComponent, WrapperComponent = <MultiSel
                 .map((location, index) => (
                   <SelectionComponentWithIcons
                     key={index.toString()}
+                    {...props}
                     name={`${name}.${index + 1}`}
-                    label={label}
                     withIcon={minusIcon(arrayHelpers, index + 1)}
                     options={indexOptions(index + 1)}
                   />
                 ))}
             {values[name].length > 1 && (
               <SelectionComponentWithIcons
+                {...props}
                 name={`${name}.${values[name].length - 1}`}
-                label={label}
                 withIcon={lastIcon(arrayHelpers)}
                 options={indexOptions(values[name].length - 1)}
               />
@@ -129,12 +129,14 @@ function withIcons(WrappedComponent, wrapperComponent) {
 
 function MultiSelectWrapper({ children, icons }) {
   const styles = useStyles();
+
   return (
     <Grid container alignItems="center" className={styles.multSelectWrapper} wrap="nowrap">
-      <Grid item className={styles.marginBottom} xs={11}>
+      <Grid item xs={11} className={styles.marginBottom}>
         {children}
       </Grid>
-      <Grid item container wrap="nowrap" xs={1}>
+
+      <Grid item xs={1} container wrap="nowrap">
         {icons}
       </Grid>
     </Grid>
