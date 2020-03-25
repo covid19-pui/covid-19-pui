@@ -79,6 +79,9 @@ const darkTheme = createMuiTheme({
       input: {
         '&::before': {
           borderColor: colors.lightGray
+        },
+        '&$disabled': {
+          color: colors.lightGray
         }
       },
       underline: {
