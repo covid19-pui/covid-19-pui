@@ -34,29 +34,37 @@ const IdentifiersSectionForm = memo(function IdentifiersSectionForm({ knownConta
             name="contactId"
             label="Contact ID"
             helperText="Assign Contact ID using CDC 2019-nCoV ID and sequential contact ID, e.g., Confirmed case CA102034567 has contacts CA102034567 -01 and CA102034567 -02"
-            autoComplete="off"
+            autoComplete="new-password"
           />
         </Grid>
       )}
 
       <Grid item xs={12}>
-        <TextField name="reportingJurisdiction" label="Reporting Jurisdiction" autoComplete="off" />
+        <TextField
+          name="reportingJurisdiction"
+          label="Reporting Jurisdiction"
+          autoComplete="new-password"
+        />
       </Grid>
 
       <Grid item xs={12}>
         <TextField
           name="reportingHealthDept"
           label="Reporting Health Department"
-          autoComplete="off"
+          autoComplete="new-password"
         />
       </Grid>
 
       <Grid item xs={4}>
-        <TextField name="caseStateLocalId" label="Case State / Local ID" autoComplete="off" />
+        <TextField
+          name="caseStateLocalId"
+          label="Case State / Local ID"
+          autoComplete="new-password"
+        />
       </Grid>
 
       <Grid item xs={4}>
-        <TextField name="CDC2019nCoVID" label="CDC 2019-nCoV ID" autoComplete="off" />
+        <TextField name="CDC2019nCoVID" label="CDC 2019-nCoV ID" autoComplete="new-password" />
       </Grid>
 
       <Grid item xs={4}>
@@ -64,7 +72,7 @@ const IdentifiersSectionForm = memo(function IdentifiersSectionForm({ knownConta
           name="NNDSSCaseId"
           label="NNDSS Loc. Rec. ID / Case ID"
           helperText="For NNDSS reporters, use GenV2 or NETSS patient identifier"
-          autoComplete="off"
+          autoComplete="new-password"
         />
       </Grid>
     </Grid>

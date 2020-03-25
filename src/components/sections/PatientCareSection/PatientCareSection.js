@@ -288,7 +288,7 @@ const PatientCareSectionForm = memo(function PatientCareSectionForm({
             name="totalDaysWithMV"
             label="Total Days with MV"
             type="text"
-            autoComplete="off"
+            autoComplete="new-password"
           />
         </Grid>
       )}

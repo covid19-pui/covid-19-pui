@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Button, Grid } from '@material-ui/core';
 
+import PatientHeader from 'components/PatientHeader';
 import FormSectionHeader from 'components/FormSectionHeader';
 import IdentifiersSection from 'components/sections/IdentifiersSection';
 import InterviewerSection from 'components/sections/InterviewerSection';
@@ -48,6 +49,8 @@ function FormContent() {
 
   return (
     <>
+      <PatientHeader />
+
       {sectionContent}
 
       <Grid container justify="flex-end" className={styles['submit-button']}>

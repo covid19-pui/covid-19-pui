@@ -69,4 +69,38 @@ const theme = createMuiTheme({
   }
 });
 
+const darkTheme = createMuiTheme({
+  ...theme,
+  overrides: {
+    MuiInput: {
+      root: {
+        color: colors.white
+      },
+      input: {
+        '&::before': {
+          borderColor: colors.lightGray
+        },
+        '&$disabled': {
+          color: colors.lightGray
+        }
+      },
+      underline: {
+        borderColor: colors.lightGray,
+        '&:before': {
+          borderBottomColor: 'rgba(255, 255, 255, 0.7)'
+        },
+        '&:hover:not($disabled):before': {
+          borderBottomColor: 'rgba(255, 255, 255, 0.7)'
+        }
+      }
+    },
+    MuiIconButton: {
+      root: {
+        color: colors.lightGray
+      }
+    }
+  }
+});
+
 export default theme;
+export { theme, darkTheme };

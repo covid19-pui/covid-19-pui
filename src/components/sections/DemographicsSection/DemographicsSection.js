@@ -1,10 +1,9 @@
-import React, { memo, useCallback } from 'react';
-import { unstable_batchedUpdates as batch } from 'react-dom';
+import React, { memo } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { useFormikContext } from 'formik';
-import { differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 
 import { SelectBox, DateField, TextField } from 'components/forms';
+import useDOBAgeCallback from 'hooks/useDOBAgeCallback';
 
 const ethnicityOptions = [
   { value: 'hispanicLatino', label: 'Hispanic / Latino' },
@@ -48,37 +47,12 @@ function DemographicsSection() {
 }
 
 const DemographicsSectionForm = memo(function DemographicsSectionForm({ setFieldValue, race }) {
-  const handleBirthdayChange = useCallback(
-    date => {
-      batch(() => {
-        setFieldValue('dateOfBirth', date);
-        if (!isNaN(date)) {
-          const now = new Date();
-          const dayDiff = differenceInDays(now, date);
-          const monthDiff = differenceInMonths(now, date);
-          const yearDiff = differenceInYears(now, date);
-
-          if (dayDiff <= 0) return;
-          else if (monthDiff === 0) {
-            setFieldValue('age', dayDiff);
-            setFieldValue('ageUnits', 'days');
-          } else if (monthDiff <= 12) {
-            setFieldValue('age', monthDiff);
-            setFieldValue('ageUnits', 'months');
-          } else {
-            setFieldValue('age', yearDiff);
-            setFieldValue('ageUnits', 'years');
-          }
-        }
-      });
-    },
-    [setFieldValue]
-  );
+  const calculateDOBAge = useDOBAgeCallback(setFieldValue);
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
-        <DateField name="dateOfBirth" label="Date of Birth" onChange={handleBirthdayChange} />
+        <DateField name="dateOfBirth" label="Date of Birth" onChange={calculateDOBAge} />
       </Grid>
 
       <Grid item xs={6}>
@@ -86,7 +60,7 @@ const DemographicsSectionForm = memo(function DemographicsSectionForm({ setField
       </Grid>
 
       <Grid item xs={3}>
-        <TextField name="age" label="Age" type="text" autoComplete="off" />
+        <TextField name="age" label="Age" type="text" autoComplete="new-password" />
       </Grid>
 
       <Grid item xs={3}>
@@ -103,7 +77,7 @@ const DemographicsSectionForm = memo(function DemographicsSectionForm({ setField
 
       {race === 'other' && (
         <Grid item xs={6}>
-          <TextField name="otherRace" label="Other Race" autoComplete="off" />
+          <TextField name="otherRace" label="Other Race" autoComplete="new-password" />
         </Grid>
       )}
     </Grid>
