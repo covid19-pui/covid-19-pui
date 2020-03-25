@@ -14,7 +14,7 @@ const typeOptions = [
 
 export default function Specimen({ name, id }) {
   const { values } = useFormikContext();
-  const specimenType = values.specimens[id - 1].specimenType;
+  const specimenType = values.specimens[id - 1]?.specimenType || '';
 
   return <SpecimenForm name={name} specimenType={specimenType} />;
 }
