@@ -7,6 +7,12 @@ export default makeStyles(
     },
     'margin-bottom': {
       marginBottom: '1em'
+    },
+    'margin-top': {
+      marginTop: '1em'
+    },
+    'button-icon': {
+      marginRight: '5px'
     }
   },
   { name: 'TestingSection' }

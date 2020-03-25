@@ -164,7 +164,8 @@ const testingValues = {
 };
 
 const testValues = {
-  testName: ''
+  testName: '',
+  result: ''
 };
 
 export const initialFormValues = {

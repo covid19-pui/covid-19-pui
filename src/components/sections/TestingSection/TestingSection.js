@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Grid from '@material-ui/core/Grid';
 
 import RadioField from 'components/forms/RadioField';
@@ -10,6 +10,10 @@ const initialOptions = [
 ];
 
 export default function TestingSection() {
+  return <TestingSectionForm />;
+}
+
+const TestingSectionForm = memo(function TestingSectionForm() {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -27,4 +31,4 @@ export default function TestingSection() {
       <TestingGroups />
     </Grid>
   );
-}
+});
