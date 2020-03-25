@@ -1,11 +1,13 @@
 import React from 'react';
 import { useFormikContext, FieldArray } from 'formik';
 import { Button, Grid } from '@material-ui/core';
+
 import { FormGroup, FormGroupDivider } from 'components/forms/FormGroup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { RadioField, SelectBox, TextField } from 'components/forms';
 import { createTest } from 'components/FormProvider';
+import useStyles from './styles';
 
 const formGroupOptions = [
   { value: 'pos', label: 'Pos' },
@@ -20,10 +22,11 @@ const fluTestOptions = [
 ];
 
 function DefaultFormValues() {
+  const styles = useStyles();
   const { values } = useFormikContext();
 
   return (
-    <Grid container>
+    <Grid container className={styles.root}>
       <FormGroup options={formGroupOptions} headerText="Test">
         <Grid item xs={12}>
           <RadioField
@@ -31,12 +34,13 @@ function DefaultFormValues() {
             label="Influenza rapid Ag"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
 
         {values.influenzaRapidAg !== '' && values.influenzaRapidAg !== 'notDone' && (
           <Grid container alignItems="center">
-            <Grid item xs={6}>
+            <Grid item xs={4} className={styles['margin-bottom']}>
               <SelectBox name="influenzaRapidAgType" label="Type" options={fluTestOptions} />
             </Grid>
           </Grid>
@@ -50,12 +54,13 @@ function DefaultFormValues() {
             label="Influenza PCR"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
 
         {values.influenzaPCR !== '' && values.influenzaPCR !== 'notDone' && (
           <Grid container alignItems="center">
-            <Grid item xs={6}>
+            <Grid item xs={4} className={styles['margin-bottom']}>
               <SelectBox name="influenzaPCRType" label="Type" options={fluTestOptions} />
             </Grid>
           </Grid>
@@ -64,7 +69,13 @@ function DefaultFormValues() {
         <FormGroupDivider />
 
         <Grid item xs={12}>
-          <RadioField name="rsv" label="RSV" options={formGroupOptions} inFormGroup />
+          <RadioField
+            name="rsv"
+            label="RSV"
+            options={formGroupOptions}
+            inFormGroup
+            numOptions={4}
+          />
         </Grid>
 
         <FormGroupDivider />
@@ -75,6 +86,7 @@ function DefaultFormValues() {
             label="H. Metapneumovirus"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
 
@@ -86,13 +98,20 @@ function DefaultFormValues() {
             label="Parainfluenza (1-4)"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
 
         <FormGroupDivider />
 
         <Grid item xs={12}>
-          <RadioField name="adenovirus" label="Adenovirus" options={formGroupOptions} inFormGroup />
+          <RadioField
+            name="adenovirus"
+            label="Adenovirus"
+            options={formGroupOptions}
+            inFormGroup
+            numOptions={4}
+          />
         </Grid>
 
         <FormGroupDivider />
@@ -103,6 +122,7 @@ function DefaultFormValues() {
             label="Rhinovirus/enterovirus"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
 
@@ -114,6 +134,7 @@ function DefaultFormValues() {
             label="Coronavirus (OC43, 229E, HKU1, NL63"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
 
@@ -125,6 +146,7 @@ function DefaultFormValues() {
             label="M. pneumoniae"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
 
@@ -136,6 +158,7 @@ function DefaultFormValues() {
             label="C. Pneumonia"
             options={formGroupOptions}
             inFormGroup
+            numOptions={4}
           />
         </Grid>
       </FormGroup>

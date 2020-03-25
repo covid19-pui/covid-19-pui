@@ -34,6 +34,9 @@ export default makeStyles(
     'options-count-3': {
       width: '300px'
     },
+    'options-count-4': {
+      width: '400px'
+    },
     'header-button-option': {
       padding: '2px 10px',
       width: '100px',
