@@ -13,6 +13,7 @@ import DiscoverySection from 'components/sections/DiscoverySection';
 import SymptomsSection from 'components/sections/SymptomsSection';
 import HistorySection from 'components/sections/HistorySection';
 import SpecimensSection from 'components/sections/SpecimensSection';
+import TestingSection from 'components/sections/TestingSection';
 
 import useTOC from 'hooks/useTOC';
 import useStyles from './styles';
@@ -27,7 +28,7 @@ const sections = [
   { id: 'discovery', title: 'discovery', section: <DiscoverySection /> },
   { id: 'symptoms', title: 'symptoms', section: <SymptomsSection /> },
   { id: 'history', title: 'history', section: <HistorySection /> },
-  { id: 'testing', title: 'testing' },
+  { id: 'testing', title: 'testing', section: <TestingSection /> },
   { id: 'specimens', title: 'specimens', section: <SpecimensSection /> }
 ];
 

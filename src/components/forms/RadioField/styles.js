@@ -7,9 +7,13 @@ export default makeStyles(
       flexDirection: 'row',
       alignItems: 'center'
     },
-    'in-form-group': {
+    'in-form-group-3': {
       width: '300px',
       minWidth: '300px',
+      justifyContent: 'space-around'
+    },
+    'in-form-group-4': {
+      width: '400px',
       justifyContent: 'space-around'
     },
     grouped: {

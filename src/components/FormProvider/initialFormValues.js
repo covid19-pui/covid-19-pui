@@ -146,6 +146,28 @@ const specimenValues = {
   sentToCDC: ''
 };
 
+const testingValues = {
+  respiratoryTesting: '',
+  influenzaRapidAg: '',
+  influenzaRapidAgType: '',
+  influenzaPCR: '',
+  influenzaPCRType: '',
+  rsv: '',
+  metapneumovirus: '',
+  parainfluenza: '',
+  adenovirus: '',
+  rhinovirus: '',
+  coronavirus: '',
+  mpneumoniae: '',
+  cpneumoniae: '',
+  additionalTests: []
+};
+
+const testValues = {
+  testName: '',
+  result: ''
+};
+
 export const initialFormValues = {
   ...patientHeaderValues,
   ...identifierValues,
@@ -157,7 +179,9 @@ export const initialFormValues = {
   ...discoveryValues,
   ...historyValues,
   ...symptomsValues,
-  ...specimensValues
+  ...specimensValues,
+  ...testingValues,
+  ...testValues
 };
 
 let id = 0;
@@ -173,5 +197,13 @@ export function createSpecimen() {
   return {
     ...specimenValues,
     _id: ++specimenId
+  };
+}
+
+let testId = 0;
+export function createTest() {
+  return {
+    _id: ++testId,
+    ...testValues
   };
 }

@@ -14,7 +14,7 @@ function FormikRadioGroup({ onChange, ...props }) {
   return <RadioGroup {...radioProps} />;
 }
 
-function RadioField({ name, label, options, inFormGroup = false, ...props }) {
+function RadioField({ name, label, options, inFormGroup = false, numOptions = 3, ...props }) {
   const styles = useStyles();
 
   return (
@@ -23,7 +23,10 @@ function RadioField({ name, label, options, inFormGroup = false, ...props }) {
       <Field
         component={FormikRadioGroup}
         name={name}
-        className={clsx(styles['radio-group'], inFormGroup && styles['in-form-group'])}
+        className={clsx(
+          styles['radio-group'],
+          inFormGroup && styles[`in-form-group-${numOptions}`]
+        )}
         {...props}
       >
         {options.map(option => (
