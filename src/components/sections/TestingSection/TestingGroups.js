@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useFormikContext, FieldArray } from 'formik';
 import { Button, IconButton, Grid } from '@material-ui/core';
 import { FormGroup, FormGroupDivider } from 'components/forms/FormGroup';
@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 import { RadioField, SelectBox, TextField } from 'components/forms';
 import { createTest } from 'components/FormProvider';
+import useObjectSlice from 'hooks/useObjectSlice';
 import useStyles from './styles';
 
 const formGroupOptions = [
@@ -20,9 +21,10 @@ const fluTestOptions = [
   { value: 'B', label: 'B' }
 ];
 
-function DefaultFormValues() {
+const REQUIRED_VALUES = ['influenzaRapidAg', 'influenzaPCR'];
+
+const DefaultFormValues = memo(function DefaultFormValues({ values }) {
   const styles = useStyles();
-  const { values } = useFormikContext();
 
   return (
     <FormGroup options={formGroupOptions} headerText="Test">
@@ -157,7 +159,7 @@ function DefaultFormValues() {
       <FormGroupDivider />
     </FormGroup>
   );
-}
+});
 
 function FieldArrayItems({
   remove,
@@ -172,8 +174,8 @@ function FieldArrayItems({
     <>
       {additionalTests && additionalTests.length > 0 ? (
         additionalTests.map((test, index) => (
-          <Grid item xs={12} key={test._id}>
-            <Grid className={styles['margin-top']} container direction="row" alignItems="center">
+          <Grid item xs={12} key={test._id} alignItems="center">
+            <Grid container direction="row" className={styles.row}>
               <Grid item xs={4}>
                 <TextField
                   name={`additionalTests.${index}.testName`}
@@ -182,28 +184,29 @@ function FieldArrayItems({
                   autoComplete="off"
                 />
               </Grid>
-              <Grid item xs={1} className={styles['margin-top']}>
+
+              <Grid item xs={1} className={styles.buttons}>
                 <IconButton
                   type="button"
                   onClick={() => remove(index)}
                   size="small"
                   color="primary"
-                  className={styles['margin-bottom']}
                 >
                   <FontAwesomeIcon icon={faMinusSquare} />
                 </IconButton>
+
                 {index + 1 === additionalTests.length && (
                   <IconButton
                     type="button"
                     onClick={() => push(createTest())}
                     size="small"
                     color="secondary"
-                    className={styles['margin-bottom']}
                   >
                     <FontAwesomeIcon icon={faPlusSquare} />
                   </IconButton>
                 )}
               </Grid>
+
               <Grid item xs={7}>
                 <RadioField
                   name={`additionalTests.${index}.result`}
@@ -213,10 +216,17 @@ function FieldArrayItems({
                 />
               </Grid>
             </Grid>
+
+            <FormGroupDivider />
           </Grid>
         ))
       ) : (
-        <Button type="button" color="secondary" onClick={() => push(createTest())}>
+        <Button
+          type="button"
+          color="secondary"
+          onClick={() => push(createTest())}
+          className={styles['margin-top']}
+        >
           <FontAwesomeIcon icon={faPlusSquare} className={styles['button-icon']} /> Add Test
         </Button>
       )}
@@ -225,16 +235,17 @@ function FieldArrayItems({
 }
 
 function TestingGroups() {
-  const { values } = useFormikContext();
   const styles = useStyles();
+  const { values } = useFormikContext();
+  const formValues = useObjectSlice(values, REQUIRED_VALUES);
+
+  if (values.respiratoryTesting !== 'yes') return null;
 
   return (
-    values.respiratoryTesting === 'yes' && (
-      <Grid container className={styles.root}>
-        <DefaultFormValues />
-        <FieldArray name="additionalTests" component={FieldArrayItems} />
-      </Grid>
-    )
+    <Grid container className={styles.root}>
+      <DefaultFormValues values={formValues} />
+      <FieldArray name="additionalTests" component={FieldArrayItems} />
+    </Grid>
   );
 }
 

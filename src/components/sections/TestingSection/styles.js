@@ -13,6 +13,13 @@ export default makeStyles(
     },
     'button-icon': {
       marginRight: '5px'
+    },
+    row: {
+      alignItems: 'center',
+      margin: '1em 0'
+    },
+    buttons: {
+      padding: '5px'
     }
   },
   { name: 'TestingSection' }
