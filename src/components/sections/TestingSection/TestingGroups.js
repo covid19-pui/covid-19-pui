@@ -179,10 +179,11 @@ function FieldArrayItems({
         additionalTests.map((test, index) => (
           //<span key={test._id}>{test._id}</span>
           <TextField
+            key={test._id}
             label="Specify Test"
             type="text"
             autoComplete="off"
-            name={`test.${index}.name`}
+            name={`test.${index}.testName`}
           />
         ))
       ) : (

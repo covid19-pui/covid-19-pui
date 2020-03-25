@@ -163,6 +163,10 @@ const testingValues = {
   additionalTests: []
 };
 
+const testValues = {
+  testName: ''
+};
+
 export const initialFormValues = {
   ...patientHeaderValues,
   ...identifierValues,
@@ -175,7 +179,8 @@ export const initialFormValues = {
   ...historyValues,
   ...symptomsValues,
   ...specimensValues,
-  ...testingValues
+  ...testingValues,
+  ...testValues
 };
 
 let id = 0;
@@ -198,6 +203,6 @@ let testId = 0;
 export function createTest() {
   return {
     _id: ++testId,
-    name: ''
+    ...testValues
   };
 }
